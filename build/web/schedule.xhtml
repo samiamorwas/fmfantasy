@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      template="./template.xhtml">
+    
+    <ui:define name="body">
+        <h1>Cool League Schedule</h1>
+        <h2>Week 6</h2>
+        <h3><h:link outcome="prevschedule" value="« Week 5" /></h3>
+        <h4><h:link outcome="nextschedule" value="Week 7 »" /></h4>
+        <table class="scheduleTable">
+            <tr>
+                <td>Team A</td>
+                <td>vs</td>
+                <td>Team B</td>
+            </tr>
+            
+            <tr>
+                <td>Team C</td>
+                <td>vs</td>
+                <td>Team D</td>
+            </tr>
+            
+            <tr>
+                <td>Team E</td>
+                <td>vs</td>
+                <td>Team F</td>
+            </tr>
+            
+            <tr>
+                <td>Team G</td>
+                <td>vs</td>
+                <td>Team H</td>
+            </tr>
+        </table>
+    </ui:define>
+    
+</ui:composition>

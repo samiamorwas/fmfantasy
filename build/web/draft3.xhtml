@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      template="./template.xhtml">
+    
+    <ui:define name="body">
+        <h1>Cool League Draft</h1>
+        <form name="search" action="draft2.xhtml">
+            <input type="text" name="searchTerm" value="Draft a player" style="background-color:red;"/>
+            <input type="submit" value="Draft Complete" style="height:40px; width:150px; font-size:20px;" />
+        </form>
+        <div style="color:red;">Tony Romo drafted to Team A.</div>
+        <table>
+            <tr>
+                <td>Team A</td>
+                <td>Team B</td>
+                <td>Team C</td>
+                <td>Team D</td>
+            </tr>
+            
+            <tr>
+                <td>Team E</td>
+                <td>Team F</td>
+                <td>Team G</td>
+                <td>Team H</td>
+            </tr>
+            
+            <tr>
+                <td>Team I</td>
+                <td>Team J</td>
+                <td>Team K</td>
+                <td>Team L</td>
+            </tr>
+        </table>
+    </ui:define>
+    
+</ui:composition>

@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML>
+<ui:composition     xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    template="/template.xhtml"
+                    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <ui:define name="title">
+        Login
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <h:commandButton action="#{userReqBean.logout}" value="Log out" rendered="#{userReqBean.logged}" />
+        </h:form>
+        <h4>Leagues owned</h4>
+           <h:dataTable value="#{leagueReqBean.owned}" var="league"	>
+ 
+    			<h:column>
+    				<f:facet name="header">league ID</f:facet>
+    				#{league.leagueID}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">League Name</f:facet>
+    				#{league.leagueName}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">League Owner</f:facet>
+    				#{league.leagueOwner.email}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">finished draft?</f:facet>
+    				#{league.finishedDraft}
+    			</h:column>
+                        <h:column>
+    				<f:facet name="header">view league</f:facet>
+                                <h:form>
+                                    <h:commandButton action="#{leagueReqBean.viewLeague(league)}" value="View" />
+                                </h:form>
+    			</h:column>
+ 
+    		</h:dataTable>
+           <h4>Leagues member of</h4>
+           <h:dataTable value="#{leagueReqBean.memberOf}" var="league"	>
+ 
+    			<h:column>
+    				<f:facet name="header">league ID</f:facet>
+    				#{league.leagueID}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">League Name</f:facet>
+    				#{league.leagueName}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">League Owner</f:facet>
+    				#{league.leagueOwner.email}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">finished draft?</f:facet>
+    				#{league.finishedDraft}
+    			</h:column>
+ 
+    		</h:dataTable>
+           <h4>Teams owned</h4>
+           <h:dataTable value="#{teamReqBean.owned}" var="team"	>
+ 
+    			<h:column>
+    				<f:facet name="header">League Name</f:facet>
+    				#{team.league.leagueName}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">Team Name</f:facet>
+    				#{team.teamName}
+    			</h:column>
+ 
+    		</h:dataTable>
+           <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="League Name" for="lName" />
+                <h:inputText id="lName" value="#{leagueReqBean.leagueName}" />
+
+                <h:outputLabel value="Team Name:" for="tName" />
+                <h:inputText id="tName" value="#{leagueReqBean.teamName}" />
+                
+                <h:commandButton action="#{leagueReqBean.createLeague}" value="Create League" />
+            </h:panelGrid>
+         </h:form>              
+         <h:dataTable value="#{inviteReqBean.invitesToYou}" var="inv"	> 
+                <h:column>
+                        <f:facet name="header">sender Email</f:facet>
+                        #{inv.sender.email}
+                </h:column>
+                <h:column>
+                        <f:facet name="header">league</f:facet>
+                        #{inv.league.leagueName}
+                </h:column>
+                <h:column>
+                        <f:facet name="header">accept</f:facet>
+                        <h:form>
+                            <h:inputText id="ntname" value="#{inviteReqBean.teamName}" />
+                            <h:commandButton action="#{inviteReqBean.acceptInvite(inv)}" value="accept" />
+                        </h:form>
+                </h:column>   
+        </h:dataTable>      
+                          
+    </ui:define>
+
+</ui:composition>

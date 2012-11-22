@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      template="./template.xhtml">
+    
+    <ui:define name="body">
+        <h1>#{sessionBean.user.email}'s Invitations</h1>
+        
+        <h:dataTable value="#{inviteReqBean.invitesToYou}" var="invite">
+            <h:column>
+                <f:facet name="header">League Name</f:facet>
+                #{invite.league.leagueName}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">From</f:facet>
+                #{invite.sender.email}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Accept</f:facet>
+                <h:form>
+                    <h:inputText id="teamName" value="#{inviteReqBean.teamName}" />
+                    <h:commandButton action="#{inviteReqBean.acceptInvite(invite)}" value="Accept" />
+                </h:form>
+            </h:column>
+        </h:dataTable>
+        
+    </ui:define>
+    
+</ui:composition>

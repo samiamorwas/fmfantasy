@@ -1,0 +1,152 @@
+body {
+    background-image: url('../../images/mongoose_fight.jpg');
+}
+
+#topBar {
+    position: relative;
+    margin: 0px 0px 0px 983px;
+    color: black;
+}
+
+a:link, a:visited {
+    font-family: Times, sans-serif;
+    color: black;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover {
+    font-family: Times, sans-serif;
+    font-weight: bold;
+}
+
+#topBar input[type=submit] {
+    font-family: Times, sans-serif;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#topBar input[type=submit]:hover {
+    font-family: Times, sans-serif;
+    font-weight: bold;
+}
+
+#topBar input[type=submit] + a {
+    padding: 3px;
+}
+
+#topBar a + a {
+    padding: 3px;
+}
+
+#mainBox {
+    width: 1350px;
+    height: auto;
+}
+
+#top {
+    position: relative;
+    background-image: url('../../images/top_bar.png');
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    padding: 50px;
+    margin: 0px 200px 10px 150px;
+    border: 5px groove white;
+}
+
+#schedule {
+    position: relative;
+    margin: 0px 200px 40px 150px;
+    border: 2px groove black;
+    padding: 5px;
+    background-color: lightblue;
+    opacity: 0.8;
+    font-family: Times, sans-serif;
+    font-size: 22px;
+    text-align: center;
+}
+
+#content {
+    position: relative;
+    margin-left: 270px;
+    margin-right: 100px;
+    border: 2px groove black;
+    background-color: orange;
+    opacity: 0.8;
+    padding: 5px;
+    font-family: Times, sans-serif;
+    font-size: 24px;
+    text-align: center;
+}
+
+#navBar {
+    position: fixed;
+    top: 228px;
+    left: 5px;
+    border: 2px groove black;
+    background-color: lightblue;
+    opacity: 0.8;
+    float: left;
+    padding: 5px;
+    font-family: Times, sans-serif;
+    font-size: 22px;
+    text-align: center;
+    width: 160px;
+}
+
+#navBar input[type=submit] {
+    font-family: Times, sans-serif;
+    font-size: 22px;
+    margin-left: 0px;
+}
+
+#navBar input[type=submit]:hover {
+    font-weight: bold;
+}
+
+#content table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: lightblue;
+}
+#content table, #content td, #content tr, #content th {
+    text-align: center;
+    border: 2px groove black;
+    font-family: Times, sans-serif;
+    font-size: 24px;
+    padding: 10px;
+}
+
+h1 {
+    font-family: Times, sans-serif;
+    border: 5px groove black;
+    background-color: orangered;
+}
+
+h2 {
+    font-family: Times, sans-serif;
+    text-decoration: underline;
+}
+
+h3 {
+    float: left;
+    font-family: Times, sans-serif;
+    font-size: 26px;
+    background-color: lightblue;
+    border: 2px groove black;
+}
+
+h4 {
+    float: right;
+    font-family: Times, sans-serif;
+    font-size: 26px;
+    background-color: lightblue;
+    border: 2px groove black;
+}
+
+#content input[type=text] {
+    font-family: Times, sans-serif;
+    width: 400px;
+    font-size: 30px;
+    padding: 2px;
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <h:form>
+        <h:link outcome="schedule" value="Schedule" />
+        <br />
+        <h:link outcome="roster" value="Roster" />
+        <br />
+        <h:link outcome="standings" value="Standings" />
+        <br />
+        <h:link outcome="freeagents" value="Free Agents" />
+        <br />
+        <h:link outcome="leagues" value="My Leagues" />
+        <br />
+        <h:commandButton value="Create League" style="background: transparent; border: none;" onclick="displayForm()"/>
+        <br />
+        <h:form id="createLeague" style="display: none;">
+            <h:outputLabel value="League Name:" />
+            <h:inputText id="leagueName" value="#{leagueReqBean.leagueName}" />
+            
+            <h:outputLabel value="Team Name:" />
+            <h:inputText id="teamName" value="#{leagueReqBean.teamName}" />
+            
+            <h:commandButton action="#{leagueReqBean.createLeague}" value="Submit"/>
+        </h:form>
+        <br />
+        <h:link outcome="invite" value="Invites" />
+        <br />
+        <h:link outcome="draft" value="Draft" />
+    </h:form>
+</html>

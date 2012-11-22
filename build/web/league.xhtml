@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML>
+<ui:composition     xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    template="/template.xhtml"
+                    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <ui:define name="title">
+        league
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form><h:commandButton action="#{userReqBean.logout}" value="Log out" /></h:form>
+        <h:form><h:commandButton action="leagues.xhtml" value="back" /></h:form>
+           <h4>Teams in #{SessionBean.league.leagueName}</h4>
+           <h:dataTable value="#{teamReqBean.inLeague}" var="team"	>
+ 
+    			<h:column>
+    				<f:facet name="header">team ID</f:facet>
+    				#{team.teamID}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">Team Name</f:facet>
+    				#{team.teamName}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">Team Owner</f:facet>
+    				#{team.teamOwner.email}
+    			</h:column>
+  
+            </h:dataTable>
+           
+           <h:form rendered="#{sessionBean.league.leagueOwner == sessionBean.user}" >
+               <h:outputLabel value="Email:" for="email" />
+               <h:inputText id="email" value="#{inviteReqBean.recipEmail}" />
+               <h:commandButton action="#{inviteReqBean.sendInvite()}" value="Invite"/>
+           </h:form>
+        
+           
+    </ui:define>
+
+</ui:composition>
