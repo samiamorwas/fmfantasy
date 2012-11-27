@@ -7,7 +7,6 @@
 
     <h:head>
         <meta charset="utf-8" />
-
         <title>
             Fighting Mongooses Fantasy Football
             <ui:insert name="title" />
@@ -20,15 +19,16 @@
     <h:body>
         <div id="mainBox" class="mainBox">
             <div id="topBar" class="topBar">
+                
                 <h:form>
                     <h:commandButton action="#{userReqBean.logout}" value="Log Out" rendered="#{userReqBean.logged}"
-                                     style="background: transparent; border: none; float: left;"/>
+                                     style="background: transparent; border: none;"/>
 
                     <a href="http://www.nfl.com">NFL.com </a>
                     <h:link outcome="home" value="Home" />
                 </h:form>
             </div>
-
+            
             <div id="top" class="top">
 
             </div>
@@ -36,16 +36,17 @@
             <div id="schedule" class="schedule">
                 NFL Schedule Week 6: Bears vs 49's, Texans vs Lions, Redskins vs Cowboys, Patriots vs Jets, Bills vs Colts
             </div>
-
-            <div id="content" class="content">
-                <ui:insert name="body">Default Body</ui:insert>
-            </div>
-
-            <div id="navBar" class="navBar">
+            
+             <div id="navBar" class="navBar">
                 <ui:insert name="navBar">
                     <ui:include src="/WEB-INF/includes/mainNav.xhtml" />
                 </ui:insert>
             </div>
+
+            <div id="content" class="content">
+                <ui:insert name="body">Default Body</ui:insert>
+            </div>
+            
         </div>
     </h:body>
 </html>
