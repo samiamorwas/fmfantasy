@@ -105,26 +105,32 @@ public class AgentReqBean {
         this.DEF = DEF;
     }
     private List<NFLPlayer> getFiltered(){
+        
         List<NFLPlayer> nflpList = new ArrayList<NFLPlayer>();
         if(QB){
             NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 1);
-            nflpList.add(nflp);
+            if(nflp != null)
+                nflpList.add(nflp);
         }
         if(RB){
             NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 2);
-            nflpList.add(nflp);
+            if(nflp != null)
+                nflpList.add(nflp);
         }
         if(WR){
             NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 3);
-            nflpList.add(nflp);
+            if(nflp != null)
+                nflpList.add(nflp);
         }
         if(TE){
             NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 4);
-            nflpList.add(nflp);
+            if(nflp != null)
+                nflpList.add(nflp);
         }
         if(K){
             NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 5);
-            nflpList.add(nflp);
+            if(nflp != null)
+                nflpList.add(nflp);
         }
         if(DEF){
             NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 6);
