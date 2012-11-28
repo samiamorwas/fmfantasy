@@ -24,7 +24,9 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries( {
     @NamedQuery(name = "RosterPlayer.getByLeague", query = 
-                        "SELECT rp FROM RosterPlayer rp WHERE rp.league = :league")
+                        "SELECT rp FROM RosterPlayer rp WHERE rp.league = :league"),
+    @NamedQuery(name = "RosterPlayer.getByTeam", query =
+                        "SELECT rp FROM RosterPlayer rp WHERE rp.team = :team")
 } )
 public class RosterPlayer implements Serializable {
     private static final long serialVersionUID = 1L;

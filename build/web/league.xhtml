@@ -37,11 +37,18 @@
                 #{team.teamOwner.email}
             </h:column>
 
+            <h:column>
+                <h:form>
+                    <f:facet name="header">View</f:facet>
+                    <h:commandButton value="View" action="#{teamReqBean.setTeam(team)}"/>
+                </h:form>
+            </h:column>
+
         </h:dataTable>
         <br /><br />
         <h:form rendered="#{sessionBean.league.leagueOwner == sessionBean.user}" >
-        <div class ="TableHeader" style="background-color: orangered">Invite Members</div>
-        <br />
+            <div class ="TableHeader" style="background-color: orangered">Invite Members</div>
+            <br />
             <div class="whiteText" style="font-size: 24px">
                 <h:outputLabel value="Email:" for="email" />
             </div>

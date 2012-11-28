@@ -5,6 +5,7 @@
 package FMFantasyEJB;
 
 import Entity.FantasyLeague;
+import Entity.FantasyTeam;
 import Entity.RosterPlayer;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -35,5 +36,11 @@ public class RosterPlayerBean extends AbstractFacade<RosterPlayer> {
         createNamedQuery.setParameter("league", leag);
         
         return createNamedQuery.getResultList();      
+    }
+    
+    public List<RosterPlayer> getByTeam(FantasyTeam team) {
+        Query createNamedQuery = em.createNamedQuery("RosterPlayer.getByTeam");
+        createNamedQuery.setParameter("team", team);
+        return createNamedQuery.getResultList();
     }
 }

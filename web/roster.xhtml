@@ -12,88 +12,25 @@ and open the template in the editor.
       template="./template.xhtml">
     
     <ui:define name="body">
-        <h1>Team A's Roster</h1>
-        <table style="float:right;">
-            <tr>
-                <td><h:link outcome="roster" value="Team B" /></td>
-            </tr>
-            <tr>
-                <td><h:link outcome="roster" value="Team C" /></td>
-            </tr>
-            <tr>
-                <td><h:link outcome="roster" value="Team D" /></td>
-            </tr>
-        </table>
+        <h1>#{sessionBean.team.teamName}</h1>
+        <h:dataTable style="float:right;" value="#{teamReqBean.inLeague}" var="team">
+            <h:column>
+                <f:facet name="header">Teams</f:facet>
+                <h:commandButton action="#{teamReqBean.setTeam(team)}" value="#{team.teamName}" />
+            </h:column>
+        </h:dataTable>
         
-        <table>
-            <tr>
-                <td>x</td>
-                <td><h:link outcome="roster2" value="-" /></td>
-                <td>QB</td>
-                <td>Tony Romo</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
+        <h:dataTable value="#{rosterReqBean.team}" var="player">
+            <h:column>
+                <f:facet name="header">Position</f:facet>
+                #{player.nflPlayer.position}
+            </h:column>
             
-            <tr>
-                <td>x</td>
-                <td>-</td>
-                <td>RB</td>
-                <td>Scott Sicko</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-            
-            <tr>
-                <td>x</td>
-                <td>-</td>
-                <td>RB</td>
-                <td>Adrian Petersen</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-            
-            <tr>
-                <td>x</td>
-                <td>-</td>
-                <td>K</td>
-                <td>John Kicker</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-        </table>
-        
-        
-        
-        <h2>Bench</h2>
-        
-        <table>
-            <tr>
-                <td>x</td>
-                <td>+</td>
-                <td>QB</td>
-                <td>Drew Brees</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-            
-            <tr>
-                <td>x</td>
-                <td>+</td>
-                <td>DEF</td>
-                <td>49's</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-        </table>
-        
-        
+            <h:column>
+                <f:facet name="header">Player</f:facet>
+                #{player.nflPlayer.name}
+            </h:column>
+        </h:dataTable>
     </ui:define>
     
 </ui:composition>

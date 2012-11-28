@@ -51,4 +51,9 @@ public class TeamReqBean {
         return teams;
     }
     
+    public String setTeam(FantasyTeam team) {
+        sessionBean.setTeam(team);
+        return "team_set";
+    }
+    
 }

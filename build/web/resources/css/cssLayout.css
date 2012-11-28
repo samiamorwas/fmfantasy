@@ -100,6 +100,17 @@ a:link:hover, a:visited:hover {
     font-weight: bold;
 }
 
+#content input[type=submit] {
+    font-family: Times, sans-serif;
+    font-size: 17px;
+    background: none;
+    border: none;
+}
+
+#content input[type=submit]:hover {
+    font-weight: bold;
+}
+
 #content table {
     border-collapse: collapse;
     background-color: lightblue;

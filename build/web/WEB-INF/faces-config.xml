@@ -59,7 +59,15 @@
         <navigation-case>
             <from-outcome>invite_error</from-outcome>
             <to-view-id>/leagues.xhtml</to-view-id>
-        </navigation-case>     
+        </navigation-case>    
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/league.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>team_set</from-outcome>
+            <to-view-id>/roster.xhtml</to-view-id>
+        </navigation-case> 
     </navigation-rule>
     
     <navigation-rule>
