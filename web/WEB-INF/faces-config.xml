@@ -95,6 +95,18 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <from-view-id>/draft.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>player_drafted</from-outcome>
+            <to-view-id>/draft.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>draft_over</from-outcome>
+            <to-view-id>/league.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>
 
 

@@ -163,7 +163,7 @@ public class AgentReqBean {
         }
         return nflpList;
     }
-    public String DraftPlayer(FantasyTeam ft){
+    public String draftPlayer(FantasyTeam ft){
         String result;
         
         FantasyLeague leag = sessionBean.getLeague();
