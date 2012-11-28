@@ -173,10 +173,20 @@ public class AgentReqBean {
         rp.setLeague(leag);
         rp.setRosterSlot(0); //start benched
         
-        
         //nfl stuff
-        List<NFLPlayer> nflpList = getFreeAgentsLike();       
-        rp.setNflPlayer(nflpList.get(0));        
+        List<NFLPlayer> nflpList = getFreeAgentsLike();
+        if(nflpList.size() == 0){
+            return "no_such_player";
+        }
+        rp.setNflPlayer(nflpList.get(0));
+        
+        List<RosterPlayer> draftedPlayers = rpBean.getByLeague(leag);
+        for(int i = 0; i < draftedPlayers.size(); i++){
+            if(draftedPlayers.get(i).getNflPlayer().getNFLDataID() == rp.getNflPlayer().getNFLDataID()){
+                return "already_drafted";
+            }            
+        }        
+        
         rpBean.create(rp);
         
         result = "player_drafted";
