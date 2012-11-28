@@ -29,6 +29,7 @@ public class UserReqBean implements Serializable{
     //info from reg/login forms
     private String email;
     private String password;
+    private String error;
     
     public UserReqBean(){
         
@@ -45,7 +46,13 @@ public class UserReqBean implements Serializable{
     }
     public void setPassword(String password) {
         this.password = password;
-    }        
+    }
+    public String getError() {
+        return error;
+    }
+    public void setError(String error) {
+        this.error = error;
+    }
         
     public boolean isLogged(){
         return sessionBean.getUser() != null;
@@ -53,10 +60,16 @@ public class UserReqBean implements Serializable{
     
     public String register(){
         String result;
-        
+        if(email == null || email.equals("") || password == null || password.equals("")) {
+            result = "no_such_username";
+            error = "Username and password cannot be blank.";
+            return result;
+        }
         FantasyUser lookup = fUserBean.getUserByEmail(email);
         if(lookup != null){
             result = "user_already_exists";
+            error = "User already exists.";
+            return result;
         } else{
             FantasyUser newUser = new FantasyUser();
             newUser.setEmail(email);
@@ -73,7 +86,11 @@ public class UserReqBean implements Serializable{
     
     public String login(){
         String result;
-        
+        if(email == null || email.equals("") || password == null || password.equals("")) {
+            result = "no_such_username";
+            error = "Username and password cannot be blank.";
+            return result;
+        }
         FantasyUser lookup = fUserBean.getUserByEmail(email);
         if( lookup != null){
             if(lookup.getPassword().equals(password)){
@@ -81,9 +98,11 @@ public class UserReqBean implements Serializable{
                 result = "login_success";
             } else{
                 result = "wrong_password";
+                error = "Password is incorrect.";
             }
         }else{
             result = "no_such_username";
+            error = "User does not exist.";
         }
         
         return result;

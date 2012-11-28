@@ -24,6 +24,18 @@
             <from-outcome>register_success</from-outcome>
             <to-view-id>/leagues.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>user_already_exists</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>wrong_password</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>no_such_username</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
