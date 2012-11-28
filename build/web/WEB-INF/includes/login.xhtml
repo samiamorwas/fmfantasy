@@ -10,11 +10,11 @@
 
     <h:form>
         <h:panelGrid columns="1">
-            <h:outputLabel value="Email:" for="email" />
-            <h:inputText id="email" value="#{userReqBean.email}" />
+            <h:outputLabel value="Email:" for="email" rendered="#{!userReqBean.logged}" />
+            <h:inputText id="email" value="#{userReqBean.email}" rendered="#{!userReqBean.logged}" />
 
-            <h:outputLabel value="Password:" for="password" />
-            <h:inputSecret id="password" value="#{userReqBean.password}" />
+            <h:outputLabel value="Password:" for="password" rendered="#{!userReqBean.logged}" />
+            <h:inputSecret id="password" value="#{userReqBean.password}" rendered="#{!userReqBean.logged}" />
 
             <h:commandButton action="#{userReqBean.login}" value="Log in" rendered="#{! userReqBean.logged}" />
             <h:commandButton action="#{userReqBean.logout}" value="Log out" rendered="#{userReqBean.logged}" />

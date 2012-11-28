@@ -4,10 +4,13 @@
  */
 package FMFantasyEJB;
 
+import Entity.FantasyLeague;
 import Entity.RosterPlayer;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,4 +30,10 @@ public class RosterPlayerBean extends AbstractFacade<RosterPlayer> {
         super(RosterPlayer.class);
     }
     
+    public List<RosterPlayer> getByLeague(FantasyLeague leag){
+        Query createNamedQuery = em.createNamedQuery("RosterPlayer.getByLeague");
+        createNamedQuery.setParameter("league", leag);
+        
+        return createNamedQuery.getResultList();      
+    }
 }

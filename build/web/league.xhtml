@@ -16,41 +16,41 @@
         <h:form><h:commandButton action="#{userReqBean.logout}" value="Log out" /></h:form>
         <h:form><h:commandButton action="leagues.xhtml" value="back" /></h:form>
         <br />
-        
+
         <div class ="TableHeader" style="background-color: orangered">Teams in #{sessionBean.league.leagueName}</div>
-         <br />
-           
-           <h:dataTable value="#{teamReqBean.inLeague}" var="team">
- 
-    			<h:column>
-    				<f:facet name="header">team ID</f:facet>
-    				#{team.teamID}
-    			</h:column>
- 
-    			<h:column>
-    				<f:facet name="header">Team Name</f:facet>
-    				#{team.teamName}
-    			</h:column>
- 
-    			<h:column>
-    				<f:facet name="header">Team Owner</f:facet>
-    				#{team.teamOwner.email}
-    			</h:column>
-  
-            </h:dataTable>
-           <br /><br />
-           <div class ="TableHeader" style="background-color: orangered">Invite Members</div>
-         <br />
-           <h:form rendered="#{sessionBean.league.leagueOwner == sessionBean.user}" >
-               <div class="whiteText" style="font-size: 24px">
-                    <h:outputLabel value="Email:" for="email" />
-               </div>
-               <h:inputText id="email" value="#{inviteReqBean.recipEmail}" />
-               <h:commandButton action="#{inviteReqBean.sendInvite()}" value="Invite"/>
-           </h:form>
-         <h:outputLabel value="#{inviteReqBean.error}" style="color: red;" />
-        
-           
+        <br />
+
+        <h:dataTable value="#{teamReqBean.inLeague}" var="team">
+
+            <h:column>
+                <f:facet name="header">team ID</f:facet>
+                #{team.teamID}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Team Name</f:facet>
+                #{team.teamName}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Team Owner</f:facet>
+                #{team.teamOwner.email}
+            </h:column>
+
+        </h:dataTable>
+        <br /><br />
+        <h:form rendered="#{sessionBean.league.leagueOwner == sessionBean.user}" >
+        <div class ="TableHeader" style="background-color: orangered">Invite Members</div>
+        <br />
+            <div class="whiteText" style="font-size: 24px">
+                <h:outputLabel value="Email:" for="email" />
+            </div>
+            <h:inputText id="email" value="#{inviteReqBean.recipEmail}" />
+            <h:commandButton action="#{inviteReqBean.sendInvite()}" value="Invite"/>
+        </h:form>
+        <h:outputLabel value="#{inviteReqBean.error}" style="color: red;" />
+
+
     </ui:define>
 
 </ui:composition>

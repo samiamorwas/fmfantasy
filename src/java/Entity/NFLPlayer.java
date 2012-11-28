@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -18,18 +20,31 @@ import javax.persistence.Table;
  * @author Greasy
  */
 @Entity
+@NamedQueries( {
+    @NamedQuery(name = "NFLPlayer.findByNameAndPos", query = 
+                        "SELECT nflp FROM NFLPlayer nflp WHERE nflp.name = :name AND nflp.position = :pos"),
+     @NamedQuery(name = "NFLPlayer.findLikeNameAndPos", query = 
+                        "SELECT nflp FROM NFLPlayer nflp WHERE nflp.name LIKE :name AND nflp.position = :pos"),
+                })
 public class NFLPlayer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long NFLPlayerID;
 
-
+    private long NFLDataID;
+    
     private String name;
     private String team;
     
+    
     /*
      * lets say 1 - qb, etc
+     * 2 - RB
+     * 3 - WR
+     * 4 - TE
+     * 5 - K
+     * 6 - D
      */
     private int position;
 
@@ -63,6 +78,14 @@ public class NFLPlayer implements Serializable {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public long getNFLDataID() {
+        return NFLDataID;
+    }
+
+    public void setNFLDataID(long NFLDataID) {
+        this.NFLDataID = NFLDataID;
     }
     
     
