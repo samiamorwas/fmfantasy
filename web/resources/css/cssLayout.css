@@ -1,6 +1,6 @@
 body {
     background-image: url('../../images/mongoose_fight.jpg');
-    background-repeat: norepeat;
+    background-repeat: repeat;
 }
 
 #topBar {
@@ -108,8 +108,8 @@ a:link:hover, a:visited:hover {
     text-align: center;
     border: 2px groove black;
     font-family: Times, sans-serif;
-    font-size: 24px;
-    padding: 10px;
+    font-size: 17px;
+    padding: 5px;
 }
 
 h1 {
@@ -165,4 +165,13 @@ h4 {
 .scheduleTable {
     alignment-adjust: central;
     margin-left: 200px;
+}
+
+.TableHeader{
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.whiteText{
+    color:white;
 }

@@ -20,8 +20,8 @@
         <h:form>
             <h:commandButton action="#{userReqBean.logout}" value="Log out" rendered="#{userReqBean.logged}" />
         </h:form>
-        <h4><div id ="LeaguesOwned" style="background-color: orangered">Leagues owned</div></h4>
-        <h:dataTable value="#{leagueReqBean.owned}" var="league"	>
+        <div id ="LeaguesOwned" class ="TableHeader" style="background-color: orangered">Leagues owned</div><br />
+        <h:dataTable value="#{leagueReqBean.owned}" var="league">
 
             <h:column>
                 <f:facet name="header">league ID</f:facet>
@@ -50,8 +50,10 @@
             </h:column>
 
         </h:dataTable>
-        <h4><div style="background-color: orangered">Leagues member of</div></h4>
-        <h:dataTable value="#{leagueReqBean.memberOf}" var="league"	>
+
+        <br /><br />
+        <div class ="TableHeader" style="background-color: orangered">Leagues member of</div><br />
+        <h:dataTable style="align: right" value="#{leagueReqBean.memberOf}" var="league"	>
 
             <h:column>
                 <f:facet name="header">League ID</f:facet>
@@ -80,7 +82,8 @@
             </h:column>
 
         </h:dataTable>
-        <h4><div style="background-color: orangered">Teams owned</div></h4>
+        <br /><br />
+        <div class ="TableHeader" style="background-color: orangered">Teams owned</div><br />
         <h:dataTable value="#{teamReqBean.owned}" var="team"	>
 
             <h:column>
@@ -94,17 +97,10 @@
             </h:column>
 
         </h:dataTable>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="League Name" for="lName" />
-                <h:inputText id="lName" value="#{leagueReqBean.leagueName}" />
+        <br /><br />
 
-                <h:outputLabel value="Team Name:" for="tName" />
-                <h:inputText id="tName" value="#{leagueReqBean.teamName}" />
-
-                <h:commandButton action="#{leagueReqBean.createLeague}" value="Create League" />
-            </h:panelGrid>
-        </h:form>              
+        <div class ="TableHeader" style="background-color: orangered">Invitations</div>
+        <br />
         <h:dataTable value="#{inviteReqBean.invitesToYou}" var="inv"	> 
             <h:column>
                 <f:facet name="header">sender Email</f:facet>
@@ -121,7 +117,7 @@
                     <h:commandButton action="#{inviteReqBean.acceptInvite(inv)}" value="accept" />
                 </h:form>
             </h:column>   
-        </h:dataTable>
+        </h:dataTable>  
         <h:outputLabel value="#{inviteReqBean.error}" style="color: red;" />
 
     </ui:define>

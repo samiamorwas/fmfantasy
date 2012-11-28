@@ -15,8 +15,12 @@
     <ui:define name="body">
         <h:form><h:commandButton action="#{userReqBean.logout}" value="Log out" /></h:form>
         <h:form><h:commandButton action="leagues.xhtml" value="back" /></h:form>
-           <h4>Teams in #{SessionBean.league.leagueName}</h4>
-           <h:dataTable value="#{teamReqBean.inLeague}" var="team"	>
+        <br />
+        
+        <div class ="TableHeader" style="background-color: orangered">Teams in #{sessionBean.league.leagueName}</div>
+         <br />
+           
+           <h:dataTable value="#{teamReqBean.inLeague}" var="team">
  
     			<h:column>
     				<f:facet name="header">team ID</f:facet>
@@ -34,13 +38,18 @@
     			</h:column>
   
             </h:dataTable>
-           
+           <br /><br />
+           <div class ="TableHeader" style="background-color: orangered">Invite Members</div>
+         <br />
            <h:form rendered="#{sessionBean.league.leagueOwner == sessionBean.user}" >
-               <h:outputLabel value="Email:" for="email" />
+               <div class="whiteText" style="font-size: 24px">
+                    <h:outputLabel value="Email:" for="email" />
+               </div>
                <h:inputText id="email" value="#{inviteReqBean.recipEmail}" />
                <h:commandButton action="#{inviteReqBean.sendInvite()}" value="Invite"/>
            </h:form>
-           <h:outputLabel value="#{inviteReqBean.error}" style="color: red;" />
+         <h:outputLabel value="#{inviteReqBean.error}" style="color: red;" />
+        
            
     </ui:define>
 
