@@ -36,6 +36,7 @@ public class InviteReqBean {
         
     private String recipEmail;
     private String teamName;
+    private String error;
     
     /**
      * Creates a new instance of FantasyLeagueController
@@ -57,6 +58,14 @@ public class InviteReqBean {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+    
+    public String getError() {
+        return error;
+    }
+    
+    public void setError(String error) {
+        this.error = error;
     }
     
     public List<Invitation> getInvitesToYou(){
@@ -87,7 +96,21 @@ public class InviteReqBean {
         
         FantasyUser recip = userBean.getUserByEmail(recipEmail);
         if(recip == null){
+            error = "User does not exist.";
             return "non_exist_user";
+        }
+        
+        if(recip.getEmail().equals(luser.getEmail())) {
+            error = "Cannot invite yourself.";
+            return "non_exist_user";
+        }
+        
+        List<Invitation> testInvs = invBean.findByReceiver(recip);
+        for(Invitation inv : testInvs) {
+            if(inv.getSender().getEmail().equals(luser.getEmail())) {
+                error = "Invitation already sent.";
+                return "non_exist_user";
+            }
         }
         
         Invitation inv = new Invitation();
@@ -95,11 +118,24 @@ public class InviteReqBean {
         inv.setLeague(lleague);
         inv.setReceiver(recip);
         invBean.createInvitation(inv);
-        
+        error = "Invitation sent.";
         return "invite_sent";
     }
     
     public String acceptInvite(Invitation inv){
+        if(teamName == null || teamName.equals("")) {
+            error = "Team name cannot be blank.";
+            return "invite_error";
+        }
+        
+        List<FantasyTeam> teams = teamBean.findByLeague(inv.getLeague());
+        for(FantasyTeam team : teams) {
+            if(team.getTeamName().equals(teamName)) {
+                error = "Team name is taken.";
+                return "invite_error";
+            }
+        }
+        
         FantasyTeam team = new FantasyTeam();
         team.setTeamName(teamName);
         team.setTeamOwner(inv.getReceiver());
@@ -107,7 +143,7 @@ public class InviteReqBean {
         teamBean.createTeam(team);
         
         invBean.remove(inv);
-        
+        error = "Invite accepted.";
         return "invite_accepted";
     }
     

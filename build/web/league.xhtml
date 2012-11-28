@@ -40,7 +40,7 @@
                <h:inputText id="email" value="#{inviteReqBean.recipEmail}" />
                <h:commandButton action="#{inviteReqBean.sendInvite()}" value="Invite"/>
            </h:form>
-        
+           <h:outputLabel value="#{inviteReqBean.error}" style="color: red;" />
            
     </ui:define>
 

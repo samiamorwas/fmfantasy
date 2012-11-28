@@ -36,6 +36,7 @@ public class LeagueReqBean {
         
     private String leagueName;
     private String teamName;
+    private String error;
     
     /**
      * Creates a new instance of LeagueReqBean
@@ -57,7 +58,15 @@ public class LeagueReqBean {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
-    }    
+    }
+    
+    public String getError() {
+        return error;
+    }
+    
+    public void setError(String error) {
+        this.error = error;
+    }
     
     public List<FantasyLeague> getOwned(){
         FantasyUser luser = sessionBean.getUser();
@@ -78,6 +87,11 @@ public class LeagueReqBean {
     }
     
     public String createLeague(){
+        if(leagueName == null || leagueName.equals("") || teamName == null || teamName.equals("")) {
+            error = "League and team name cannot be blank";
+            return "create_league_error";
+        }
+        
         FantasyUser luser = sessionBean.getUser();
         
         FantasyLeague l = new FantasyLeague();
@@ -86,7 +100,7 @@ public class LeagueReqBean {
         l.setFinishedDraft(false);
         leagueBean.createLeague(l);
         
-        FantasyTeam t = new FantasyTeam();
+        FantasyTeam t = new FantasyTeam();        
         t.setTeamName(teamName);
         t.setLeague(l);
         t.setTeamOwner(luser);
