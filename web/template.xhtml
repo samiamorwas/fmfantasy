@@ -12,7 +12,6 @@
             <ui:insert name="title" />
         </title>
         <h:outputStylesheet library="css" name="cssLayout.css" />
-        <h:outputScript library="js" name="script.js" />
 
     </h:head>
 
@@ -25,7 +24,7 @@
                                      style="background: transparent; border: none;"/>
 
                     <a href="http://www.nfl.com">NFL.com </a>
-                    <h:link outcome="home" value="Home" />
+                    <h:link outcome="leagues" value="Home" rendered="#{userReqBean.logged}" />
                 </h:form>
             </div>
             
