@@ -14,6 +14,7 @@ and open the template in the editor.
     <ui:define name="body">
         <h1>Cool League Draft</h1>
         <h:form>
+            <h:outputLabel value="#{agentReqBean.error}"/>
             <h:inputText id="name" value="#{agentReqBean.name}" />
             <br/>
             <h:selectBooleanCheckbox value="#{agentReqBean.QB}" />QB<br />

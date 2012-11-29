@@ -39,6 +39,8 @@ public class AgentReqBean {
     private boolean K;
     private boolean DEF;
     
+    private String error;
+    
        
     @Inject
     SessionBean sessionBean;
@@ -47,6 +49,14 @@ public class AgentReqBean {
      * Creates a new instance of FantasyLeagueController
      */
     public AgentReqBean() {
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 
     public String getName() {
@@ -182,6 +192,7 @@ public class AgentReqBean {
         //nfl stuff
         List<NFLPlayer> nflpList = getFreeAgentsLike();
         if(nflpList.size() == 0){
+            error = "No Such Player!";
             return "no_such_player";
         }
         rp.setNflPlayer(nflpList.get(0));
@@ -189,6 +200,7 @@ public class AgentReqBean {
         List<RosterPlayer> draftedPlayers = rpBean.getByLeague(leag);
         for(int i = 0; i < draftedPlayers.size(); i++){
             if(draftedPlayers.get(i).getNflPlayer().getNFLDataID() == rp.getNflPlayer().getNFLDataID()){
+                error = "Player already drafted!";
                 return "already_drafted";
             }            
         }        
