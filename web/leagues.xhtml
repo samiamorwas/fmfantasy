@@ -116,7 +116,13 @@
                     <h:inputText id="ntname" value="#{inviteReqBean.teamName}" />
                     <h:commandButton action="#{inviteReqBean.acceptInvite(inv)}" value="accept" />
                 </h:form>
-            </h:column>   
+            </h:column>
+            <h:column>
+                <f:facet name="header">decline</f:facet>
+                <h:form>
+                    <h:commandButton action="#{inviteReqBean.deleteInvite(inv)}" value="decline" />
+                </h:form>
+            </h:column>
         </h:dataTable>  
         <h:outputLabel value="#{inviteReqBean.error}" style="color: red;" />
 

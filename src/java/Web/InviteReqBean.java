@@ -146,5 +146,10 @@ public class InviteReqBean {
         error = "Invite accepted.";
         return "invite_accepted";
     }
+    public String deleteInvite(Invitation inv){
+        invBean.remove(inv);
+        
+        return "invite_deleted";
+    }
     
 }
