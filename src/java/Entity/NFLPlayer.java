@@ -26,6 +26,7 @@ import javax.persistence.Table;
      @NamedQuery(name = "NFLPlayer.findLikeNameAndPos", query = 
                         "SELECT nflp FROM NFLPlayer nflp WHERE nflp.name LIKE :name AND nflp.position = :pos"),
                 })
+
 public class NFLPlayer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -108,5 +108,11 @@ public class LeagueReqBean {
         
         return "create_league_success";
     }
+    
+    public String createSchedule(){
+        
+        
+        return "schedule_created";
+    }
        
 }
