@@ -5,9 +5,11 @@
 package FMFantasyEJB;
 
 import Entity.FantasyMatch;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,4 +29,10 @@ public class FantasyMatchBean extends AbstractFacade<FantasyMatch> {
         super(FantasyMatch.class);
     }
     
+    public List<FantasyMatch> findByWeek(int w){
+        Query createNamedQuery = em.createNamedQuery("FantasyMatch.findByWeek");
+        createNamedQuery.setParameter("week", w);
+        
+        return createNamedQuery.getResultList();    
+    }
 }
