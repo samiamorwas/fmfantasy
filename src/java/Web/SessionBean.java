@@ -28,11 +28,61 @@ public class SessionBean implements Serializable{
     private FantasyTeam team;
     private FantasyMatch match;
     
+    private boolean QB,RB,WR,TE,KCK,DEF;
+    
     private int NFLWeek;
     private int LeagueWeek;
     
     public SessionBean(){
         
+    }
+
+    public boolean isQB() {
+        return QB;
+    }
+
+    public void setQB(boolean QB) {
+        this.QB = QB;
+    }
+
+    public boolean isRB() {
+        return RB;
+    }
+
+    public void setRB(boolean RB) {
+        this.RB = RB;
+    }
+
+    public boolean isWR() {
+        return WR;
+    }
+
+    public void setWR(boolean WR) {
+        this.WR = WR;
+    }
+
+    public boolean isTE() {
+        return TE;
+    }
+
+    public void setTE(boolean TE) {
+        this.TE = TE;
+    }
+
+    public boolean isKCK() {
+        return KCK;
+    }
+
+    public void setKCK(boolean KCK) {
+        this.KCK = KCK;
+    }
+
+    public boolean isDEF() {
+        return DEF;
+    }
+
+    public void setDEF(boolean DEF) {
+        this.DEF = DEF;
     }
 
     public int getNFLWeek() {

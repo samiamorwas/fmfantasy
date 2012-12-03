@@ -9,20 +9,36 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       template="./template.xhtml">
     
     <ui:define name="body">
         <h1>Cool League Draft</h1>
-        <h:form>
+        <h:form id ="input">
             <h:outputLabel value="#{agentReqBean.error}"/>
-            <h:inputText id="name" value="#{agentReqBean.name}" />
+            <p:autoComplete id="nameauto" value="#{agentReqBean.name}" 
+                            completeMethod="#{agentReqBean.draftAutoComplete}"
+                            maxResults ="8"/>
             <br/>
-            <h:selectBooleanCheckbox value="#{agentReqBean.QB}" />QB<br />
-            <h:selectBooleanCheckbox value="#{agentReqBean.RB}" />RB<br />
-            <h:selectBooleanCheckbox value="#{agentReqBean.WR}" />WR<br />
-            <h:selectBooleanCheckbox value="#{agentReqBean.TE}" />TE<br />
-            <h:selectBooleanCheckbox value="#{agentReqBean.k}" />K<br />
-            <h:selectBooleanCheckbox value="#{agentReqBean.DEF}" />DEF<br />
+            
+            <p:selectBooleanCheckbox value="#{sessionBean.QB}" itemLabel="QB">
+                <p:ajax update ="input"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.RB}" itemLabel="RB">
+                <p:ajax update ="input"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.WR}" itemLabel="WR">
+                <p:ajax update ="input"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.TE}" itemLabel="K">
+                <p:ajax update ="input"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.KCK}" itemLabel="DEF">
+                <p:ajax update ="input"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.DEF}" itemLabel="DEF">
+                <p:ajax update ="input"/>
+            </p:selectBooleanCheckbox>
             
             <h:dataTable value="#{teamReqBean.inLeague}" var="team">
 

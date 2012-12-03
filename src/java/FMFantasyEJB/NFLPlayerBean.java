@@ -42,10 +42,12 @@ public class NFLPlayerBean extends AbstractFacade<NFLPlayer> {
     }
     public List<NFLPlayer> getPlayerLikeNameAndPos(String name, int pos){
         Query createNamedQuery = em.createNamedQuery("NFLPlayer.findLikeNameAndPos");
+        name = name.concat("%");
         createNamedQuery.setParameter("name", name);
         createNamedQuery.setParameter("pos", pos);
         
-        return createNamedQuery.getResultList();        
+        List<NFLPlayer> result = createNamedQuery.getResultList();
+        return result;
     }
     
 }

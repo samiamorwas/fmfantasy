@@ -31,14 +31,7 @@ public class AgentReqBean {
     @EJB
     private FMFantasyEJB.NFLPlayerBean nflpBean;
     
-    private String name;
-    private boolean QB;
-    private boolean RB;
-    private boolean WR;
-    private boolean TE;
-    private boolean K;
-    private boolean DEF;
-    
+    private String name;    
     private String error;
     
        
@@ -50,6 +43,19 @@ public class AgentReqBean {
      */
     public AgentReqBean() {
     }
+    
+    public List<String> draftAutoComplete(String userText){
+        List<String> result = new ArrayList<String>();
+  
+        name = userText;
+        List<NFLPlayer> nflpResult = getFreeAgentsLike();
+        for(int i = 0; i < nflpResult.size(); i++){
+            result.add(nflpResult.get(i).getName());            
+        }
+        
+        return result;
+    }
+    
 
     public String getError() {
         return error;
@@ -67,85 +73,22 @@ public class AgentReqBean {
         this.name = name;
     }
 
-    public boolean isQB() {
-        return QB;
-    }
-
-    public void setQB(boolean QB) {
-        this.QB = QB;
-    }
-
-    public boolean isRB() {
-        return RB;
-    }
-
-    public void setRB(boolean RB) {
-        this.RB = RB;
-    }
-
-    public boolean isWR() {
-        return WR;
-    }
-
-    public void setWR(boolean WR) {
-        this.WR = WR;
-    }
-
-    public boolean isTE() {
-        return TE;
-    }
-
-    public void setTE(boolean TE) {
-        this.TE = TE;
-    }
-
-    public boolean isK() {
-        return K;
-    }
-
-    public void setK(boolean K) {
-        this.K = K;
-    }
-
-    public boolean isDEF() {
-        return DEF;
-    }
-
-    public void setDEF(boolean DEF) {
-        this.DEF = DEF;
-    }
     private List<NFLPlayer> getFiltered(){
         
         List<NFLPlayer> nflpList = new ArrayList<NFLPlayer>();
-        if(QB){
-            NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 1);
-            if(nflp != null)
-                nflpList.add(nflp);
-        }
-        if(RB){
-            NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 2);
-            if(nflp != null)
-                nflpList.add(nflp);
-        }
-        if(WR){
-            NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 3);
-            if(nflp != null)
-                nflpList.add(nflp);
-        }
-        if(TE){
-            NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 4);
-            if(nflp != null)
-                nflpList.add(nflp);
-        }
-        if(K){
-            NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 5);
-            if(nflp != null)
-                nflpList.add(nflp);
-        }
-        if(DEF){
-            NFLPlayer nflp = nflpBean.getPlayerByNameAndPos(name, 6);
-            nflpList.add(nflp);
-        } 
+        if(sessionBean.isQB())
+            nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 1));
+        if(sessionBean.isRB())
+            nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 2));
+        if(sessionBean.isWR())
+            nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 3));
+        if(sessionBean.isTE())
+            nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 4));
+        if(sessionBean.isKCK())
+            nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 5));
+        if(sessionBean.isDEF())
+            nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 6));
+        
         return nflpList;
     }
     public List<NFLPlayer> getFreeAgentsLike(){

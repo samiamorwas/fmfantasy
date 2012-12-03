@@ -22,9 +22,9 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries( {
     @NamedQuery(name = "NFLPlayer.findByNameAndPos", query = 
-                        "SELECT nflp FROM NFLPlayer nflp WHERE nflp.name = :name AND nflp.position = :pos"),
+                        "SELECT nflp FROM NFLPlayer nflp WHERE lower(nflp.name) = lower(:name) AND nflp.position = :pos"),
      @NamedQuery(name = "NFLPlayer.findLikeNameAndPos", query = 
-                        "SELECT nflp FROM NFLPlayer nflp WHERE nflp.name LIKE :name AND nflp.position = :pos"),
+                        "SELECT nflp FROM NFLPlayer nflp WHERE lower(nflp.name) LIKE lower(:name) AND nflp.position = :pos"),
                 })
 
 public class NFLPlayer implements Serializable {
