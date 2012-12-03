@@ -51,6 +51,7 @@ public class AgentReqBean {
     public void setError(String error) {
         this.error = error;
     }
+    
     public boolean isPickable(NFLPlayer nflp){
         boolean result = false;
         
@@ -60,14 +61,16 @@ public class AgentReqBean {
         List<RosterPlayer> allMembers = rpBean.getByTeam(team);
         
         //12 total players allowed? I don't remember
-        if (allMembers.size() < 12)
+        if (allMembers.size() < 12) {
             result = true;
+        }
         
         return result;
     }
     public void pickupPlayer(NFLPlayer nflp){
-        if(!isPickable(nflp))
+        if(!isPickable(nflp)) {
             return;
+        }
         FantasyUser user = sessionBean.getUser();
         FantasyLeague leag = sessionBean.getLeague();
         FantasyTeam team = teamBean.findByOwnerAndLeague(user, leag);
@@ -81,7 +84,7 @@ public class AgentReqBean {
         
         rpBean.create(rp);        
     }
-    public List<String> draftAutoComplete(String userText){
+    public List<String> draftAutoComplete(){
         List<String> result = new ArrayList<String>();
   
         List<NFLPlayer> nflpResult = getFreeAgentsLike();
@@ -94,21 +97,28 @@ public class AgentReqBean {
 
     private List<NFLPlayer> getFiltered(){
         String name = sessionBean.getAgentTextEntry();
-        if (name == null)
-                name = "";
+        if (name == null) {
+            name = "";
+        }
         List<NFLPlayer> nflpList = new ArrayList<NFLPlayer>();
-        if(sessionBean.isQB())
+        if(sessionBean.isQB()) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 1));
-        if(sessionBean.isRB())
+        }
+        if(sessionBean.isRB()) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 2));
-        if(sessionBean.isWR())
+        }
+        if(sessionBean.isWR()) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 3));
-        if(sessionBean.isTE())
+        }
+        if(sessionBean.isTE()) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 4));
-        if(sessionBean.isKCK())
+        }
+        if(sessionBean.isKCK()) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 5));
-        if(sessionBean.isDEF())
+        }
+        if(sessionBean.isDEF()) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 6));
+        }
         
         return nflpList;
     }
@@ -155,7 +165,7 @@ public class AgentReqBean {
         
         //nfl stuff
         List<NFLPlayer> nflpList = getFreeAgentsLike();
-        if(nflpList.size() == 0){
+        if(nflpList.isEmpty()){
             error = "No Such Player!";
             return "no_such_player";
         }

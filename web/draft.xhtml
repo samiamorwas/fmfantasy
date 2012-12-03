@@ -16,6 +16,7 @@ and open the template in the editor.
         <h1>Cool League Draft</h1>
         <h:form id ="input">
             <h:outputLabel value="#{agentReqBean.error}"/>
+            <!--What do you want to do with this? Name doesn't exist in AgentReqBean.-->
             <p:autoComplete id="nameauto" value="#{agentReqBean.name}" 
                             completeMethod="#{agentReqBean.draftAutoComplete}"
                             maxResults ="8"/>
@@ -30,10 +31,10 @@ and open the template in the editor.
             <p:selectBooleanCheckbox value="#{sessionBean.WR}" itemLabel="WR">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.TE}" itemLabel="K">
+            <p:selectBooleanCheckbox value="#{sessionBean.TE}" itemLabel="TE">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.KCK}" itemLabel="DEF">
+            <p:selectBooleanCheckbox value="#{sessionBean.KCK}" itemLabel="K">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
             <p:selectBooleanCheckbox value="#{sessionBean.DEF}" itemLabel="DEF">
