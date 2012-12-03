@@ -45,4 +45,18 @@ public class RosterPlayerBean extends AbstractFacade<RosterPlayer> {
         List<RosterPlayer> results = createNamedQuery.getResultList();
         return results;
     }
+    public List<RosterPlayer> getActiveByTeam(FantasyTeam team) {
+        Query createNamedQuery = em.createNamedQuery("RosterPlayer.getActiveByTeam");
+        createNamedQuery.setParameter("team", team);
+        
+        List<RosterPlayer> results = createNamedQuery.getResultList();
+        return results;
+    }
+    public List<RosterPlayer> getBenchByTeam(FantasyTeam team) {
+        Query createNamedQuery = em.createNamedQuery("RosterPlayer.getBenchByTeam");
+        createNamedQuery.setParameter("team", team);
+        
+        List<RosterPlayer> results = createNamedQuery.getResultList();
+        return results;
+    }
 }

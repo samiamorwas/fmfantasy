@@ -28,10 +28,51 @@ and open the template in the editor.
         </h:form>
         
         <h:form id ="rosterTables">
-            <h:dataTable name="activeTable" value="#{rosterReqBean.team}" var="player">
+            <h:dataTable name="activeTable" value="#{rosterReqBean.active}" var="player">
+                <h:column>
+                    <f:facet name="header"></f:facet>
+                    <p:commandLink update =":rosterTables" 
+                                   actionListener="#{rosterReqBean.drop(player)}" >
+                        <h:outputText value="X"/>
+                    </p:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header"></f:facet>
+                    <p:commandLink update =":rosterTables" 
+                                   actionListener="#{rosterReqBean.demote(player)}">
+                        <h:outputText value="-"/>
+                    </p:commandLink>
+                </h:column>
                 <h:column>
                     <f:facet name="header">Position</f:facet>
-                    #{player.nflPlayer.position}
+                    #{player.nflPlayer.positionString}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Player</f:facet>
+                    #{player.nflPlayer.name}
+                </h:column>
+            </h:dataTable>
+            
+            <h:dataTable name="BenchTable" value="#{rosterReqBean.bench}" var="player">
+                <h:column>
+                    <f:facet name="header"></f:facet>
+                    <p:commandLink update =":rosterTables" 
+                                   actionListener="#{rosterReqBean.drop(player)}" >
+                        <h:outputText value="X"/>
+                    </p:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header"></f:facet>
+                    <p:commandLink update =":rosterTables" 
+                                   actionListener="#{rosterReqBean.promote(player)}"
+                                   rendered ="#{rosterReqBean.isPromotable(player)}">
+                        <h:outputText value="+"/>
+                    </p:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Position</f:facet>
+                    #{player.nflPlayer.positionString}
                 </h:column>
 
                 <h:column>

@@ -48,7 +48,25 @@ public class NFLPlayer implements Serializable {
      * 6 - D
      */
     private int position;
-
+    
+    public String getPositionString(){
+        switch(position){
+            case 1:
+                return "QB";
+            case 2:
+                return "RB";
+            case 3:
+                return "WR";
+            case 4:
+                return "TE";
+            case 5:
+                return "K";
+            case 6:
+                return "DEF";
+            default:
+                return "Uh oh";
+        }
+    }
     public Long getNFLPlayerID() {
         return NFLPlayerID;
     }

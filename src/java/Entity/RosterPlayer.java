@@ -26,7 +26,11 @@ import javax.persistence.Table;
     @NamedQuery(name = "RosterPlayer.getByLeague", query = 
                         "SELECT rp FROM RosterPlayer rp WHERE rp.league = :league"),
     @NamedQuery(name = "RosterPlayer.getByTeam", query =
-                        "SELECT rp FROM RosterPlayer rp WHERE rp.team = :team")
+                        "SELECT rp FROM RosterPlayer rp WHERE rp.team = :team"),
+    @NamedQuery(name = "RosterPlayer.getActiveByTeam", query =
+                        "SELECT rp FROM RosterPlayer rp WHERE rp.team = :team AND rp.rosterSlot != 0"),
+    @NamedQuery(name = "RosterPlayer.getBenchByTeam", query =
+                        "SELECT rp FROM RosterPlayer rp WHERE rp.team = :team AND rp.rosterSlot = 0")       
 } )
 public class RosterPlayer implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -59,7 +63,10 @@ public class RosterPlayer implements Serializable {
     */
     @Column(name = "ROSTERSLOT")
     private int rosterSlot; //0 benched, 1-10 active positions? this could work
-
+    
+    public String getPositionString(){
+        return nflPlayer.getPositionString();        
+    }
     public Long getRpID() {
         return rpID;
     }

@@ -36,4 +36,28 @@ public class RosterReqBean {
     public List<RosterPlayer> getTeam() {
         return rosterBean.getByTeam(sessionBean.getTeam());
     }
+    public List<RosterPlayer> getActive() {
+        return rosterBean.getActiveByTeam(sessionBean.getTeam());
+    }
+    public List<RosterPlayer> getBench() {
+        return rosterBean.getBenchByTeam(sessionBean.getTeam());
+    }
+    
+    public void drop(RosterPlayer rp){
+        rosterBean.remove(rp);        
+    }
+    public void demote(RosterPlayer rp){
+        rp.setRosterSlot(0);
+        rosterBean.edit(rp);
+    }
+    public void promote(RosterPlayer rp){
+        //need some logic here
+        if(isPromotable(rp))
+        rp.setRosterSlot(rp.getNflPlayer().getPosition());
+        rosterBean.edit(rp);
+    }
+    public boolean isPromotable(RosterPlayer rp){
+        //also here
+        return true;
+    }
 }
