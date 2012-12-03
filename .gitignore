@@ -6,3 +6,4 @@ build/
 *.war
 *.ear
 dist/
+!/web/WEB-INF/lib/primefaces-3.4.2.jar
