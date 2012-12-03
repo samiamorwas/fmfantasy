@@ -9,52 +9,58 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       template="./template.xhtml">
     
     <ui:define name="body">
         <h1>Cool League Free Agents</h1>
-        <form name="search" action="freeagents2.xhtml">
-            <input type="text" name="searchTerm" value="Search for a free agent" />
-            <input type="submit" value="Search" style="height:40px; width:80px; font-size:20px;" />
-        </form>
-        <br />
-        <table>
-            <tr>
-                <td>+</td>
-                <td>Tony Bomo</td>
-                <td>QB</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-            
-            <tr>
-                <td>+</td>
-                <td>Tony Como</td>
-                <td>QB</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-            
-            <tr>
-                <td>+</td>
-                <td>Tony Domo</td>
-                <td>QB</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-            
-            <tr>
-                <td>+</td>
-                <td>Tony Romo</td>
-                <td>QB</td>
-                <td>867</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-        </table>
+        <h:form id ="input">
+            <h:outputLabel value="#{agentReqBean.error}"/>
+            <p:inputText value ="#{sessionBean.agentTextEntry}">
+                <p:ajax event="keyup" update =":resultsTable"/>
+            </p:inputText>
+                
+            <br/>            
+            <p:selectBooleanCheckbox value="#{sessionBean.QB}" itemLabel="QB">
+                <p:ajax update =":resultsTable"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.RB}" itemLabel="RB">
+                <p:ajax update =":resultsTable"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.WR}" itemLabel="WR">
+                <p:ajax update =":resultsTable"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.TE}" itemLabel="K">
+                <p:ajax update =":resultsTable"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.KCK}" itemLabel="DEF">
+                <p:ajax update =":resultsTable"/>
+            </p:selectBooleanCheckbox>
+            <p:selectBooleanCheckbox value="#{sessionBean.DEF}" itemLabel="DEF">
+                <p:ajax update =":resultsTable"/>
+            </p:selectBooleanCheckbox>
+        </h:form>
+        
+        <h:form id="resultsTable" >
+            <h:dataTable value="#{agentReqBean.freeAgentsLike}" var="player">
+                <h:column>
+                    <f:facet name="header">+</f:facet>
+                    <p:commandLink update=":resultsTable" 
+                                   actionListener="#{agentReqBean.pickupPlayer(player)}"
+                                   rendered ="#{agentReqBean.isPickable(player)}">
+                        <h:outputText value="+"/>
+                    </p:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pos</f:facet>
+                    <h:outputText value="#{player.positionString}"/>                    
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{player.name}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
        
     </ui:define>
     

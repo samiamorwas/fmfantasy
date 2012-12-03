@@ -56,4 +56,12 @@ public class FantasyTeamBean extends AbstractFacade<FantasyTeam> {
         return createNamedQuery.getResultList();        
     }
     
+    public FantasyTeam findByOwnerAndLeague(FantasyUser u, FantasyLeague l){
+        Query createNamedQuery = em.createNamedQuery("FantasyTeam.findByOwnerAndLeague");
+        createNamedQuery.setParameter("owner", u);
+        createNamedQuery.setParameter("league", l);
+        
+        return (FantasyTeam) createNamedQuery.getSingleResult();        
+    }
+    
 }

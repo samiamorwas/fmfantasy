@@ -30,8 +30,9 @@ public class AgentReqBean {
     private FMFantasyEJB.RosterPlayerBean rpBean;
     @EJB
     private FMFantasyEJB.NFLPlayerBean nflpBean;
+    @EJB
+    private FMFantasyEJB.FantasyTeamBean teamBean;
     
-    private String name;    
     private String error;
     
        
@@ -43,20 +44,6 @@ public class AgentReqBean {
      */
     public AgentReqBean() {
     }
-    
-    public List<String> draftAutoComplete(String userText){
-        List<String> result = new ArrayList<String>();
-  
-        name = userText;
-        List<NFLPlayer> nflpResult = getFreeAgentsLike();
-        for(int i = 0; i < nflpResult.size(); i++){
-            result.add(nflpResult.get(i).getName());            
-        }
-        
-        return result;
-    }
-    
-
     public String getError() {
         return error;
     }
@@ -64,17 +51,51 @@ public class AgentReqBean {
     public void setError(String error) {
         this.error = error;
     }
-
-    public String getName() {
-        return name;
+    public boolean isPickable(NFLPlayer nflp){
+        boolean result = false;
+        
+        FantasyUser user = sessionBean.getUser();
+        FantasyLeague leag = sessionBean.getLeague();
+        FantasyTeam team = teamBean.findByOwnerAndLeague(user, leag);
+        List<RosterPlayer> allMembers = rpBean.getByTeam(team);
+        
+        //12 total players allowed? I don't remember
+        if (allMembers.size() < 12)
+            result = true;
+        
+        return result;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void pickupPlayer(NFLPlayer nflp){
+        if(!isPickable(nflp))
+            return;
+        FantasyUser user = sessionBean.getUser();
+        FantasyLeague leag = sessionBean.getLeague();
+        FantasyTeam team = teamBean.findByOwnerAndLeague(user, leag);
+        
+        
+        RosterPlayer rp = new RosterPlayer();
+        rp.setTeam(team);
+        rp.setLeague(leag);
+        rp.setRosterSlot(0); //start benched
+        rp.setNflPlayer(nflp);
+        
+        rpBean.create(rp);        
+    }
+    public List<String> draftAutoComplete(String userText){
+        List<String> result = new ArrayList<String>();
+  
+        List<NFLPlayer> nflpResult = getFreeAgentsLike();
+        for(int i = 0; i < nflpResult.size(); i++){
+            result.add(nflpResult.get(i).getName());            
+        }
+        
+        return result;
     }
 
     private List<NFLPlayer> getFiltered(){
-        
+        String name = sessionBean.getAgentTextEntry();
+        if (name == null)
+                name = "";
         List<NFLPlayer> nflpList = new ArrayList<NFLPlayer>();
         if(sessionBean.isQB())
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 1));

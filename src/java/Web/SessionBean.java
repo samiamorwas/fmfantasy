@@ -28,6 +28,7 @@ public class SessionBean implements Serializable{
     private FantasyTeam team;
     private FantasyMatch match;
     
+    private String agentTextEntry;
     private boolean QB,RB,WR,TE,KCK,DEF;
     
     private int NFLWeek;
@@ -35,6 +36,14 @@ public class SessionBean implements Serializable{
     
     public SessionBean(){
         
+    }
+
+    public String getAgentTextEntry() {
+        return agentTextEntry;
+    }
+
+    public void setAgentTextEntry(String agentTextEntry) {
+        this.agentTextEntry = agentTextEntry;
     }
 
     public boolean isQB() {
