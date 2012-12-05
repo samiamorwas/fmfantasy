@@ -110,7 +110,22 @@ public class LeagueReqBean {
     }
     
     public String createSchedule(){
-        
+        List<FantasyTeam> teams = teamBean.findByLeague(sessionBean.getLeague());
+        List<FantasyTeam> sideA, sideB;
+        sideA = teams.subList(0, teams.size()/2-1);
+        sideB = teams.subList(teams.size()/2, teams.size()-1);
+        sideA.listIterator(1);
+        sideB.listIterator(0);
+        for(int i=0; i<14; i++)
+        {
+            /*create a match*/
+            
+            
+            sideA.add(1, sideB.get(sideB.size()-1));
+            sideB.add(0, sideA.get(sideA.size()-1));
+            sideA.remove(sideA.size()-1);
+            sideB.remove(sideB.size()-1);
+        }
         
         return "schedule_created";
     }
