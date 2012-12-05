@@ -5,12 +5,14 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -66,10 +68,6 @@ public class FantasyMatch implements Serializable {
     @OneToOne
     private NFLPlayer team2K;
     @OneToOne
-    private NFLTeam team1DEF;
-    @OneToOne
-    private NFLTeam team2DEF;
-    @OneToOne
     private NFLPlayer team1BEN1;
     @OneToOne
     private NFLPlayer team2BEN1;
@@ -91,6 +89,12 @@ public class FantasyMatch implements Serializable {
     private NFLPlayer team2BEN5;
     @OneToOne
     private NFLPlayer team1BEN6;
+    @OneToOne
+    private NFLPlayer team2BEN6;
+    @OneToOne
+    private NFLTeam team1DEF;
+    @OneToOne
+    private NFLTeam team2DEF;
 
     public int getWeek() {
         return week;
@@ -267,23 +271,7 @@ public class FantasyMatch implements Serializable {
     public void setTeam2K(NFLPlayer team2K) {
         this.team2K = team2K;
     }
-
-    public NFLTeam getTeam1DEF() {
-        return team1DEF;
-    }
-
-    public void setTeam1DEF(NFLTeam team1DEF) {
-        this.team1DEF = team1DEF;
-    }
-
-    public NFLTeam getTeam2DEF() {
-        return team2DEF;
-    }
-
-    public void setTeam2DEF(NFLTeam team2DEF) {
-        this.team2DEF = team2DEF;
-    }
-
+    
     public NFLPlayer getTeam1BEN1() {
         return team1BEN1;
     }
@@ -379,9 +367,7 @@ public class FantasyMatch implements Serializable {
     public void setTeam2BEN6(NFLPlayer team2BEN6) {
         this.team2BEN6 = team2BEN6;
     }
-    @OneToOne
-    private NFLPlayer team2BEN6;
-
+    
     public Long getfMatchID() {
         return fMatchID;
     }

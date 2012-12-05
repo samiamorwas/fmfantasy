@@ -5,10 +5,12 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -20,6 +22,25 @@ public class NFLTeam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String teamName;
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public List<NFLPlayer> getTeamPlayers() {
+        return teamPlayers;
+    }
+
+    public void setTeamPlayers(List<NFLPlayer> teamPlayers) {
+        this.teamPlayers = teamPlayers;
+    }
+    @OneToMany(mappedBy = "nflTeam")
+    private List<NFLPlayer> teamPlayers;
 
     public Long getId() {
         return id;

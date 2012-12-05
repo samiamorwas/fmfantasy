@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -37,6 +38,10 @@ public class NFLPlayer implements Serializable {
     
     private String name;
     private String team;
+    // This might get confusing in addition to the String 'team' field, but that
+    // needs to stay since its used in the NFLData class, and this needs to be
+    // here for use in the FantasyMatch entity -- Jess
+    private NFLTeam nflTeam;
     
     
     /*
