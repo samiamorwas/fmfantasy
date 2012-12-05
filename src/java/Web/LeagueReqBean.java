@@ -5,8 +5,10 @@
 package Web;
 
 import Entity.FantasyLeague;
+import Entity.FantasyMatch;
 import Entity.FantasyTeam;
 import Entity.FantasyUser;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
@@ -128,6 +130,109 @@ public class LeagueReqBean {
         }
         
         return "schedule_created";
+    }
+    
+    public String createSeasonSchedule(){
+        ArrayList<FantasyTeam> teamsInLeague = (ArrayList)teamBean.findByLeague(sessionBean.getLeague());
+        List<FantasyTeam> firstHalfTeams;
+        firstHalfTeams = new ArrayList();
+        List<FantasyTeam> secondHalfTeams;
+        secondHalfTeams = new ArrayList();
+        int numTeams = teamsInLeague.size();
+        int[] indexesSelected = new int[numTeams];
+        int indexesSelectedIndex = 0;
+        int indexToAssign;
+        Boolean indexAssigned = false;
+        List<FantasyMatch> matchesInSeason;
+        matchesInSeason = new ArrayList();
+        FantasyMatch matchToAdd = new FantasyMatch();
+        FantasyTeam tempRemoval = new FantasyTeam();
+        
+        // Randomly select index in teamsInLeague list of all teams in league and, after making sure 
+        // that that index hasn't already been selected (by consulting indexesSelected array), 
+        // assign team at that index to next available index in firstHalfTeams list
+        for (int i = 0; i < numTeams/2; i++)
+        {
+            do
+            {
+                indexAssigned = false;
+                indexToAssign = (int)(Math.random() * (numTeams - 1));
+                for (int j = 0; j < j + i; j++)
+                {
+                    if (indexesSelected[j] == indexToAssign)
+                    {
+                        indexAssigned = true;
+                        j = numTeams;
+                    }
+                }
+            } while(indexAssigned);
+            
+            indexesSelected[indexesSelectedIndex] = indexToAssign;
+            indexesSelectedIndex++;
+            firstHalfTeams.add(i, teamsInLeague.get(indexToAssign));
+       }
+       
+       // Randomly select index in teamsInLeague list of all teams in league and, after making sure 
+       // that that index hasn't already been selected (by consulting indexesSelected array), 
+       // assign team at that index to next available index in secondtHalfTeams list
+       for (int i = 0; i < numTeams/2; i++)
+        {
+            do
+            {
+                indexAssigned = false;
+                indexToAssign = (int)(Math.random() * (numTeams - 1));
+                for (int j = 0; j < (j + (i + numTeams/2)); j++)
+                {
+                    if (indexesSelected[j] == indexToAssign)
+                    {
+                        indexAssigned = true;
+                        j = numTeams;
+                    }
+                }
+            } while(indexAssigned);
+            
+            indexesSelected[indexesSelectedIndex] = indexToAssign;
+            indexesSelectedIndex++;
+            
+            secondHalfTeams.add(i, teamsInLeague.get(indexToAssign));
+       }
+       
+       for (int i = 0; i < (14 * (numTeams/2)); i++)
+       {
+            for (int j = 0; j < numTeams/2; j++)
+            {
+                matchToAdd.setTeam1(firstHalfTeams.get(j));
+                matchToAdd.setTeam2(secondHalfTeams.get(j));
+                matchesInSeason.add(matchToAdd);
+            }
+            
+            // Round Robin-style rotation - Visualize lining two team lists up alongside each 
+            // other vertically, where indexes increase as you go down the vertically-aligned lists. 
+            // Keep team at index 0 of first list fixed throughout all 14 weeks. Move each team
+            // other than team at index 0 of first list in clockwise direction, where team at index
+            // 1 of first list moves to index 0 in second list and team at index numTeams/2 – 1 of 
+            // second list moves to index numTeams/2 – 1 of first list. Temporarily remove team at
+            // index 1 of first list to placeholder variable so that rotation can start by
+            // overwriting team at index of 1 of first list without losing that team
+            
+            tempRemoval = firstHalfTeams.get(1);
+            
+            for (int k = 2; k < numTeams/2; k++)
+            {
+                firstHalfTeams.add((k - 1), firstHalfTeams.get(k));
+            }
+            
+            firstHalfTeams.add((numTeams/2 - 1), (secondHalfTeams.get(numTeams/2 - 1))); 
+            
+            for (int k = 0; k < (numTeams/2 - 2); k++)
+            {
+                secondHalfTeams.add((k + 1), secondHalfTeams.get(k));
+            }
+            
+            secondHalfTeams.add(0, tempRemoval);
+       }
+       
+       return "schedule_created";
     }
        
 }
