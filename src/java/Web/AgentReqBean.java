@@ -84,7 +84,8 @@ public class AgentReqBean {
         
         rpBean.create(rp);        
     }
-    public List<String> draftAutoComplete(){
+    public List<String> draftAutoComplete(String name){
+        sessionBean.setAgentTextEntry(name);
         List<String> result = new ArrayList<String>();
   
         List<NFLPlayer> nflpResult = getFreeAgentsLike();

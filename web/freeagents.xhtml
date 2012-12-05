@@ -13,7 +13,7 @@ and open the template in the editor.
       template="./template.xhtml">
     
     <ui:define name="body">
-        <h1>Cool League Free Agents</h1>
+        <h1>#{sessionBean.league.leagueName} Free Agents</h1>
         <h:form id ="input">
             <h:outputLabel value="#{agentReqBean.error}"/>
             <p:inputText value ="#{sessionBean.agentTextEntry}">
