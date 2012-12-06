@@ -117,13 +117,19 @@ public class LeagueReqBean {
         List<FantasyTeam> sideA, sideB;
         sideA = teams.subList(0, teams.size()/2-1);
         sideB = teams.subList(teams.size()/2, teams.size()-1);
-        sideA.listIterator(1);
-        sideB.listIterator(0);
+        FantasyMatch matchToAdd = new FantasyMatch();
+        List<FantasyMatch> matchesInSeason = new ArrayList();
+        
         for(int i=0; i<14; i++)
         {
             /*create a match*/
-            
-            
+            for (int j = 0; j < sideA.size(); j++)
+            {
+                matchToAdd.setWeek(i);
+                matchToAdd.setTeam1(sideA.get(j));
+                matchToAdd.setTeam2(sideB.get(j));
+                matchesInSeason.add(matchToAdd);
+            }
             sideA.add(1, sideB.get(sideB.size()-1));
             sideB.add(0, sideA.get(sideA.size()-1));
             sideA.remove(sideA.size()-1);
@@ -132,8 +138,8 @@ public class LeagueReqBean {
         
         return "schedule_created";
     }
-    
-    public String createSeasonSchedule(){
+    /*public String createSeasonSchedule(){
+>>>>>>> 84a3f5d3258b83fa223572bf2c6385de8f39b711
         ArrayList<FantasyTeam> teamsInLeague = (ArrayList)teamBean.findByLeague(sessionBean.getLeague());
         List<FantasyTeam> firstHalfTeams;
         firstHalfTeams = new ArrayList();
@@ -143,11 +149,19 @@ public class LeagueReqBean {
         int[] indexesSelected = new int[numTeams];
         int indexesSelectedIndex = 0;
         int indexToAssign;
+<<<<<<< HEAD
         Boolean indexAssigned = false;
         List<FantasyMatch> matchesInSeason;
         matchesInSeason = new ArrayList();
         FantasyMatch matchToAdd = new FantasyMatch();
         FantasyTeam tempRemoval = new FantasyTeam();
+=======
+        Boolean indexAssigned;
+        List<FantasyMatch> matchesInSeason;
+        matchesInSeason = new ArrayList();
+        FantasyMatch matchToAdd = new FantasyMatch();
+        FantasyTeam tempRemoval;
+>>>>>>> 84a3f5d3258b83fa223572bf2c6385de8f39b711
         
         // Randomly select index in teamsInLeague list of all teams in league and, after making sure 
         // that that index hasn't already been selected (by consulting indexesSelected array), 
@@ -198,10 +212,18 @@ public class LeagueReqBean {
             secondHalfTeams.add(i, teamsInLeague.get(indexToAssign));
        }
        
+<<<<<<< HEAD
        for (int i = 0; i < (14 * (numTeams/2)); i++)
        {
             for (int j = 0; j < numTeams/2; j++)
             {
+=======
+       for (int i = 0; i < 14; i++)
+       {
+            for (int j = 0; j < numTeams/2; j++)
+            {
+                matchToAdd.setWeek(i);
+>>>>>>> 84a3f5d3258b83fa223572bf2c6385de8f39b711
                 matchToAdd.setTeam1(firstHalfTeams.get(j));
                 matchToAdd.setTeam2(secondHalfTeams.get(j));
                 matchesInSeason.add(matchToAdd);
@@ -235,5 +257,9 @@ public class LeagueReqBean {
        
        return "schedule_created";
     }
+<<<<<<< HEAD
        
+}
+=======
+    */
 }

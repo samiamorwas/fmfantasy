@@ -46,6 +46,8 @@ public class NFLPlayerBean extends AbstractFacade<NFLPlayer> {
         createNamedQuery.setParameter("name", name);
         createNamedQuery.setParameter("pos", pos);
         
+        createNamedQuery.setMaxResults(50);
+        
         List<NFLPlayer> result = createNamedQuery.getResultList();
         return result;
     }
