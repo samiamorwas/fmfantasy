@@ -22,7 +22,6 @@ import javax.inject.Named;
 @SessionScoped
 public class SessionBean implements Serializable{
     
-    //the currently logged in user? i think?
     private FantasyUser user;
     private FantasyLeague league;
     private FantasyTeam team;
@@ -141,6 +140,21 @@ public class SessionBean implements Serializable{
     public void setTeam(FantasyTeam team) {
         this.team = team;
     }
-
-       
+    
+    public boolean getDraftFinished() {
+        return league.getFinishedDraft();
+    }
+    
+    public boolean getIsOwner() {
+        return (league.getLeagueOwner().equals(user));
+    }
+    
+    public boolean getCanInvite() {
+        boolean draftInProgress = (league.getDraftStarted() || league.getFinishedDraft());
+        return (!draftInProgress) && getIsOwner();
+    }
+    
+    public boolean getCanDraft() {
+        return (!league.getFinishedDraft()) && getIsOwner();
+    }
 }

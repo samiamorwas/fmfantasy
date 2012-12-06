@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html">
@@ -13,10 +9,12 @@ and open the template in the editor.
     <br />
     <h:link outcome="standings" value="Standings" />
     <br />
-    <h:link outcome="freeagents" value="Free Agents" />
-    <br />
     <h:link outcome="leagues" value="My Leagues" />
     <br />
-    <h:link outcome="draft" value="Draft" />
-    
+    <h:form rendered="#{sessionBean.draftFinished}">
+        <h:link outcome="freeagents" value="Free Agents" />
+        <br />
+    </h:form>
+    <h:link outcome="draft" value="Draft" rendered="#{sessionBean.canDraft}" />
+
 </html>

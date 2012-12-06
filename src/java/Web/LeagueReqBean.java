@@ -100,6 +100,7 @@ public class LeagueReqBean {
         l.setLeagueName(leagueName);
         l.setLeagueOwner(luser);
         l.setFinishedDraft(false);
+        l.setDraftStarted(false);
         leagueBean.createLeague(l);
         
         FantasyTeam t = new FantasyTeam();        

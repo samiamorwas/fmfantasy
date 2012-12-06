@@ -37,6 +37,8 @@ public class FantasyLeague implements Serializable {
     
     private boolean finishedDraft;
     
+    private boolean startedDraft;
+    
     @OneToMany(mappedBy = "league")
     private List<FantasyTeam> memberTeams;    
 
@@ -66,8 +68,16 @@ public class FantasyLeague implements Serializable {
     public void setLeagueOwner(FantasyUser leagueOwner) {
         this.leagueOwner = leagueOwner;
     }
+    
+    public boolean getDraftStarted() {
+        return startedDraft;
+    }
+    
+    public void setDraftStarted(boolean startedDraft) {
+        this.startedDraft = startedDraft;
+    }
 
-    public boolean isFinishedDraft() {
+    public boolean getFinishedDraft() {
         return finishedDraft;
     }
 

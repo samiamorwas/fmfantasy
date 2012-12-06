@@ -46,7 +46,7 @@
 
         </h:dataTable>
         <br /><br />
-        <h:form rendered="#{sessionBean.league.leagueOwner == sessionBean.user}" >
+        <h:form rendered="#{sessionBean.canInvite}" >
             <div class ="TableHeader" style="background-color: orangered">Invite Members</div>
             <br />
             <div class="whiteText" style="font-size: 24px">
