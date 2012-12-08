@@ -4,8 +4,12 @@
  */
 package FMFantasyEJB;
 
+import Entity.FantasyLeague;
 import Entity.FantasyMatch;
+import Entity.FantasyTeam;
+import java.util.Collections;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +21,8 @@ import javax.persistence.Query;
  */
 @Stateless
 public class FantasyMatchBean extends AbstractFacade<FantasyMatch> {
+    @EJB
+    private FantasyTeamBean teamBean;
     @PersistenceContext(unitName = "WebApplication1PU")
     private EntityManager em;
 
@@ -29,9 +35,31 @@ public class FantasyMatchBean extends AbstractFacade<FantasyMatch> {
         super(FantasyMatch.class);
     }
     
-    public boolean createMatch(FantasyMatch m) {
-        super.create(m);
-        return true;
+    public void createSchedule(FantasyLeague league){
+        List<FantasyTeam> teams = teamBean.findByLeague(league);
+        List<FantasyTeam> sideA, sideB;
+        sideA = teams.subList(0, teams.size()/2);
+        sideB = teams.subList(teams.size()/2, teams.size());
+        Collections.reverse(sideB);
+        
+        for(int i = 0; i < 14; i++)
+        {
+            /*create a match*/
+            for (int j = 0; j < sideA.size(); j++)
+            {   
+                FantasyMatch matchToAdd = new FantasyMatch();
+                matchToAdd.setWeek(i + 1);
+                matchToAdd.setLeague(league);
+                matchToAdd.setTeam1(sideA.get(j));
+                matchToAdd.setTeam2(sideB.get(j));
+                create(matchToAdd);
+            }
+            if(sideA.size() > 1){
+                sideA.add(1, sideB.remove(0));
+                sideB.add(sideA.remove(sideA.size()-1));
+            }
+        }
+        
     }
     
     public List<FantasyMatch> findByWeek(int w){

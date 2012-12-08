@@ -115,6 +115,14 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <from-view-id>/schedule.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>team_set</from-outcome>
+            <to-view-id>/roster.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>
 
 

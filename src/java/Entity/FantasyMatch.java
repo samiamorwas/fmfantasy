@@ -35,65 +35,36 @@ public class FantasyMatch implements Serializable {
     private FantasyTeam team2;
     private int team1Points;
     private int team2Points;
-    @OneToOne
+    
     private NFLPlayer team1QB;
-    @OneToOne
     private NFLPlayer team2QB;
-    @OneToOne
     private NFLPlayer team1RB1;
-    @OneToOne
     private NFLPlayer team2RB1;
-    @OneToOne
     private NFLPlayer team1RB2;
-    @OneToOne
     private NFLPlayer team2RB2;
-    @OneToOne
     private NFLPlayer team1WR1;
-    @OneToOne
     private NFLPlayer team2WR1;
-    @OneToOne
     private NFLPlayer team1WR2;
-    @OneToOne
     private NFLPlayer team2WR2;
-    @OneToOne
     private NFLPlayer team1WRRB;
-    @OneToOne
     private NFLPlayer team2WRRB;
-    @OneToOne
     private NFLPlayer team1TE;
-    @OneToOne
     private NFLPlayer team2TE;
-    @OneToOne
     private NFLPlayer team1K;
-    @OneToOne
     private NFLPlayer team2K;
-    @OneToOne
     private NFLPlayer team1BEN1;
-    @OneToOne
     private NFLPlayer team2BEN1;
-    @OneToOne
     private NFLPlayer team1BEN2;
-    @OneToOne
     private NFLPlayer team2BEN2;
-    @OneToOne
     private NFLPlayer team1BEN3;
-    @OneToOne
     private NFLPlayer team2BEN3;
-    @OneToOne
     private NFLPlayer team1BEN4;
-    @OneToOne
     private NFLPlayer team2BEN4;
-    @OneToOne
     private NFLPlayer team1BEN5;
-    @OneToOne
     private NFLPlayer team2BEN5;
-    @OneToOne
     private NFLPlayer team1BEN6;
-    @OneToOne
     private NFLPlayer team2BEN6;
-    @OneToOne
     private NFLTeam team1DEF;
-    @OneToOne
     private NFLTeam team2DEF;
 
     public int getWeek() {

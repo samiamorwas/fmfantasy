@@ -33,7 +33,7 @@ public class SessionBean implements Serializable{
     private boolean QB,RB,WR,TE,KCK,DEF;
     
     private int NFLWeek;
-    private int LeagueWeek;
+    private int LeagueWeek = 1;
     private int previousLeagueWeek;
     private int nextLeagueWeek;
     
