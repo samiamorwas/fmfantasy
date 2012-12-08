@@ -9,37 +9,27 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      template="./template.xhtml">
+      template="./template.xhtml"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     
     <ui:define name="body">
-        <h1>Cool League Schedule</h1>
-        <h2>Week 6</h2>
-        <h3><h:link outcome="prevschedule" value="« Week 5" /></h3>
-        <h4><h:link outcome="nextschedule" value="Week 7 »" /></h4>
-        <table class="scheduleTable">
-            <tr>
-                <td>Team A</td>
-                <td>vs</td>
-                <td>Team B</td>
-            </tr>
-            
-            <tr>
-                <td>Team C</td>
-                <td>vs</td>
-                <td>Team D</td>
-            </tr>
-            
-            <tr>
-                <td>Team E</td>
-                <td>vs</td>
-                <td>Team F</td>
-            </tr>
-            
-            <tr>
-                <td>Team G</td>
-                <td>vs</td>
-                <td>Team H</td>
-            </tr>
+        <h1>#{sessionBean.league.leagueName}</h1>
+        <h2><h:outputText value="Week #{sessionBean.leagueWeek}" /></h2>
+        <h3><p:commandLink value="« Week #{sessionBean.previousLeagueWeek}">
+            <p:ajax listener="#{leagueReqBean.decrementWeek}" update="schedule" />
+        </p:commandLink></h3>
+        <h3><p:commandLink value="Week #{sessionBean.nextLeagueWeek} »">
+            <p:ajax listener="#{leagueReqBean.incrementWeek}" update="schedule" />
+        </p:commandLink></h3>
+        <table id="schedule" class="scheduleTable">
+            <ui:repeat value="#{leagueReqBean.matchesInWeek}" var="match">
+                <tr>
+                    <td>match.team1</td>
+                    <td>vs</td>
+                    <td>match.team2</td>
+                </tr>
+            </ui:repeat>
         </table>
     </ui:define>
     

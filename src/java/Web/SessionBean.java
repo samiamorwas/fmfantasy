@@ -9,6 +9,8 @@ import Entity.FantasyMatch;
 import Entity.FantasyTeam;
 import Entity.FantasyUser;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -32,6 +34,8 @@ public class SessionBean implements Serializable{
     
     private int NFLWeek;
     private int LeagueWeek;
+    private int previousLeagueWeek;
+    private int nextLeagueWeek;
     
     public SessionBean(){
         
@@ -108,7 +112,23 @@ public class SessionBean implements Serializable{
     public void setLeagueWeek(int LeagueWeek) {
         this.LeagueWeek = LeagueWeek;
     }
+    
+    public int getPreviousLeagueWeek() {
+        return previousLeagueWeek;
+    }
 
+    public void setPreviousLeagueWeek(int previousLeagueWeek) {
+        this.previousLeagueWeek = previousLeagueWeek;
+    }
+
+    public int getNextLeagueWeek() {
+        return nextLeagueWeek;
+    }
+
+    public void setNextLeagueWeek(int nextLeagueWeek) {
+        this.nextLeagueWeek = nextLeagueWeek;
+    }
+    
     public FantasyMatch getMatch() {
         return match;
     }

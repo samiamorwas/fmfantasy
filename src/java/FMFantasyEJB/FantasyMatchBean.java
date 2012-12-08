@@ -29,6 +29,11 @@ public class FantasyMatchBean extends AbstractFacade<FantasyMatch> {
         super(FantasyMatch.class);
     }
     
+    public boolean createMatch(FantasyMatch m) {
+        super.create(m);
+        return true;
+    }
+    
     public List<FantasyMatch> findByWeek(int w){
         Query createNamedQuery = em.createNamedQuery("FantasyMatch.findByWeek");
         createNamedQuery.setParameter("week", w);

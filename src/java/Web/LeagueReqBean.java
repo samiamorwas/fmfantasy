@@ -32,6 +32,8 @@ public class LeagueReqBean {
     private FMFantasyEJB.FantasyUserBean userBean;
     @EJB
     private FMFantasyEJB.InvitationBean invBean;
+    @EJB
+    private FMFantasyEJB.FantasyMatchBean matchBean;
     
     @Inject
     SessionBean sessionBean;
@@ -39,6 +41,7 @@ public class LeagueReqBean {
     private String leagueName;
     private String teamName;
     private String error;
+    private List<FantasyMatch> matchesInWeek;
     
     /**
      * Creates a new instance of LeagueReqBean
@@ -68,6 +71,14 @@ public class LeagueReqBean {
     
     public void setError(String error) {
         this.error = error;
+    }
+    
+    public List<FantasyMatch> getMatchesInWeek() {
+        return matchesInWeek;
+    }
+
+    public void setMatchesInWeek(List<FantasyMatch> matchesInWeek) {
+        this.matchesInWeek = matchesInWeek;
     }
     
     public List<FantasyLeague> getOwned(){
@@ -118,17 +129,19 @@ public class LeagueReqBean {
         sideA = teams.subList(0, teams.size()/2-1);
         sideB = teams.subList(teams.size()/2, teams.size()-1);
         FantasyMatch matchToAdd = new FantasyMatch();
-        List<FantasyMatch> matchesInSeason = new ArrayList();
+        matchesInWeek = new ArrayList();
         
         for(int i=0; i<14; i++)
         {
             /*create a match*/
             for (int j = 0; j < sideA.size(); j++)
             {
-                matchToAdd.setWeek(i);
+                sessionBean.setLeagueWeek(i + 1);
+                matchToAdd.setWeek(i + 1);
+                matchToAdd.setLeague(sessionBean.getLeague());
                 matchToAdd.setTeam1(sideA.get(j));
                 matchToAdd.setTeam2(sideB.get(j));
-                matchesInSeason.add(matchToAdd);
+                matchBean.createMatch(matchToAdd);
             }
             sideA.add(1, sideB.get(sideB.size()-1));
             sideB.add(0, sideA.get(sideA.size()-1));
@@ -136,7 +149,28 @@ public class LeagueReqBean {
             sideB.remove(sideB.size()-1);
         }
         
+        // matchesInWeek initially set to first week of season
+        matchesInWeek = matchBean.findByWeek(1);
+        
         return "schedule_created";
+    }
+    
+    public void decrementWeek()
+    {
+        // Can't go to previous week if it's Week 1
+        if (sessionBean.getLeagueWeek() != 1)
+        {
+            matchesInWeek = matchBean.findByWeek(sessionBean.getLeagueWeek() - 1);
+        }
+    }
+    
+    public void incrementWeek()
+    {
+        // Can't go to next week if it's Week 14
+        if (sessionBean.getLeagueWeek() != 14)
+        {
+            matchesInWeek = matchBean.findByWeek(sessionBean.getLeagueWeek() + 1);
+        }
     }
  /* 
     public String createSeasonSchedule()
@@ -151,10 +185,9 @@ public class LeagueReqBean {
         int indexesSelectedIndex = 0;
         int indexToAssign;
         Boolean indexAssigned;
-        List<FantasyMatch> matchesInSeason;
-        matchesInSeason = new ArrayList();
         FantasyMatch matchToAdd = new FantasyMatch();
         FantasyTeam tempRemoval;
+        matchesInWeek = new ArrayList();
         
         // Randomly select index in teamsInLeague list of all teams in league and, after making sure 
         // that that index hasn't already been selected (by consulting indexesSelected array), 
@@ -209,7 +242,8 @@ public class LeagueReqBean {
         {
             for (int j = 0; j < numTeams/2; j++)
             {
-                matchToAdd.setWeek(i);
+                sessionBean.setLeagueWeek(i + 1);
+                matchToAdd.setWeek(i + 1);
                 matchToAdd.setTeam1(firstHalfTeams.get(j));
                 matchToAdd.setTeam2(secondHalfTeams.get(j));
                 matchesInSeason.add(matchToAdd);
@@ -241,6 +275,9 @@ public class LeagueReqBean {
             secondHalfTeams.set(0, tempRemoval);
         }
        
+        // matchesInWeek initially set to first week of season
+        matchesInWeek = matchBean.findByWeek(1);
+        
         return "schedule_created";
     }
  */
