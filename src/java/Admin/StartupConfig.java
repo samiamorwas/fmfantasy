@@ -4,14 +4,20 @@
  */
 package Admin;
 
+import Entity.FantasyLeague;
 import Entity.FantasyMatch;
+import Entity.FantasyTeam;
 import Entity.NFLMatch;
 import Entity.NFLPlayer;
 import Entity.RosterPlayer;
+import FMFantasyEJB.FantasyLeagueBean;
 import FMFantasyEJB.FantasyMatchBean;
+import FMFantasyEJB.FantasyTeamBean;
 import FMFantasyEJB.NFLMatchBean;
 import FMFantasyEJB.NFLPlayerBean;
 import FMFantasyEJB.RosterPlayerBean;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -33,6 +39,10 @@ public class StartupConfig {
     FantasyMatchBean fmatchBean;
     @EJB
     RosterPlayerBean rpBean;
+    @EJB
+    FantasyTeamBean ftBean;
+    @EJB
+    FantasyLeagueBean flBean;
     
     private int worldDay;
     private int worldWeek;
@@ -193,8 +203,92 @@ public class StartupConfig {
     //  compute winner or something
     //  update points/rank/w/l/d of teams in match
     private void doMatchesStats(int week){
+        NFLData nfld = new NFLData();
+        
+        
+        List<FantasyMatch> fMatches = fmatchBean.findByWeek(week);
+        for(int i = 0; i < fMatches.size(); i++){
+            FantasyMatch fm = fMatches.get(i);
+            FantasyTeam team1 = fm.getTeam1();
+            FantasyTeam team2 = fm.getTeam2();
+            int team1Points = 0, team2Points = 0;
+            
+            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1QB(), week);
+            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2QB(), week);
+            
+            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1RB1(), week);
+            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2RB1(), week);
+            
+            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1RB2(), week);
+            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2RB2(), week);
+            
+            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1WR1(), week);
+            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2WR1(), week);
+            
+            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1WR2(), week);
+            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2WR2(), week);
+            
+            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1WRRB(), week);
+            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2WRRB(), week);
+            
+            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1TE(), week);
+            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2TE(), week);
+            
+            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1K(), week);
+            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2K(), week);
+            
+            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1DEF(), week);
+            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2DEF(), week);
+            
+            fm.setTeam1Points(team1Points);
+            fm.setTeam2Points(team2Points);
+            
+            if(team1Points > team2Points){
+                team1.setWins(team1.getWins() + 1);
+                team2.setLosses(team2.getLosses() + 1);
+            }
+            if(team1Points == team2Points){
+                team1.setDraws(team1.getDraws() + 1);
+                team2.setDraws(team2.getDraws() + 1);
+            }
+            if(team1Points < team2Points){
+                team1.setLosses(team1.getLosses() + 1);
+                team2.setWins(team2.getWins() + 1);
+            }
+            
+            team1.setPointsFor(team1.getPointsFor() + team1Points);
+            team1.setPointsAgainst(team1.getPointsAgainst() + team2Points);
+            
+            team2.setPointsFor(team2.getPointsFor() + team2Points);
+            team2.setPointsAgainst(team2.getPointsAgainst() + team1Points);            
+        }
+        
+        List<FantasyLeague> leagues = flBean.findAll();
+        for(int i = 0; i < leagues.size(); i++){
+            List<FantasyTeam> teams = ftBean.findByLeague(leagues.get(i));
+            
+            //DO SORTING BY WINS
+            Collections.sort(teams, new TeamWinComparator());
+            
+            for(int j = 0; j < teams.size(); j++){
+                FantasyTeam team = teams.get(j);
+                team.setPreviousRank(team.getRank());
+                team.setRank(j + 1);                
+            }
+        }
         
     }
+    public class TeamWinComparator implements Comparator<FantasyTeam>{
+ 
+    @Override
+    public int compare(FantasyTeam t1, FantasyTeam t2) {
+        if(t1.getWins() > t2.getWins())
+            return -1;
+        if(t1.getWins() < t2.getWins())
+            return 1;
+        return 0;
+    }
+}
     
     @PostConstruct
     public void startupStuff(){
