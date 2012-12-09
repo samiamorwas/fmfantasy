@@ -75,11 +75,12 @@ public class NFLData {
     public int getWeekPointsForPlayer(NFLPlayer nflp, int week){
         int points;
         
-        long nfldataID = nflp.getNFLPlayerID();
+        long nfldataID = nflp.getNFLDataID();
         //if not defense
         try {
             if(nflp.getPosition() != 6){
-                JSONObject jObj = getJSONObjFromURL(urlPrefix + "PlayerGameStatsByPlayerID/2011/" + week + "/" + nfldataID + apiKey);
+                JSONArray jArr = getJSONArrFromURL(urlPrefix + "PlayerGameStatsByPlayerID/2011/" + week + "/" + nfldataID + apiKey);
+                JSONObject jObj = jArr.getJSONObject(0);
                 points = jObj.getInt("FantasyPoints");
             }else{
                 JSONArray jArr = getJSONArrFromURL(urlPrefix + "FantasyDefenseByGame/2011/" + week + apiKey);

@@ -3,7 +3,6 @@ package Web;
 import Admin.NFLData;
 import Entity.FantasyMatch;
 import Entity.NFLPlayer;
-import FMFantasyEJB.FantasyMatchBean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;

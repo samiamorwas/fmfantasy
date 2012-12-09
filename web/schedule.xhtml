@@ -26,13 +26,13 @@ and open the template in the editor.
             <center>
                 <h:dataTable value="#{leagueReqBean.matchesInWeek}" var="match">
                     <h:column>
-                        <p:commandLink value="#{match.team1.teamName}" action="#{teamReqBean.setTeam(match.team1)}"/>
+                        <p:commandLink value="#{match.team1.teamName}" action="#{teamReqBean.viewTeam(match.team1)}"/>
                     </h:column>
                     <h:column>
                         <p:commandLink value="vs" action="#{matchReqBean.viewMatch(match)}"/>
                     </h:column>
                     <h:column>
-                        <p:commandLink value="#{match.team2.teamName}" action="#{teamReqBean.setTeam(match.team2)}" />
+                        <p:commandLink value="#{match.team2.teamName}" action="#{teamReqBean.viewTeam(match.team2)}" />
                     </h:column>
                 </h:dataTable>
             </center>

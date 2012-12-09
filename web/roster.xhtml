@@ -28,7 +28,7 @@ and open the template in the editor.
         </h:form>
         
         <h:form id ="rosterTables">
-            <h:dataTable name="activeTable" value="#{rosterReqBean.active}" var="player">
+            <h:dataTable value="#{rosterReqBean.active}" var="player">
                 <h:column rendered="#{userReqBean.user.userID == teamReqBean.team.teamOwner.userID}">
                     <f:facet name="header">X</f:facet>
                     <p:commandLink update =":rosterTables" 
@@ -54,7 +54,7 @@ and open the template in the editor.
                 </h:column>
             </h:dataTable>
             
-            <h:dataTable name="BenchTable" value="#{rosterReqBean.bench}" var="player">
+            <h:dataTable value="#{rosterReqBean.bench}" var="player">
                 <h:column rendered="#{userReqBean.user.userID == teamReqBean.team.teamOwner.userID}">
                     <f:facet name="header">X</f:facet>
                     <p:commandLink update =":rosterTables" 

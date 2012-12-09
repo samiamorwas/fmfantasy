@@ -117,6 +117,7 @@ public class UserReqBean implements Serializable{
         }
         
         clearInputs();
+        error = "";
         return result;
     }
     
@@ -134,7 +135,6 @@ public class UserReqBean implements Serializable{
     private void clearInputs(){
         email = "";
         password = "";
-        error = "";
     }
     
 }

@@ -23,11 +23,13 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Named;
 
 /**
  *
  * @author Greasy
  */
+@Named
 @Singleton
 @Startup
 public class StartupConfig {
@@ -89,13 +91,13 @@ public class StartupConfig {
             List<RosterPlayer> rosterA = rpBean.getActiveByTeam(fm.getTeam1());
             List<RosterPlayer> rosterB = rpBean.getActiveByTeam(fm.getTeam2());
             
+            int WRnum = 0;
+            int RBnum = 0;
             for(int j = 0; j < rosterA.size(); j++){
-                RosterPlayer rp = rosterA.get(i);
+                RosterPlayer rp = rosterA.get(j);
                 NFLPlayer nflp = rp.getNflPlayer();
                 int pos = nflp.getPosition();
                 
-                int WRnum = 0;
-                int RBnum = 0;
                 switch(pos){
                     case 1:
                         fm.setTeam1QB(nflp);
@@ -141,13 +143,13 @@ public class StartupConfig {
                         break;
                 }
             }
+            WRnum = 0;
+            RBnum = 0;
             for(int j = 0; j < rosterB.size(); j++){
-                RosterPlayer rp = rosterB.get(i);
+                RosterPlayer rp = rosterB.get(j);
                 NFLPlayer nflp = rp.getNflPlayer();
                 int pos = nflp.getPosition();
                 
-                int WRnum = 0;
-                int RBnum = 0;
                 switch(pos){
                     case 1:
                         fm.setTeam2QB(nflp);
