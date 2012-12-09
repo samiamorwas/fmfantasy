@@ -5,16 +5,12 @@
 package Entity;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  *
@@ -23,9 +19,9 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries( {
     @NamedQuery(name = "NFLPlayer.findByNameAndPos", query = 
-                        "SELECT nflp FROM NFLPlayer nflp WHERE lower(nflp.name) = lower(:name) AND nflp.position = :pos"),
-     @NamedQuery(name = "NFLPlayer.findLikeNameAndPos", query = 
-                        "SELECT nflp FROM NFLPlayer nflp WHERE lower(nflp.name) LIKE lower(:name) AND nflp.position = :pos"),
+                        "SELECT nflp FROM NFLPlayer nflp WHERE lower(nflp.name) = lower(:name) AND nflp.position = :pos ORDER BY nflp.seasonPoints DESC"),
+    @NamedQuery(name = "NFLPlayer.findLikeNameAndPos", query = 
+                        "SELECT nflp FROM NFLPlayer nflp WHERE lower(nflp.name) LIKE lower(:name) AND nflp.position = :pos ORDER BY nflp.seasonPoints DESC"),
                 })
 
 public class NFLPlayer implements Serializable {
@@ -38,10 +34,8 @@ public class NFLPlayer implements Serializable {
     
     private String name;
     private String team;
-    // This might get confusing in addition to the String 'team' field, but that
-    // needs to stay since its used in the NFLData class, and this needs to be
-    // here for use in the FantasyMatch entity -- Jess
-    private NFLTeam nflTeam;
+    
+    private int seasonPoints;
     
     
     /*
@@ -71,6 +65,14 @@ public class NFLPlayer implements Serializable {
             default:
                 return "Uh oh";
         }
+    }
+
+    public int getSeasonPoints() {
+        return seasonPoints;
+    }
+
+    public void setSeasonPoints(int seasonPoints) {
+        this.seasonPoints = seasonPoints;
     }
     public Long getNFLPlayerID() {
         return NFLPlayerID;

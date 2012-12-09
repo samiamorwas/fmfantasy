@@ -64,8 +64,8 @@ public class FantasyMatch implements Serializable {
     private NFLPlayer team2BEN5;
     private NFLPlayer team1BEN6;
     private NFLPlayer team2BEN6;
-    private NFLTeam team1DEF;
-    private NFLTeam team2DEF;
+    private NFLPlayer team1DEF;
+    private NFLPlayer team2DEF;
 
     public int getWeek() {
         return week;

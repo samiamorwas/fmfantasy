@@ -134,17 +134,19 @@ public class NFLData {
                 String teamFullName = teamObj.getString("FullName");
                 String teamAbrv = teamObj.getString("Key"); 
                 
-                JSONArray pArr = getJSONArrFromURL(urlPrefix + "Players/" + teamAbrv + apiKey);
+                JSONArray pArr = getJSONArrFromURL(urlPrefix + "PlayerSeasonStatsByTeam/2011/" + teamAbrv + apiKey);
                 for(int j = 0; j < pArr.length(); j++){
                     JSONObject pObj = pArr.getJSONObject(j);
                     if(! pObj.getString("PositionCategory").equals("DEF") ){
                         String playerName = pObj.getString("Name");
                         String position = pObj.getString("Position");
+                        int fantasyPoints = pObj.getInt("FantasyPoints");
                         int NFLDataID = pObj.getInt("PlayerID");
                         
                         NFLPlayer nflp = new NFLPlayer();
                         nflp.setTeam(teamAbrv);
                         nflp.setName(playerName);
+                        nflp.setSeasonPoints(fantasyPoints);
                         nflp.setNFLDataID(NFLDataID);
                         if(position.equals("QB")){
                             nflp.setPosition(1);

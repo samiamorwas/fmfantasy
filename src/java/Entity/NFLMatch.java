@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
  * @author Greasy
  */
 @Entity
-@NamedQueries( {@NamedQuery(name = "NFLMatch.findByWeek", query = "Select match from NFLMatch match where whee = :week") })
+@NamedQueries( {@NamedQuery(name = "NFLMatch.findByWeek", query = "SELECT match FROM NFLMatch match WHERE match.week = :week") })
 public class NFLMatch implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
