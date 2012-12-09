@@ -7,6 +7,7 @@ package FMFantasyEJB;
 import Entity.FantasyLeague;
 import Entity.FantasyMatch;
 import Entity.FantasyTeam;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
@@ -38,8 +39,8 @@ public class FantasyMatchBean extends AbstractFacade<FantasyMatch> {
     public void createSchedule(FantasyLeague league){
         List<FantasyTeam> teams = teamBean.findByLeague(league);
         List<FantasyTeam> sideA, sideB;
-        sideA = teams.subList(0, teams.size()/2);
-        sideB = teams.subList(teams.size()/2, teams.size());
+        sideA = new ArrayList(teams.subList(0, teams.size()/2));
+        sideB = new ArrayList(teams.subList(teams.size()/2, teams.size()));
         Collections.reverse(sideB);
         
         for(int i = 0; i < 14; i++)
@@ -56,7 +57,7 @@ public class FantasyMatchBean extends AbstractFacade<FantasyMatch> {
             }
             if(sideA.size() > 1){
                 sideA.add(1, sideB.remove(0));
-                sideB.add(sideA.remove(sideA.size()-1));
+                sideB.add(sideA.remove(sideA.size() - 1));
             }
         }
         
