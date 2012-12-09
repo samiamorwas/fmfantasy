@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries( {@NamedQuery(name = "FantasyTeam.findByOwner", query = "SELECT team FROM FantasyTeam team WHERE team.teamOwner = :owner"),
-                @NamedQuery(name = "FantasyTeam.findByLeague", query = "SELECT team FROM FantasyTeam team WHERE team.league = :league"),
+                @NamedQuery(name = "FantasyTeam.findByLeague", query = "SELECT team FROM FantasyTeam team WHERE team.league = :league ORDER BY team.rank"),
                 @NamedQuery(name = "FantasyTeam.findByOwnerAndLeague", query = "Select team FROM FantasyTeam team WHERE team.league = :league AND team.teamOwner = :owner")})
 public class FantasyTeam implements Serializable {
 

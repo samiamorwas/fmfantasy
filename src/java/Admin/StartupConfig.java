@@ -47,7 +47,8 @@ public class StartupConfig {
         
         // if week > 0
         // if day == 1 - copy roster to current weeks matches
-        // if day == 2 - get stats and put in matches
+        // if day == 2 - get stats and put in matches. update w/l/d ratio and ranks for teams.
+        
         
     }
     
