@@ -49,7 +49,7 @@ public class StartupConfig {
     private int worldDay;
     private int worldWeek;
     
-    public void setWeeksStart(){
+    public StartupConfig(){
         worldWeek = 0;
         worldDay = 1;        
     }
@@ -293,7 +293,6 @@ public class StartupConfig {
     
     @PostConstruct
     public void startupStuff(){
-        setWeeksStart();        
         
         List<NFLPlayer> allPlayers = nfld.getAllPlayers();        
         for(int i = 0; i < allPlayers.size(); i++){

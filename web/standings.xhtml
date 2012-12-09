@@ -13,7 +13,7 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
     
     <ui:define name="body">
-        <h1>#{sessionBean.league.leagueName} Standings</h1>
+        <h1>#{leagueReqBean.league.leagueName} Standings</h1>
         <h:form id ="scheduleForm">
             <center>
                 <h:dataTable value="#{teamReqBean.inLeague}" var="team">

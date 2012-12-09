@@ -2,16 +2,13 @@ package Web;
 
 import Admin.NFLData;
 import Entity.FantasyMatch;
-import Entity.FantasyTeam;
 import Entity.NFLPlayer;
 import FMFantasyEJB.FantasyMatchBean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -22,8 +19,6 @@ import javax.inject.Named;
 @Stateful
 @SessionScoped
 public class MatchReqBean {
-    @EJB
-    private FantasyMatchBean matchBean;
     @EJB
     private NFLData nfldata;
     

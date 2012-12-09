@@ -10,7 +10,7 @@ import Entity.FantasyUser;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,40 +20,46 @@ import javax.inject.Named;
  */
 @Named
 @Stateful
-@RequestScoped
+@SessionScoped
 public class TeamReqBean {
     @EJB
-    private FMFantasyEJB.FantasyLeagueBean leagueBean;
-    @EJB
     private FMFantasyEJB.FantasyTeamBean teamBean;
-       
+
     @Inject
-    SessionBean sessionBean;
+    UserReqBean uReq;
+    @Inject
+    LeagueReqBean lReq;
+    
+    private FantasyTeam teamViewed;
     
     /**
      * Creates a new instance of FantasyLeagueController
      */
     public TeamReqBean() {
+        teamViewed = null;
     }
     
     public List<FantasyTeam> getOwned(){
-        FantasyUser luser = sessionBean.getUser();
+        FantasyUser luser = uReq.getUser();
         
         List<FantasyTeam> teams = teamBean.findByOwner(luser);
         
         return teams;
     }
     public List<FantasyTeam> getInLeague(){
-        FantasyLeague lleague = sessionBean.getLeague();
+        FantasyLeague lleague = lReq.getLeague();
         
         List<FantasyTeam> teams = teamBean.findByLeague(lleague);
         
         return teams;
     }
     
-    public String setTeam(FantasyTeam team) {
-        sessionBean.setTeam(team);
+    public String viewTeam(FantasyTeam team) {
+        this.teamViewed = team;
         return "team_set";
+    }
+    public FantasyTeam getTeam(){
+        return teamViewed;
     }
     
 }

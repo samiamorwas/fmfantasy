@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,7 +26,7 @@ import javax.inject.Named;
  */
 @Named
 @Stateful
-@RequestScoped
+@SessionScoped
 public class AgentReqBean {
     @EJB
     private FMFantasyEJB.RosterPlayerBean rpBean;
@@ -37,14 +37,25 @@ public class AgentReqBean {
     
     private String error;
     
-       
     @Inject
-    SessionBean sessionBean;
+    UserReqBean uReq;
+    @Inject
+    LeagueReqBean lReq;
+    
+    private String agentTextEntry;
+    private String draftTextEntry;
+    private boolean QB,RB,WR,TE,KCK,DEF;
     
     /**
      * Creates a new instance of FantasyLeagueController
      */
     public AgentReqBean() {
+        clearInputs();
+        QB=RB=WR=TE=KCK=DEF=true;
+    }
+    private void clearInputs(){
+        agentTextEntry="";
+        draftTextEntry="";
     }
     public String getError() {
         return error;
@@ -57,8 +68,8 @@ public class AgentReqBean {
     public boolean isPickable(NFLPlayer nflp){
         boolean result = false;
         
-        FantasyUser user = sessionBean.getUser();
-        FantasyLeague leag = sessionBean.getLeague();
+        FantasyUser user = uReq.getUser();
+        FantasyLeague leag = lReq.getLeague();
         FantasyTeam team = teamBean.findByOwnerAndLeague(user, leag);
         List<RosterPlayer> allMembers = rpBean.getByTeam(team);
         
@@ -73,8 +84,8 @@ public class AgentReqBean {
         if(!isPickable(nflp)) {
             return;
         }
-        FantasyUser user = sessionBean.getUser();
-        FantasyLeague leag = sessionBean.getLeague();
+        FantasyUser user = uReq.getUser();
+        FantasyLeague leag = lReq.getLeague();
         FantasyTeam team = teamBean.findByOwnerAndLeague(user, leag);
         
         
@@ -84,13 +95,14 @@ public class AgentReqBean {
         rp.setRosterSlot(0); //start benched
         rp.setNflPlayer(nflp);
         
-        rpBean.create(rp);        
+        rpBean.create(rp);
+        
+        clearInputs();
     }
     public List<String> draftAutoComplete(String name){
-        sessionBean.setAgentTextEntry(name);
         List<String> result = new ArrayList<String>();
   
-        List<NFLPlayer> nflpResult = getFreeAgentsLike();
+        List<NFLPlayer> nflpResult = getFreeAgentsLike(name);
         for(int i = 0; i < nflpResult.size(); i++){
             result.add(nflpResult.get(i).getName());            
         }
@@ -112,28 +124,27 @@ public class AgentReqBean {
             return result;
         }
     }
-    private List<NFLPlayer> getFiltered(){
-        String name = sessionBean.getAgentTextEntry();
-        if (name == null) {
+    private List<NFLPlayer> getFiltered(String name){
+        if (name == null) 
             name = "";
-        }
+
         List<NFLPlayer> nflpList = new ArrayList<NFLPlayer>();
-        if(sessionBean.isQB()) {
+        if(QB) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 1));
         }
-        if(sessionBean.isRB()) {
+        if(RB) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 2));
         }
-        if(sessionBean.isWR()) {
+        if(WR) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 3));
         }
-        if(sessionBean.isTE()) {
+        if(TE) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 4));
         }
-        if(sessionBean.isKCK()) {
+        if(KCK) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 5));
         }
-        if(sessionBean.isDEF()) {
+        if(DEF) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 6));
         }
         
@@ -142,10 +153,13 @@ public class AgentReqBean {
         
         return nflpList;
     }
-    public List<NFLPlayer> getFreeAgentsLike(){
-        FantasyLeague leag = sessionBean.getLeague();
+    public List<NFLPlayer> getFreeAgentsTable(){
+        return getFreeAgentsLike(agentTextEntry);
+    }
+    public List<NFLPlayer> getFreeAgentsLike(String name){
+        FantasyLeague leag = lReq.getLeague();
         
-        List<NFLPlayer> nflpList = getFiltered();
+        List<NFLPlayer> nflpList = getFiltered(name);
         
         //remove players already picked up in league
         List<RosterPlayer> rpList = rpBean.getByLeague(leag);
@@ -176,7 +190,7 @@ public class AgentReqBean {
     public String draftPlayer(FantasyTeam ft){
         String result;
         
-        FantasyLeague leag = sessionBean.getLeague();
+        FantasyLeague leag = lReq.getLeague();
         
         RosterPlayer rp = new RosterPlayer();
         rp.setTeam(ft);
@@ -184,7 +198,7 @@ public class AgentReqBean {
         rp.setRosterSlot(0); //start benched
         
         //nfl stuff
-        List<NFLPlayer> nflpList = getFreeAgentsLike();
+        List<NFLPlayer> nflpList = getFreeAgentsLike(draftTextEntry);
         if(nflpList.isEmpty()){
             error = "No Such Player!";
             return "no_such_player";
@@ -203,7 +217,72 @@ public class AgentReqBean {
         
         result = "player_drafted";
         
+        clearInputs();
         return result;
+    }
+
+    public String getAgentTextEntry() {
+        return agentTextEntry;
+    }
+
+    public void setAgentTextEntry(String agentTextEntry) {
+        this.agentTextEntry = agentTextEntry;
+    }
+
+    public boolean isQB() {
+        return QB;
+    }
+
+    public void setQB(boolean QB) {
+        this.QB = QB;
+    }
+
+    public boolean isRB() {
+        return RB;
+    }
+
+    public void setRB(boolean RB) {
+        this.RB = RB;
+    }
+
+    public boolean isWR() {
+        return WR;
+    }
+
+    public void setWR(boolean WR) {
+        this.WR = WR;
+    }
+
+    public boolean isTE() {
+        return TE;
+    }
+
+    public void setTE(boolean TE) {
+        this.TE = TE;
+    }
+
+    public boolean isKCK() {
+        return KCK;
+    }
+
+    public void setKCK(boolean KCK) {
+        this.KCK = KCK;
+    }
+
+    public boolean isDEF() {
+        return DEF;
+    }
+
+    public void setDEF(boolean DEF) {
+        this.DEF = DEF;
+    }
+
+    public String getDraftTextEntry() {
+        return draftTextEntry;
+    }
+
+    public void setDraftTextEntry(String draftTextEntry) {
+        this.draftTextEntry = draftTextEntry;
     }
     
 }

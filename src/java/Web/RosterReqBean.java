@@ -21,11 +21,11 @@ import javax.inject.Named;
 @Stateful
 @RequestScoped
 public class RosterReqBean {
-
     @EJB
     private FMFantasyEJB.RosterPlayerBean rosterBean;
-    @Inject
-    SessionBean sessionBean;
+    
+    @Inject 
+    TeamReqBean tReq;
 
     /**
      * Creates a new instance of FantasyLeagueController
@@ -34,13 +34,16 @@ public class RosterReqBean {
     }
 
     public List<RosterPlayer> getTeam() {
-        return rosterBean.getByTeam(sessionBean.getTeam());
+        FantasyTeam ft = tReq.getTeam();
+        return rosterBean.getByTeam(ft);
     }
     public List<RosterPlayer> getActive() {
-        return rosterBean.getActiveByTeam(sessionBean.getTeam());
+        FantasyTeam ft = tReq.getTeam();
+        return rosterBean.getActiveByTeam(ft);
     }
     public List<RosterPlayer> getBench() {
-        return rosterBean.getBenchByTeam(sessionBean.getTeam());
+        FantasyTeam ft = tReq.getTeam();
+        return rosterBean.getBenchByTeam(ft);
     }
     
     public void drop(RosterPlayer rp){

@@ -13,39 +13,39 @@ and open the template in the editor.
       template="./template.xhtml">
     
     <ui:define name="body">
-        <h1>#{sessionBean.league.leagueName} Free Agents</h1>
+        <h1>#{leagueReqBean.league.leagueName} Free Agents</h1>
         <h:form id ="input">
             <h:outputLabel value="#{agentReqBean.error}"/>
-            <p:inputText value ="#{sessionBean.agentTextEntry}">
+            <p:inputText value ="#{agentReqBean.agentTextEntry}">
                 <p:ajax event="keyup" update =":resultsTable"/>
             </p:inputText>
                 
             <br/>            
-            <p:selectBooleanCheckbox value="#{sessionBean.QB}" itemLabel="QB">
+            <p:selectBooleanCheckbox value="#{agentReqBean.QB}" itemLabel="QB">
                 <p:ajax update =":resultsTable"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.RB}" itemLabel="RB">
+            <p:selectBooleanCheckbox value="#{agentReqBean.RB}" itemLabel="RB">
                 <p:ajax update =":resultsTable"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.WR}" itemLabel="WR">
+            <p:selectBooleanCheckbox value="#{agentReqBean.WR}" itemLabel="WR">
                 <p:ajax update =":resultsTable"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.TE}" itemLabel="TE">
+            <p:selectBooleanCheckbox value="#{agentReqBean.TE}" itemLabel="TE">
                 <p:ajax update =":resultsTable"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.KCK}" itemLabel="K">
+            <p:selectBooleanCheckbox value="#{agentReqBean.KCK}" itemLabel="K">
                 <p:ajax update =":resultsTable"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.DEF}" itemLabel="DEF">
+            <p:selectBooleanCheckbox value="#{agentReqBean.DEF}" itemLabel="DEF">
                 <p:ajax update =":resultsTable"/>
             </p:selectBooleanCheckbox>
         </h:form>
         
         <h:form id="resultsTable" >
-            <h:dataTable value="#{agentReqBean.freeAgentsLike}" var="player">
+            <h:dataTable value="#{agentReqBean.freeAgentsTable}" var="player">
                 <h:column>
                     <f:facet name="header">+</f:facet>
-                    <p:commandLink update=":resultsTable" 
+                    <p:commandLink update=":resultsTable,:input" 
                                    actionListener="#{agentReqBean.pickupPlayer(player)}"
                                    rendered ="#{agentReqBean.isPickable(player)}">
                         <h:outputText value="+"/>

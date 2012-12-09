@@ -13,33 +13,33 @@ and open the template in the editor.
       template="./template.xhtml">
     
     <ui:define name="body">
-        <h1>#{sessionBean.league.leagueName} Draft</h1>
+        <h1>#{leagueReqBean.league.leagueName} Draft</h1>
         <h:form id ="input">
             <h:outputLabel value="#{agentReqBean.error}"/>
             
-            <p:autoComplete id="nameauto" value="#{sessionBean.agentTextEntry}" 
+            <p:autoComplete id="nameauto" value="#{agentReqBean.draftTextEntry}" 
                             completeMethod="#{agentReqBean.draftAutoComplete}"
                             maxResults ="8">
                 
             </p:autoComplete>
             <br/>
             
-            <p:selectBooleanCheckbox value="#{sessionBean.QB}" itemLabel="QB">
+            <p:selectBooleanCheckbox value="#{agentReqBean.QB}" itemLabel="QB">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.RB}" itemLabel="RB">
+            <p:selectBooleanCheckbox value="#{agentReqBean.RB}" itemLabel="RB">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.WR}" itemLabel="WR">
+            <p:selectBooleanCheckbox value="#{agentReqBean.WR}" itemLabel="WR">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.TE}" itemLabel="TE">
+            <p:selectBooleanCheckbox value="#{agentReqBean.TE}" itemLabel="TE">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.KCK}" itemLabel="K">
+            <p:selectBooleanCheckbox value="#{agentReqBean.KCK}" itemLabel="K">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.DEF}" itemLabel="DEF">
+            <p:selectBooleanCheckbox value="#{agentReqBean.DEF}" itemLabel="DEF">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
             

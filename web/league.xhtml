@@ -17,7 +17,7 @@
         <h:form><h:commandButton action="leagues.xhtml" value="back" /></h:form>
         <br />
 
-        <div class ="TableHeader" style="background-color: orangered">Teams in #{sessionBean.league.leagueName}</div>
+        <div class ="TableHeader" style="background-color: orangered">Teams in #{leagueReqBean.league.leagueName}</div>
         <br />
 
         <h:dataTable value="#{teamReqBean.inLeague}" var="team">
@@ -46,7 +46,7 @@
 
         </h:dataTable>
         <br /><br />
-        <h:form rendered="#{sessionBean.canInvite}" >
+        <h:form rendered="#{leagueReqBean.canInvite}" >
             <div class ="TableHeader" style="background-color: orangered">Invite Members</div>
             <br />
             <div class="whiteText" style="font-size: 24px">

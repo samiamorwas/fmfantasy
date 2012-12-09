@@ -31,7 +31,9 @@ public class InviteReqBean {
     private FMFantasyEJB.FantasyTeamBean teamBean;
     
     @Inject
-    SessionBean sessionBean;
+    UserReqBean uReq;
+    @Inject
+    LeagueReqBean lReq;
     
         
     private String recipEmail;
@@ -69,21 +71,21 @@ public class InviteReqBean {
     }
     
     public List<Invitation> getInvitesToYou(){
-        FantasyUser luser = sessionBean.getUser();
+        FantasyUser luser = uReq.getUser();
         
         List<Invitation> invs = invBean.findByReceiver(luser);
         
         return invs;
     }
     public List<Invitation> getInvitesFromYou(){
-        FantasyUser luser = sessionBean.getUser();
+        FantasyUser luser = uReq.getUser();
         
         List<Invitation> invs = invBean.findBySender(luser);
         
         return invs;
     }
     public List<Invitation> getInvitesByLeague(){
-        FantasyLeague lleague = sessionBean.getLeague();
+        FantasyLeague lleague = lReq.getLeague();
         
         List<Invitation> invs = invBean.findByLeague(lleague);
         
@@ -91,8 +93,8 @@ public class InviteReqBean {
     }
     
     public String sendInvite(){
-        FantasyUser luser = sessionBean.getUser();
-        FantasyLeague lleague = sessionBean.getLeague();
+        FantasyUser luser = uReq.getUser();
+        FantasyLeague lleague = lReq.getLeague();
         
         FantasyUser recip = userBean.getUserByEmail(recipEmail);
         if(recip == null){

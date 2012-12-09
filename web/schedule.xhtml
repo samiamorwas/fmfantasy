@@ -14,12 +14,12 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
     
     <ui:define name="body">
-        <h1>#{sessionBean.league.leagueName}</h1>
+        <h1>#{leagueReqBean.league.leagueName}</h1>
         
         <h:form id ="scheduleForm">
             <h2>
                 <p:commandLink value=" prev " update="scheduleForm" actionListener="#{leagueReqBean.decrementWeek()}"/>
-                <h:outputText value="Week #{sessionBean.leagueWeek}" />
+                <h:outputText value="Week #{leagueReqBean.weekViewed}" />
                 <p:commandLink value=" next " update="scheduleForm" actionListener="#{leagueReqBean.incrementWeek()}"/>
             </h2>
         

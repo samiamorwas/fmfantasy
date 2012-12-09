@@ -14,13 +14,13 @@ and open the template in the editor.
     
     <ui:define name="body">
         <h:form id="teamNameTitle">
-            <h1>#{sessionBean.team.teamName}</h1>
+            <h1>#{teamReqBean.team.teamName}</h1>
         </h:form>
         <h:form id="teamSelectForm">
             <h:dataTable style="float:right;" value="#{teamReqBean.inLeague}" var="team">
                 <h:column>
                     <f:facet name="header">Teams</f:facet>
-                    <p:commandLink update=":rosterTables,:teamNameTitle"  actionListener="#{teamReqBean.setTeam(team)}">
+                    <p:commandLink update=":rosterTables,:teamNameTitle"  actionListener="#{teamReqBean.viewTeam(team)}">
                         <h:outputText value="#{team.teamName}"/>
                     </p:commandLink>
                 </h:column>
@@ -29,14 +29,14 @@ and open the template in the editor.
         
         <h:form id ="rosterTables">
             <h:dataTable name="activeTable" value="#{rosterReqBean.active}" var="player">
-                <h:column rendered="#{sessionBean.user.userID == sessionBean.team.teamOwner.userID}">
+                <h:column rendered="#{userReqBean.user.userID == teamReqBean.team.teamOwner.userID}">
                     <f:facet name="header">X</f:facet>
                     <p:commandLink update =":rosterTables" 
                                    actionListener="#{rosterReqBean.drop(player)}" >
                         <h:outputText value="X"/>
                     </p:commandLink>
                 </h:column>
-                <h:column rendered="#{sessionBean.user.userID == sessionBean.team.teamOwner.userID}">
+                <h:column rendered="#{userReqBean.user.userID == teamReqBean.team.teamOwner.userID}">
                     <f:facet name="header">-</f:facet>
                     <p:commandLink update =":rosterTables" 
                                    actionListener="#{rosterReqBean.demote(player)}" >
@@ -55,14 +55,14 @@ and open the template in the editor.
             </h:dataTable>
             
             <h:dataTable name="BenchTable" value="#{rosterReqBean.bench}" var="player">
-                <h:column rendered="#{sessionBean.user.userID == sessionBean.team.teamOwner.userID}">
+                <h:column rendered="#{userReqBean.user.userID == teamReqBean.team.teamOwner.userID}">
                     <f:facet name="header">X</f:facet>
                     <p:commandLink update =":rosterTables" 
                                    actionListener="#{rosterReqBean.drop(player)}" >
                         <h:outputText value="X"/>
                     </p:commandLink>
                 </h:column>
-                <h:column rendered="#{sessionBean.user.userID == sessionBean.team.teamOwner.userID}">
+                <h:column rendered="#{userReqBean.user.userID == teamReqBean.team.teamOwner.userID}">
                     <f:facet name="header">+</f:facet>
                     <p:commandLink update =":rosterTables" 
                                    actionListener="#{rosterReqBean.promote(player)}"

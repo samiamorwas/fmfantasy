@@ -11,7 +11,7 @@ import Entity.FantasyUser;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -21,22 +21,21 @@ import javax.inject.Named;
  */
 @Named
 @Stateful
-@RequestScoped
+@SessionScoped
 public class LeagueReqBean {
     @EJB
     private FMFantasyEJB.FantasyLeagueBean leagueBean;
     @EJB
     private FMFantasyEJB.FantasyTeamBean teamBean;
     @EJB
-    private FMFantasyEJB.FantasyUserBean userBean;
-    @EJB
-    private FMFantasyEJB.InvitationBean invBean;
-    @EJB
     private FMFantasyEJB.FantasyMatchBean matchBean;
     
     @Inject
-    SessionBean sessionBean;
-        
+    UserReqBean uReq;
+    
+    private FantasyLeague league;
+    private int weekViewed;
+    
     private String leagueName;
     private String teamName;
     private String error;
@@ -45,8 +44,28 @@ public class LeagueReqBean {
      * Creates a new instance of LeagueReqBean
      */
     public LeagueReqBean() {
+        league = null;
+        leagueName = "";
+        teamName = "";
+        error = "";
     }
 
+    public FantasyLeague getLeague() {
+        return league;
+    }
+
+    public void setLeague(FantasyLeague league) {
+        this.league = league;
+    }
+
+    public int getWeekViewed() {
+        return weekViewed;
+    }
+
+    public void setWeekViewed(int weekViewed) {
+        this.weekViewed = weekViewed;
+    }
+    
     public String getLeagueName() {
         return leagueName;
     }
@@ -72,20 +91,20 @@ public class LeagueReqBean {
     }
     
     public List<FantasyLeague> getOwned(){
-        FantasyUser luser = sessionBean.getUser();
+        FantasyUser luser = uReq.getUser();
         List<FantasyLeague> leagues = leagueBean.findByOwner(luser);
         
         return leagues;
     }
     public List<FantasyLeague> getMemberOf(){
-        FantasyUser luser = sessionBean.getUser();
+        FantasyUser luser = uReq.getUser();
         List<FantasyLeague> leagues = leagueBean.findByMember(luser);
         
         return leagues;
     }
     
     public String viewLeague(FantasyLeague league){
-        sessionBean.setLeague(league);
+        this.league = league;
         return "view_league";
     }
     
@@ -95,7 +114,7 @@ public class LeagueReqBean {
             return "create_league_error";
         }
         
-        FantasyUser luser = sessionBean.getUser();
+        FantasyUser luser = uReq.getUser();
         
         FantasyLeague l = new FantasyLeague();
         l.setLeagueName(leagueName);
@@ -110,12 +129,14 @@ public class LeagueReqBean {
         t.setTeamOwner(luser);
         teamBean.createTeam(t);
         
+        leagueName = "";
+        teamName = "";
+        error = "";
+        
         return "create_league_success";
     }
     
     public String finishDraft(){
-        FantasyLeague league = sessionBean.getLeague();
-        
         matchBean.createSchedule(league);        
         league.setFinishedDraft(true);
         leagueBean.edit(league);
@@ -124,28 +145,40 @@ public class LeagueReqBean {
     }
     
     public List<FantasyMatch> getMatchesInWeek(){
-        List<FantasyMatch> results = matchBean.findByWeek(sessionBean.getLeagueWeek());
+        List<FantasyMatch> results = matchBean.findByWeek(weekViewed);
         return results;
     }
     public void decrementWeek()
     {
-        int week = sessionBean.getLeagueWeek();
         // Can't go to previous week if it's Week 1
-        if (week != 1)
-        {
-            sessionBean.setLeagueWeek(week - 1);
-        }
+        if (weekViewed != 1)
+            weekViewed--;
     }
     
     public void incrementWeek()
     {
-        int week = sessionBean.getLeagueWeek();
         // Can't go to next week if it's Week 14
-        if (week != 14)
-        {
-            sessionBean.setLeagueWeek(week + 1);
-        }
+        if (weekViewed != 14)
+            weekViewed++;
     }
+    public boolean getDraftFinished() {
+        return league.getFinishedDraft();
+    }
+    
+    public boolean getIsOwner() {
+        FantasyUser loggedUser = uReq.getUser();
+        return league.getLeagueOwner().getUserID() == loggedUser.getUserID();
+    }
+    
+    public boolean getCanInvite() {
+        boolean draftInProgress = (league.getDraftStarted() || league.getFinishedDraft());
+        return (!draftInProgress) && getIsOwner();
+    }
+    
+    public boolean getCanDraft() {
+        return (!league.getFinishedDraft()) && getIsOwner();
+    }
+    
  /* 
     public String createSeasonSchedule()
     {

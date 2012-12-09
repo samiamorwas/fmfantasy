@@ -8,8 +8,7 @@ import Entity.FantasyUser;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -18,13 +17,14 @@ import javax.inject.Named;
  */
 @Named
 @Stateful
-@RequestScoped
+@SessionScoped
 public class UserReqBean implements Serializable{
     @EJB
     private FMFantasyEJB.FantasyUserBean fUserBean;
+
     
-    @Inject
-    SessionBean sessionBean;
+    //currently logged in user.
+    private FantasyUser user;
     
     //info from reg/login forms
     private String email;
@@ -32,7 +32,10 @@ public class UserReqBean implements Serializable{
     private String error;
     
     public UserReqBean(){
-        
+        user = null;
+        email = "";
+        password = "";
+        error = "";
     }
 
     public String getEmail() {
@@ -53,9 +56,17 @@ public class UserReqBean implements Serializable{
     public void setError(String error) {
         this.error = error;
     }
+
+    public FantasyUser getUser() {
+        return user;
+    }
+
+    public void setUser(FantasyUser user) {
+        this.user = user;
+    }
         
     public boolean isLogged(){
-        return sessionBean.getUser() != null;
+        return user != null;
     }
     
     public String register(){
@@ -94,7 +105,7 @@ public class UserReqBean implements Serializable{
         FantasyUser lookup = fUserBean.getUserByEmail(email);
         if( lookup != null){
             if(lookup.getPassword().equals(password)){
-                sessionBean.setUser(lookup);
+                user = lookup;
                 result = "login_success";
             } else{
                 result = "wrong_password";
@@ -105,17 +116,25 @@ public class UserReqBean implements Serializable{
             error = "User does not exist.";
         }
         
+        clearInputs();
         return result;
     }
     
     public String logout(){
         String result;
         
-        sessionBean.setUser(null);
+        user = null;
+        clearInputs();
         //do more stuff?
         result = "logout_success";
         
         return result;
+    }
+    
+    private void clearInputs(){
+        email = "";
+        password = "";
+        error = "";
     }
     
 }
