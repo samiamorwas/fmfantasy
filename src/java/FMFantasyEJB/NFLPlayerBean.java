@@ -5,6 +5,8 @@
 package FMFantasyEJB;
 
 import Entity.NFLPlayer;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -40,15 +42,19 @@ public class NFLPlayerBean extends AbstractFacade<NFLPlayer> {
         else
             return (NFLPlayer) nflpList.get(0);
     }
+    
     public List<NFLPlayer> getPlayerLikeNameAndPos(String name, int pos){
+        
+        
         Query createNamedQuery = em.createNamedQuery("NFLPlayer.findLikeNameAndPos");
         name = name.concat("%");
         createNamedQuery.setParameter("name", name);
         createNamedQuery.setParameter("pos", pos);
         
-        createNamedQuery.setMaxResults(50);
+        createNamedQuery.setMaxResults(10);
         
         List<NFLPlayer> result = createNamedQuery.getResultList();
+        
         return result;
     }
     

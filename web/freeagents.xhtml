@@ -30,10 +30,10 @@ and open the template in the editor.
             <p:selectBooleanCheckbox value="#{sessionBean.WR}" itemLabel="WR">
                 <p:ajax update =":resultsTable"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.TE}" itemLabel="K">
+            <p:selectBooleanCheckbox value="#{sessionBean.TE}" itemLabel="TE">
                 <p:ajax update =":resultsTable"/>
             </p:selectBooleanCheckbox>
-            <p:selectBooleanCheckbox value="#{sessionBean.KCK}" itemLabel="DEF">
+            <p:selectBooleanCheckbox value="#{sessionBean.KCK}" itemLabel="K">
                 <p:ajax update =":resultsTable"/>
             </p:selectBooleanCheckbox>
             <p:selectBooleanCheckbox value="#{sessionBean.DEF}" itemLabel="DEF">
@@ -58,6 +58,10 @@ and open the template in the editor.
                 <h:column>
                     <f:facet name="header">Name</f:facet>
                     <h:outputText value="#{player.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Season Points</f:facet>
+                    <h:outputText value="#{player.seasonPoints}"/>
                 </h:column>
             </h:dataTable>
         </h:form>

@@ -116,8 +116,10 @@ public class LeagueReqBean {
     }
     
     public String finishDraft(){
-        matchBean.createSchedule(sessionBean.getLeague());
+        FantasyLeague league = sessionBean.getLeague();
         
+        matchBean.createSchedule(league);        
+        league.setFinishedDraft(true);
         
         return "draft_complete";
     }

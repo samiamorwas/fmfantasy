@@ -9,7 +9,10 @@ import Entity.FantasyTeam;
 import Entity.FantasyUser;
 import Entity.NFLPlayer;
 import Entity.RosterPlayer;
+import FMFantasyEJB.NFLPlayerBean;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
@@ -96,6 +99,18 @@ public class AgentReqBean {
         return result;
     }
 
+    public class NFLPlayerComparable implements Comparator<NFLPlayer>{
+        @Override
+        public int compare(NFLPlayer o1, NFLPlayer o2) {
+            int result = 0;
+
+            if(o1.getSeasonPoints() > o2.getSeasonPoints())
+                result = -1;
+            if(o1.getSeasonPoints() < o2.getSeasonPoints())
+                result = 1;
+            return result;
+        }
+    }
     private List<NFLPlayer> getFiltered(){
         String name = sessionBean.getAgentTextEntry();
         if (name == null) {
@@ -120,6 +135,9 @@ public class AgentReqBean {
         if(sessionBean.isDEF()) {
             nflpList.addAll(nflpBean.getPlayerLikeNameAndPos(name, 6));
         }
+        
+        AgentReqBean.NFLPlayerComparable nflpc = new AgentReqBean.NFLPlayerComparable();
+        Collections.sort(nflpList, nflpc);
         
         return nflpList;
     }
