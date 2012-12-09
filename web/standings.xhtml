@@ -9,50 +9,50 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      template="./template.xhtml">
+      template="./template.xhtml"
+      xmlns:p="http://primefaces.org/ui">
     
     <ui:define name="body">
-        <h1>Cool League Standings</h1>
-        <table>
-            <th>Rank</th>
-            <th>Team Name</th>
-            <th>W/L/D</th>
-            <th>Pts for</th>
-            <th>Pts agst</th>
-            
-            <tr>
-                <td>1</td>
-                <td>Team A</td>
-                <td>8/6/7</td>
-                <td>530</td>
-                <td>986</td>
-            </tr>
-            
-            <tr>
-                <td>2</td>
-                <td>Team B</td>
-                <td>7/6/7</td>
-                <td>430</td>
-                <td>986</td>
-            </tr>
-            
-            <tr>
-                <td>3</td>
-                <td>Team C</td>
-                <td>6/6/7</td>
-                <td>330</td>
-                <td>986</td>
-            </tr>
-            
-            <tr>
-                <td>4</td>
-                <td>Team D</td>
-                <td>5/6/7</td>
-                <td>230</td>
-                <td>986</td>
-            </tr>
-        </table>
-       
+        <h1>#{sessionBean.league.leagueName} Standings</h1>
+        <h:form id ="scheduleForm">
+            <center>
+                <h:dataTable value="#{teamReqBean.inLeague}" var="team">
+                    <h:column>
+                        <f:facet name ="header">Rank</f:facet>
+                        <p:outputLabel value="#{team.rank}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name ="header">Prev Rank</f:facet>
+                        <p:outputLabel value="#{team.previousRank}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name ="header">Team</f:facet>
+                        <p:outputLabel value="#{team.teamName}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name ="header">Win</f:facet>
+                        <p:outputLabel value="#{team.wins}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name ="header">Loss</f:facet>
+                        <p:outputLabel value="#{team.losses}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name ="header">Draw</f:facet>
+                        <p:outputLabel value="#{team.draws}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name ="header">Pts For</f:facet>
+                        <p:outputLabel value="#{team.pointsFor}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name ="header">Pts Against</f:facet>
+                        <p:outputLabel value="#{team.pointsAgainst}"/>
+                    </h:column>
+                </h:dataTable>
+            </center>
+        </h:form>
+              
     </ui:define>
     
 </ui:composition>
