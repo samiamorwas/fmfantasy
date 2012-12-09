@@ -9,8 +9,6 @@ import Entity.FantasyMatch;
 import Entity.FantasyTeam;
 import Entity.FantasyUser;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;

@@ -9,7 +9,6 @@ import Entity.FantasyTeam;
 import Entity.FantasyUser;
 import Entity.NFLPlayer;
 import Entity.RosterPlayer;
-import FMFantasyEJB.NFLPlayerBean;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

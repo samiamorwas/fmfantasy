@@ -5,14 +5,12 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -36,23 +34,41 @@ public class FantasyMatch implements Serializable {
     private int team1Points;
     private int team2Points;
     
+    @OneToOne
     private NFLPlayer team1QB;
+    @OneToOne
     private NFLPlayer team2QB;
+    @OneToOne
     private NFLPlayer team1RB1;
+    @OneToOne
     private NFLPlayer team2RB1;
+    @OneToOne
     private NFLPlayer team1RB2;
+    @OneToOne
     private NFLPlayer team2RB2;
+    @OneToOne
     private NFLPlayer team1WR1;
+    @OneToOne
     private NFLPlayer team2WR1;
+    @OneToOne
     private NFLPlayer team1WR2;
+    @OneToOne
     private NFLPlayer team2WR2;
+    @OneToOne
     private NFLPlayer team1WRRB;
+    @OneToOne
     private NFLPlayer team2WRRB;
+    @OneToOne
     private NFLPlayer team1TE;
+    @OneToOne
     private NFLPlayer team2TE;
+    @OneToOne
     private NFLPlayer team1K;
+    @OneToOne
     private NFLPlayer team2K;
+    @OneToOne
     private NFLPlayer team1DEF;
+    @OneToOne
     private NFLPlayer team2DEF;
 
     public NFLPlayer getTeam1DEF() {
