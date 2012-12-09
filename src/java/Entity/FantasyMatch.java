@@ -52,21 +52,25 @@ public class FantasyMatch implements Serializable {
     private NFLPlayer team2TE;
     private NFLPlayer team1K;
     private NFLPlayer team2K;
-    private NFLPlayer team1BEN1;
-    private NFLPlayer team2BEN1;
-    private NFLPlayer team1BEN2;
-    private NFLPlayer team2BEN2;
-    private NFLPlayer team1BEN3;
-    private NFLPlayer team2BEN3;
-    private NFLPlayer team1BEN4;
-    private NFLPlayer team2BEN4;
-    private NFLPlayer team1BEN5;
-    private NFLPlayer team2BEN5;
-    private NFLPlayer team1BEN6;
-    private NFLPlayer team2BEN6;
     private NFLPlayer team1DEF;
     private NFLPlayer team2DEF;
 
+    public NFLPlayer getTeam1DEF() {
+        return team1DEF;
+    }
+
+    public void setTeam1DEF(NFLPlayer team1DEF) {
+        this.team1DEF = team1DEF;
+    }
+
+    public NFLPlayer getTeam2DEF() {
+        return team2DEF;
+    }
+
+    public void setTeam2DEF(NFLPlayer team2DEF) {
+        this.team2DEF = team2DEF;
+    }
+    
     public int getWeek() {
         return week;
     }
@@ -243,101 +247,7 @@ public class FantasyMatch implements Serializable {
         this.team2K = team2K;
     }
     
-    public NFLPlayer getTeam1BEN1() {
-        return team1BEN1;
-    }
-
-    public void setTeam1BEN1(NFLPlayer team1BEN1) {
-        this.team1BEN1 = team1BEN1;
-    }
-
-    public NFLPlayer getTeam2BEN1() {
-        return team2BEN1;
-    }
-
-    public void setTeam2BEN1(NFLPlayer team2BEN1) {
-        this.team2BEN1 = team2BEN1;
-    }
-
-    public NFLPlayer getTeam1BEN2() {
-        return team1BEN2;
-    }
-
-    public void setTeam1BEN2(NFLPlayer team1BEN2) {
-        this.team1BEN2 = team1BEN2;
-    }
-
-    public NFLPlayer getTeam2BEN2() {
-        return team2BEN2;
-    }
-
-    public void setTeam2BEN2(NFLPlayer team2BEN2) {
-        this.team2BEN2 = team2BEN2;
-    }
-
-    public NFLPlayer getTeam1BEN3() {
-        return team1BEN3;
-    }
-
-    public void setTeam1BEN3(NFLPlayer team1BEN3) {
-        this.team1BEN3 = team1BEN3;
-    }
-
-    public NFLPlayer getTeam2BEN3() {
-        return team2BEN3;
-    }
-
-    public void setTeam2BEN3(NFLPlayer team2BEN3) {
-        this.team2BEN3 = team2BEN3;
-    }
-
-    public NFLPlayer getTeam1BEN4() {
-        return team1BEN4;
-    }
-
-    public void setTeam1BEN4(NFLPlayer team1BEN4) {
-        this.team1BEN4 = team1BEN4;
-    }
-
-    public NFLPlayer getTeam2BEN4() {
-        return team2BEN4;
-    }
-
-    public void setTeam2BEN4(NFLPlayer team2BEN4) {
-        this.team2BEN4 = team2BEN4;
-    }
-
-    public NFLPlayer getTeam1BEN5() {
-        return team1BEN5;
-    }
-
-    public void setTeam1BEN5(NFLPlayer team1BEN5) {
-        this.team1BEN5 = team1BEN5;
-    }
-
-    public NFLPlayer getTeam2BEN5() {
-        return team2BEN5;
-    }
-
-    public void setTeam2BEN5(NFLPlayer team2BEN5) {
-        this.team2BEN5 = team2BEN5;
-    }
-
-    public NFLPlayer getTeam1BEN6() {
-        return team1BEN6;
-    }
-
-    public void setTeam1BEN6(NFLPlayer team1BEN6) {
-        this.team1BEN6 = team1BEN6;
-    }
-
-    public NFLPlayer getTeam2BEN6() {
-        return team2BEN6;
-    }
-
-    public void setTeam2BEN6(NFLPlayer team2BEN6) {
-        this.team2BEN6 = team2BEN6;
-    }
+    
     
     public Long getfMatchID() {
         return fMatchID;

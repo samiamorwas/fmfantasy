@@ -4,10 +4,14 @@
  */
 package Admin;
 
+import Entity.FantasyMatch;
 import Entity.NFLMatch;
 import Entity.NFLPlayer;
+import Entity.RosterPlayer;
+import FMFantasyEJB.FantasyMatchBean;
 import FMFantasyEJB.NFLMatchBean;
 import FMFantasyEJB.NFLPlayerBean;
+import FMFantasyEJB.RosterPlayerBean;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -25,6 +29,10 @@ public class StartupConfig {
     NFLPlayerBean nflpb;
     @EJB
     NFLMatchBean nflmb;
+    @EJB
+    FantasyMatchBean fmatchBean;
+    @EJB
+    RosterPlayerBean rpBean;
     
     private int worldDay;
     private int worldWeek;
@@ -63,6 +71,118 @@ public class StartupConfig {
     //  get the rosters of two teams in match
     //  copy roster to match
     private void copyRostersToMatch(int week){
+        List<FantasyMatch> fMatches = fmatchBean.findByWeek(week);
+        for(int i = 0; i < fMatches.size(); i++){
+            FantasyMatch fm = fMatches.get(i);
+            List<RosterPlayer> rosterA = rpBean.getActiveByTeam(fm.getTeam1());
+            List<RosterPlayer> rosterB = rpBean.getActiveByTeam(fm.getTeam2());
+            
+            for(int j = 0; j < rosterA.size(); j++){
+                RosterPlayer rp = rosterA.get(i);
+                NFLPlayer nflp = rp.getNflPlayer();
+                int pos = nflp.getPosition();
+                
+                int WRnum = 0;
+                int RBnum = 0;
+                switch(pos){
+                    case 1:
+                        fm.setTeam1QB(nflp);
+                        break;
+                    case 2:
+                        switch(RBnum){
+                            case 0:
+                                fm.setTeam1RB1(nflp);
+                                RBnum++;
+                                break;
+                            case 1:
+                                fm.setTeam1RB2(nflp);
+                                RBnum++;
+                                break;
+                            case 2:
+                                fm.setTeam1WRRB(nflp);
+                                RBnum++;
+                                break;
+                        }
+                    case 3:
+                        switch(WRnum){
+                            case 0:
+                                fm.setTeam1WR1(nflp);
+                                WRnum++;
+                                break;
+                            case 1:
+                                fm.setTeam1WR2(nflp);
+                                WRnum++;
+                                break;
+                            case 2:
+                                fm.setTeam1WRRB(nflp);
+                                WRnum++;
+                                break;
+                        }
+                    case 4:
+                        fm.setTeam1TE(nflp);
+                        break;
+                    case 5:
+                        fm.setTeam1K(nflp);
+                        break;
+                    case 6:
+                        fm.setTeam1DEF(nflp);
+                        break;
+                }
+            }
+            for(int j = 0; j < rosterB.size(); j++){
+                RosterPlayer rp = rosterB.get(i);
+                NFLPlayer nflp = rp.getNflPlayer();
+                int pos = nflp.getPosition();
+                
+                int WRnum = 0;
+                int RBnum = 0;
+                switch(pos){
+                    case 1:
+                        fm.setTeam2QB(nflp);
+                        break;
+                    case 2:
+                        switch(RBnum){
+                            case 0:
+                                fm.setTeam2RB1(nflp);
+                                RBnum++;
+                                break;
+                            case 1:
+                                fm.setTeam2RB2(nflp);
+                                RBnum++;
+                                break;
+                            case 2:
+                                fm.setTeam2WRRB(nflp);
+                                RBnum++;
+                                break;
+                        }
+                    case 3:
+                        switch(WRnum){
+                            case 0:
+                                fm.setTeam2WR1(nflp);
+                                WRnum++;
+                                break;
+                            case 1:
+                                fm.setTeam2WR2(nflp);
+                                WRnum++;
+                                break;
+                            case 2:
+                                fm.setTeam2WRRB(nflp);
+                                WRnum++;
+                                break;
+                        }
+                    case 4:
+                        fm.setTeam2TE(nflp);
+                        break;
+                    case 5:
+                        fm.setTeam2K(nflp);
+                        break;
+                    case 6:
+                        fm.setTeam2DEF(nflp);
+                        break;
+                }
+            }            
+            
+        }
         
     }
     //for each match of the week
