@@ -29,17 +29,17 @@ and open the template in the editor.
         
         <h:form id ="rosterTables">
             <h:dataTable name="activeTable" value="#{rosterReqBean.active}" var="player">
-                <h:column>
+                <h:column rendered="#{sessionBean.user.userID == sessionBean.team.teamOwner.userID}">
                     <f:facet name="header">X</f:facet>
                     <p:commandLink update =":rosterTables" 
                                    actionListener="#{rosterReqBean.drop(player)}" >
                         <h:outputText value="X"/>
                     </p:commandLink>
                 </h:column>
-                <h:column>
+                <h:column rendered="#{sessionBean.user.userID == sessionBean.team.teamOwner.userID}">
                     <f:facet name="header">-</f:facet>
                     <p:commandLink update =":rosterTables" 
-                                   actionListener="#{rosterReqBean.demote(player)}">
+                                   actionListener="#{rosterReqBean.demote(player)}" >
                         <h:outputText value="-"/>
                     </p:commandLink>
                 </h:column>
@@ -55,14 +55,14 @@ and open the template in the editor.
             </h:dataTable>
             
             <h:dataTable name="BenchTable" value="#{rosterReqBean.bench}" var="player">
-                <h:column>
+                <h:column rendered="#{sessionBean.user.userID == sessionBean.team.teamOwner.userID}">
                     <f:facet name="header">X</f:facet>
                     <p:commandLink update =":rosterTables" 
                                    actionListener="#{rosterReqBean.drop(player)}" >
                         <h:outputText value="X"/>
                     </p:commandLink>
                 </h:column>
-                <h:column>
+                <h:column rendered="#{sessionBean.user.userID == sessionBean.team.teamOwner.userID}">
                     <f:facet name="header">+</f:facet>
                     <p:commandLink update =":rosterTables" 
                                    actionListener="#{rosterReqBean.promote(player)}"

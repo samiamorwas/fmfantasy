@@ -57,7 +57,45 @@ public class RosterReqBean {
         rosterBean.edit(rp);
     }
     public boolean isPromotable(RosterPlayer rp){
-        //also here
-        return true;
+        int pos = rp.getNflPlayer().getPosition();
+        List<RosterPlayer> activeList = getActive();
+        
+        int numOfThisPos = 0;
+        int numWR = 0;
+        int numRB = 0;
+        for(int i = 0; i < activeList.size(); i++){
+            int rpPos = activeList.get(i).getNflPlayer().getPosition();
+            
+            if(rpPos == pos)
+                numOfThisPos++;            
+            if(rpPos == 2)
+                numRB++;
+            if(rpPos == 3)
+                numWR++;
+            
+        }
+        
+        switch(pos){
+            case 1:
+            case 4:
+            case 5:
+            case 6:                
+                if( numOfThisPos == 0)
+                    return true;
+                else
+                    return false;
+            case 2:
+            case 3:
+                if(numOfThisPos < 2)
+                    return true;
+                if(numOfThisPos == 3)
+                    return false;
+                if(numWR == 3 || numRB == 3)
+                    return false;
+                else
+                    return true;                
+            default:
+                return false;
+        }
     }
 }
