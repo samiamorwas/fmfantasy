@@ -4,6 +4,7 @@
  */
 package Admin;
 
+import Entity.NFLMatch;
 import Entity.NFLPlayer;
 import java.io.IOException;
 import java.net.URL;
@@ -97,6 +98,31 @@ public class NFLData {
             points = 0;
         }
         return points;        
+    }
+    public List<NFLMatch> getNFLSchedule(){
+        List<NFLMatch> result = new ArrayList<NFLMatch>();
+        try{
+            JSONArray matchArr = getJSONArrFromURL(urlPrefix + "Schedules/2011" + apiKey);
+            for(int i = 0; i < matchArr.length(); i++){
+                JSONObject matchObj = matchArr.getJSONObject(i);
+                int week = matchObj.getInt("Week");
+                String homeTeam = matchObj.getString("HomeTeam");
+                String awayTeam = matchObj.getString("AwayTeam");
+                
+                NFLMatch nflm = new NFLMatch();
+                nflm.setWeek(week);
+                nflm.setHomeTeam(homeTeam);
+                nflm.setAwayTeam(awayTeam);
+                
+                result.add(nflm);
+            }
+            
+            
+        }catch (JSONException ex) {
+            Logger.getLogger(NFLData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return result;
     }
     
     public List<NFLPlayer> getAllPlayers(){

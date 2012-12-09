@@ -9,22 +9,49 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Greasy
  */
 @Entity
+@NamedQueries( {@NamedQuery(name = "NFLMatch.findByWeek", query = "Select match from NFLMatch match where whee = :week") })
 public class NFLMatch implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long NFLMatchID;
 
-    /*
-     * todo: api stuff?
-     * todo: everything else
-     */
+    
+    private int week;
+    private String homeTeam;
+    private String awayTeam;
+
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
+    }
+
+    public String getHomeTeam() {
+        return homeTeam;
+    }
+
+    public void setHomeTeam(String homeTeam) {
+        this.homeTeam = homeTeam;
+    }
+
+    public String getAwayTeam() {
+        return awayTeam;
+    }
+
+    public void setAwayTeam(String awayTeam) {
+        this.awayTeam = awayTeam;
+    }
 
     public Long getNFLMatchID() {
         return NFLMatchID;
