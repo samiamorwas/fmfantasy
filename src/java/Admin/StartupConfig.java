@@ -26,8 +26,34 @@ public class StartupConfig {
     @EJB
     NFLMatchBean nflmb;
     
+    private int worldDay;
+    private int worldWeek;
+    
+    public void setWeeksStart(){
+        worldWeek = 0;
+        worldDay = 1;        
+    }
+    public int getWorldWeek(){
+        return worldWeek;
+    }
+    public int getWorldDay(){
+        return worldDay;
+    }
+    public void advanceDay(){
+        if(++worldDay > 7){
+            worldDay = 1;
+            worldWeek++;
+        }
+        
+        // if week > 0
+        // if day == 1 - copy roster to current weeks matches
+        // if day == 2 - get stats and put in matches
+        
+    }
+    
     @PostConstruct
     public void startupStuff(){
+        setWeeksStart();
         NFLData nfld = new NFLData();
         
         
