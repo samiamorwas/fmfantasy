@@ -129,11 +129,25 @@ public class NFLData {
         List<NFLPlayer> result = new ArrayList<NFLPlayer>();
         try {
             JSONArray teamArr = getJSONArrFromURL(urlPrefix + "Teams/2011" + apiKey);
+            JSONArray defArr = getJSONArrFromURL(urlPrefix + "FantasyDefenseBySeason/2011" + apiKey);
             for(int i = 0 ; i < teamArr.length(); i++){
                 JSONObject teamObj = teamArr.getJSONObject(i);
+                JSONObject defObj = defArr.getJSONObject(i);
                 String teamFullName = teamObj.getString("FullName");
                 String teamAbrv = teamObj.getString("Key"); 
+                int defPoints = defObj.getInt("FantasyPoints");
                 
+                // add defense
+                NFLPlayer def = new NFLPlayer();
+                def.setName(teamFullName);
+                def.setTeam(teamAbrv);
+                def.setSeasonPoints(defPoints);
+                def.setPosition(6);
+                def.setNFLDataID(-1);
+                
+                result.add(def);
+                
+                // add all players
                 JSONArray pArr = getJSONArrFromURL(urlPrefix + "PlayerSeasonStatsByTeam/2011/" + teamAbrv + apiKey);
                 for(int j = 0; j < pArr.length(); j++){
                     JSONObject pObj = pArr.getJSONObject(j);
@@ -162,13 +176,14 @@ public class NFLData {
                         result.add(nflp);
                     }
                 }
+            }
+            
+            for(int i = 0; i < defArr.length(); i++){
+                JSONObject defObj = defArr.getJSONObject(i);
                 
-                NFLPlayer def = new NFLPlayer();
-                def.setName(teamFullName);
-                def.setTeam(teamAbrv);
-                def.setPosition(6);
-                def.setNFLDataID(-1);
-                result.add(def);
+                String teamAbrv = defObj.getString("Team");
+                
+                
             }
             
             
