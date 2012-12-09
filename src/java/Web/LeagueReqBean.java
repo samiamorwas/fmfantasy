@@ -120,6 +120,7 @@ public class LeagueReqBean {
         
         matchBean.createSchedule(league);        
         league.setFinishedDraft(true);
+        leagueBean.edit(league);
         
         return "draft_complete";
     }
