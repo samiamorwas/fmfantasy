@@ -63,8 +63,8 @@ public class AgentReqBean {
         FantasyTeam team = teamBean.findByOwnerAndLeague(user, leag);
         List<RosterPlayer> allMembers = rpBean.getByTeam(team);
         
-        //12 total players allowed? I don't remember
-        if (allMembers.size() < 12) {
+        //15 total players allowed? I don't remember
+        if (allMembers.size() < 15) {
             result = true;
         }
         

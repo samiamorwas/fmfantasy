@@ -47,8 +47,32 @@ public class StartupConfig {
         
         // if week > 0
         // if day == 1 - copy roster to current weeks matches
-        // if day == 2 - get stats and put in matches. update w/l/d ratio and ranks for teams.
+        // if day == 2 - get stats and put in matches. update w/l/d ratio, ranks, points for/against for all teams.
+        if(worldWeek > 0){
+            if(worldDay == 1){
+                copyRostersToMatch(worldWeek);            
+            }
+            if(worldDay == 2){
+                doMatchesStats(worldWeek);
+            }
+        }
         
+        
+    }
+    //for each match of the week
+    //  get the rosters of two teams in match
+    //  copy roster to match
+    private void copyRostersToMatch(int week){
+        
+    }
+    //for each match of the week
+    //  for each nflplayer in match
+    //      retreive stats of player for week
+    //      assign points
+    //      add points
+    //  compute winner or something
+    //  update points/rank/w/l/d of teams in match
+    private void doMatchesStats(int week){
         
     }
     
