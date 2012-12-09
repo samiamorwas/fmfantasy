@@ -15,7 +15,7 @@
     <ui:define name="body">
         <h1>Game Center: Week #{sessionBean.leagueWeek}</h1>
 
-        <h:dataTable value="#{matchReqBean.currentMatch(sessionBean.team)}" var="match" style="float: left;">
+        <h:dataTable value="#{matchReqBean.currentMatch}" var="match" style="float: left;">
 
             <h:column>
                 <f:facet name="header">#{match.team1}</f:facet>
@@ -45,7 +45,7 @@
 
         </h:dataTable>
 
-        <h:dataTable value="#{matchReqBean.currentMatch(sessionBean.team)}" var="match" style="float: right;">
+        <h:dataTable value="#{matchReqBean.currentMatch}" var="match" style="float: right;">
 
             <h:column>
                 <f:facet name="header">#{match.team2}</f:facet>

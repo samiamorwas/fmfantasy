@@ -5,6 +5,7 @@ import Entity.FantasyMatch;
 import Entity.FantasyTeam;
 import Entity.NFLPlayer;
 import FMFantasyEJB.FantasyMatchBean;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
@@ -29,8 +30,9 @@ public class MatchReqBean {
     public MatchReqBean() {
     }
     
-    public FantasyMatch getCurrentMatch(FantasyTeam team) {
+    public List<FantasyMatch> getCurrentMatch() {
         int week = sessionBean.getLeagueWeek();
+        FantasyTeam team = sessionBean.getTeam();
         return matchBean.findByCurrentTeam(week, team);
     }
     

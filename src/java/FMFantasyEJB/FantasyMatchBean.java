@@ -69,11 +69,11 @@ public class FantasyMatchBean extends AbstractFacade<FantasyMatch> {
         return createNamedQuery.getResultList();    
     }
     
-    public FantasyMatch findByCurrentTeam(int week, FantasyTeam team) {
+    public List<FantasyMatch> findByCurrentTeam(int week, FantasyTeam team) {
         Query createNamedQuery = em.createNamedQuery("FantasyMatch.findCurrentForTeam");
         createNamedQuery.setParameter("week", week);
         createNamedQuery.setParameter("team", team);
         
-        return (FantasyMatch) createNamedQuery.getSingleResult();
+        return createNamedQuery.getResultList();
     }
 }
