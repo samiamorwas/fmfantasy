@@ -32,17 +32,19 @@ import javax.ejb.Startup;
 @Startup
 public class StartupConfig {
     @EJB
-    NFLPlayerBean nflpb;
+    private NFLData nfld;
     @EJB
-    NFLMatchBean nflmb;
+    private NFLPlayerBean nflpb;
     @EJB
-    FantasyMatchBean fmatchBean;
+    private NFLMatchBean nflmb;
     @EJB
-    RosterPlayerBean rpBean;
+    private FantasyMatchBean fmatchBean;
     @EJB
-    FantasyTeamBean ftBean;
+    private RosterPlayerBean rpBean;
     @EJB
-    FantasyLeagueBean flBean;
+    private FantasyTeamBean ftBean;
+    @EJB
+    private FantasyLeagueBean flBean;
     
     private int worldDay;
     private int worldWeek;
@@ -203,7 +205,6 @@ public class StartupConfig {
     //  compute winner or something
     //  update points/rank/w/l/d of teams in match
     private void doMatchesStats(int week){
-        NFLData nfld = new NFLData();
         
         
         List<FantasyMatch> fMatches = fmatchBean.findByWeek(week);
@@ -292,9 +293,7 @@ public class StartupConfig {
     
     @PostConstruct
     public void startupStuff(){
-        setWeeksStart();
-        NFLData nfld = new NFLData();
-        
+        setWeeksStart();        
         
         List<NFLPlayer> allPlayers = nfld.getAllPlayers();        
         for(int i = 0; i < allPlayers.size(); i++){

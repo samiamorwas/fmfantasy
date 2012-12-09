@@ -25,7 +25,6 @@ public class SessionBean implements Serializable{
     private FantasyUser user;
     private FantasyLeague league;
     private FantasyTeam team;
-    private FantasyMatch match;
     
     private String agentTextEntry;
     private boolean QB,RB,WR,TE,KCK,DEF;
@@ -127,14 +126,6 @@ public class SessionBean implements Serializable{
         this.nextLeagueWeek = nextLeagueWeek;
     }
     
-    public FantasyMatch getMatch() {
-        return match;
-    }
-
-    public void setMatch(FantasyMatch match) {
-        this.match = match;
-    }
-
     public FantasyUser getUser() {
         return user;
     }

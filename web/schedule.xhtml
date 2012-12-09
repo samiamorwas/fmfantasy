@@ -29,8 +29,7 @@ and open the template in the editor.
                         <p:commandLink value="#{match.team1.teamName}" action="#{teamReqBean.setTeam(match.team1)}"/>
                     </h:column>
                     <h:column>
-
-                        <h:outputText value="vs"/>                    
+                        <p:commandLink value="vs" action="#{matchReqBean.viewMatch(match)}"/>
                     </h:column>
                     <h:column>
                         <p:commandLink value="#{match.team2.teamName}" action="#{teamReqBean.setTeam(match.team2)}" />

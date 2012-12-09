@@ -19,7 +19,7 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @NamedQueries( {@NamedQuery(name = "FantasyMatch.findByWeek", query = "SELECT match FROM FantasyMatch match WHERE match.week = :week"),
-                @NamedQuery(name = "FantasyMatch.findCurrentForTeam", query = "SELECT match FROM FantasyMatch match WHERE match.week = :week AND match.team1 = :team")})
+                @NamedQuery(name = "FantasyMatch.findCurrentForTeam", query = "SELECT match FROM FantasyMatch match WHERE match.week = :week AND (match.team1 = :team OR match.team2 = :team)")})
 public class FantasyMatch implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

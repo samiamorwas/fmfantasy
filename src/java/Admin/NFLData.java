@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONException;
 import org.primefaces.json.JSONObject;
@@ -21,6 +22,7 @@ import org.primefaces.json.JSONObject;
  *
  * @author Greasy
  */
+@Stateless
 public class NFLData {
     static final String urlPrefix = "http://test.nfldata.com/api.svc/JSON/";
     static final String apiKey = "?key=c7fb0f65-ccb4-4965-bbb9-4cecd0890e10";
