@@ -18,7 +18,7 @@
         <h:dataTable value="#{matchReqBean.currentMatch}" var="match" style="float: left;">
 
             <h:column>
-                <f:facet name="header">#{match.team1}</f:facet>
+                <f:facet name="header">#{match.team1.teamName}</f:facet>
                 #{match.team1QB.name}
                 #{match.team1RB1.name}
                 #{match.team1RB2.name}
@@ -32,15 +32,15 @@
 
             <h:column>
                 <f:facet name="header">Points</f:facet>
-                #{matchReqBean.pointsForPlayer(match.team1QB)}
-                #{matchReqBean.pointsForPlayer(match.team1RB1)}
-                #{matchReqBean.pointsForPlayer(match.team1RB2)}
-                #{matchReqBean.pointsForPlayer(match.team1WR1)}
-                #{matchReqBean.pointsForPlayer(match.team1WR2)}
-                #{matchReqBean.pointsForPlayer(match.team1WRRB)}
-                #{matchReqBean.pointsForPlayer(match.team1TE)}
-                #{matchReqBean.pointsForPlayer(match.team1K)}
-                #{matchReqBean.pointsForPlayer(match.team1DEF)}
+                #{matchReqBean.getPointsForPlayer(match.team1QB)}
+                #{matchReqBean.getPointsForPlayer(match.team1RB1)}
+                #{matchReqBean.getPointsForPlayer(match.team1RB2)}
+                #{matchReqBean.getPointsForPlayer(match.team1WR1)}
+                #{matchReqBean.getPointsForPlayer(match.team1WR2)}
+                #{matchReqBean.getPointsForPlayer(match.team1WRRB)}
+                #{matchReqBean.getPointsForPlayer(match.team1TE)}
+                #{matchReqBean.getPointsForPlayer(match.team1K)}
+                #{matchReqBean.getPointsForPlayer(match.team1DEF)}
             </h:column>
 
         </h:dataTable>
@@ -48,7 +48,7 @@
         <h:dataTable value="#{matchReqBean.currentMatch}" var="match" style="float: right;">
 
             <h:column>
-                <f:facet name="header">#{match.team2}</f:facet>
+                <f:facet name="header">#{match.team2.teamName}</f:facet>
                 #{match.team2QB.name}
                 #{match.team2RB1.name}
                 #{match.team2RB2.name}
@@ -62,15 +62,15 @@
 
             <h:column>
                 <f:facet name="header">Points</f:facet>
-                #{matchReqBean.pointsForPlayer(match.team2QB)}
-                #{matchReqBean.pointsForPlayer(match.team2RB1)}
-                #{matchReqBean.pointsForPlayer(match.team2RB2)}
-                #{matchReqBean.pointsForPlayer(match.team2WR1)}
-                #{matchReqBean.pointsForPlayer(match.team2WR2)}
-                #{matchReqBean.pointsForPlayer(match.team2WRRB)}
-                #{matchReqBean.pointsForPlayer(match.team2TE)}
-                #{matchReqBean.pointsForPlayer(match.team2K)}
-                #{matchReqBean.pointsForPlayer(match.team2DEF)}
+                #{matchReqBean.getPointsForPlayer(match.team2QB)}
+                #{matchReqBean.getPointsForPlayer(match.team2RB1)}
+                #{matchReqBean.getPointsForPlayer(match.team2RB2)}
+                #{matchReqBean.getPointsForPlayer(match.team2WR1)}
+                #{matchReqBean.getPointsForPlayer(match.team2WR2)}
+                #{matchReqBean.getPointsForPlayer(match.team2WRRB)}
+                #{matchReqBean.getPointsForPlayer(match.team2TE)}
+                #{matchReqBean.getPointsForPlayer(match.team2K)}
+                #{matchReqBean.getPointsForPlayer(match.team2DEF)}
             </h:column>
 
         </h:dataTable>
