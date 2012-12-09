@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML>
+<ui:composition     xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    template="/template.xhtml"
+                    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <ui:define name="title">
+        Game Center
+    </ui:define>
+
+    <ui:define name="body">
+        <h1>Game Center: Week #{sessionBean.leagueWeek}</h1>
+
+        <h:dataTable value="#{matchReqBean.currentMatch(sessionBean.team)}" var="match" style="float: left;">
+
+            <h:column>
+                <f:facet name="header">#{match.team1}</f:facet>
+                #{match.team1QB.name}
+                #{match.team1RB1.name}
+                #{match.team1RB2.name}
+                #{match.team1WR1.name}
+                #{match.team1WR2.name}
+                #{match.team1WRRB.name}
+                #{match.team1TE.name}
+                #{match.team1K.name}
+                #{match.team1DEF.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Points</f:facet>
+                #{matchReqBean.pointsForPlayer(match.team1QB)}
+                #{matchReqBean.pointsForPlayer(match.team1RB1)}
+                #{matchReqBean.pointsForPlayer(match.team1RB2)}
+                #{matchReqBean.pointsForPlayer(match.team1WR1)}
+                #{matchReqBean.pointsForPlayer(match.team1WR2)}
+                #{matchReqBean.pointsForPlayer(match.team1WRRB)}
+                #{matchReqBean.pointsForPlayer(match.team1TE)}
+                #{matchReqBean.pointsForPlayer(match.team1K)}
+                #{matchReqBean.pointsForPlayer(match.team1DEF)}
+            </h:column>
+
+        </h:dataTable>
+
+        <h:dataTable value="#{matchReqBean.currentMatch(sessionBean.team)}" var="match" style="float: right;">
+
+            <h:column>
+                <f:facet name="header">#{match.team2}</f:facet>
+                #{match.team2QB.name}
+                #{match.team2RB1.name}
+                #{match.team2RB2.name}
+                #{match.team2WR1.name}
+                #{match.team2WR2.name}
+                #{match.team2WRRB.name}
+                #{match.team2TE.name}
+                #{match.team2K.name}
+                #{match.team2DEF.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Points</f:facet>
+                #{matchReqBean.pointsForPlayer(match.team2QB)}
+                #{matchReqBean.pointsForPlayer(match.team2RB1)}
+                #{matchReqBean.pointsForPlayer(match.team2RB2)}
+                #{matchReqBean.pointsForPlayer(match.team2WR1)}
+                #{matchReqBean.pointsForPlayer(match.team2WR2)}
+                #{matchReqBean.pointsForPlayer(match.team2WRRB)}
+                #{matchReqBean.pointsForPlayer(match.team2TE)}
+                #{matchReqBean.pointsForPlayer(match.team2K)}
+                #{matchReqBean.pointsForPlayer(match.team2DEF)}
+            </h:column>
+
+        </h:dataTable>
+    </ui:define>
+
+</ui:composition>

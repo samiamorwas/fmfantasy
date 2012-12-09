@@ -12,10 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.primefaces.json.JSONObject;
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONException;
+import org.primefaces.json.JSONObject;
 
 
 /**

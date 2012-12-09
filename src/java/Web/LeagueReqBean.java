@@ -8,8 +8,6 @@ import Entity.FantasyLeague;
 import Entity.FantasyMatch;
 import Entity.FantasyTeam;
 import Entity.FantasyUser;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;

@@ -103,10 +103,12 @@ public class AgentReqBean {
         public int compare(NFLPlayer o1, NFLPlayer o2) {
             int result = 0;
 
-            if(o1.getSeasonPoints() > o2.getSeasonPoints())
+            if(o1.getSeasonPoints() > o2.getSeasonPoints()) {
                 result = -1;
-            if(o1.getSeasonPoints() < o2.getSeasonPoints())
+            }
+            if(o1.getSeasonPoints() < o2.getSeasonPoints()) {
                 result = 1;
+            }
             return result;
         }
     }
