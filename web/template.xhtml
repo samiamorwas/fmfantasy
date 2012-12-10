@@ -20,6 +20,8 @@
             <div id="topBar" class="topBar">
 
                 <h:form>
+                    <h:commandButton action="#{startupConfig.advanceWeek()}" value="--next week--"
+                                     style="background: transparent; border: none;"/>
                     <h:commandButton action="#{startupConfig.advanceDay()}" value="--next day--"
                                      style="background: transparent; border: none;"/>
                     <h:commandButton action="#{userReqBean.logout}" value="Log Out" rendered="#{userReqBean.logged}"

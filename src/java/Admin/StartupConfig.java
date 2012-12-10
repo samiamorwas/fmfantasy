@@ -65,6 +65,11 @@ public class StartupConfig {
     public int getWorldDay(){
         return worldDay;
     }
+    public void advanceWeek(){
+        for(int i = 0; i < 7; i++){
+            advanceDay();
+        }
+    }
     public void advanceDay(){
         if(++worldDay > 7){
             worldDay = 1;
