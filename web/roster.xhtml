@@ -46,13 +46,58 @@ and open the template in the editor.
                     </p:commandLink>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Position</f:facet>
+                    <f:facet name="header">Pos</f:facet>
                     #{player.nflPlayer.positionString}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Player</f:facet>
                     #{player.nflPlayer.name}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Pass Yds</f:facet>
+                    #{player.nflPlayer.passYards}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pass TD</f:facet>
+                    #{player.nflPlayer.passTD}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pass Int</f:facet>
+                    #{player.nflPlayer.passInt}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rush Yds</f:facet>
+                    #{player.nflPlayer.rushYds}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rush TD</f:facet>
+                    #{player.nflPlayer.rushTD}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rec Yds</f:facet>
+                    #{player.nflPlayer.recYds}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rec TD</f:facet>
+                    #{player.nflPlayer.recTD}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fumble TD</f:facet>
+                    #{player.nflPlayer.fumTd}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">2pt</f:facet>
+                    #{player.nflPlayer.twoPt}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fumble lost</f:facet>
+                    #{player.nflPlayer.fumLost}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fantasy Pts</f:facet>
+                    #{player.nflPlayer.seasonPoints}
                 </h:column>
             </h:dataTable>
             
@@ -80,6 +125,51 @@ and open the template in the editor.
                 <h:column>
                     <f:facet name="header">Player</f:facet>
                     #{player.nflPlayer.name}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Pass Yds</f:facet>
+                    #{player.nflPlayer.passYards}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pass TD</f:facet>
+                    #{player.nflPlayer.passTD}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pass Int</f:facet>
+                    #{player.nflPlayer.passInt}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rush Yds</f:facet>
+                    #{player.nflPlayer.rushYds}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rush TD</f:facet>
+                    #{player.nflPlayer.rushTD}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rec Yds</f:facet>
+                    #{player.nflPlayer.recYds}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rec TD</f:facet>
+                    #{player.nflPlayer.recTD}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fumble TD</f:facet>
+                    #{player.nflPlayer.fumTd}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">2pt</f:facet>
+                    #{player.nflPlayer.twoPt}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fumble lost</f:facet>
+                    #{player.nflPlayer.fumLost}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fantasy Pts</f:facet>
+                    #{player.nflPlayer.seasonPoints}
                 </h:column>
             </h:dataTable>
             

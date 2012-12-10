@@ -19,7 +19,7 @@ import javax.inject.Named;
 @Named
 @Stateful
 @SessionScoped
-public class NFLScheduleReqBean {
+public class NflSchedReqBean {
 
     @EJB
     NFLMatchBean nflMatchBean;
@@ -29,7 +29,7 @@ public class NFLScheduleReqBean {
     /**
      * Creates a new instance of FantasyLeagueController
      */
-    public NFLScheduleReqBean() {
+    public NflSchedReqBean() {
         nflWeek = 1;
     }
 
@@ -45,19 +45,19 @@ public class NFLScheduleReqBean {
         
         List<NFLMatch> nflMatchesForWeek = nflMatchBean.getMatchesByWeek(nflWeek);
         
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < nflMatchesForWeek.size(); i++)
         {
             if (i < 6)
             {
-                nflMatchesForWeek.get(i).setDayOfWeek("Sunday");
+                nflMatchesForWeek.get(i).setDayOfWeek("Sun");
             }
             else if (i < 11)
             {
-                nflMatchesForWeek.get(i).setDayOfWeek("Monday");
+                nflMatchesForWeek.get(i).setDayOfWeek("Mon");
             }
             else
             {
-                nflMatchesForWeek.get(i).setDayOfWeek("Thursday"); 
+                nflMatchesForWeek.get(i).setDayOfWeek("Thu"); 
             }
         }
     
@@ -76,7 +76,7 @@ public class NFLScheduleReqBean {
     public void incrementNFLWeek()
     {
         // Can't go to next week if it's Week 14
-        if (nflWeek != 14)
+        if (nflWeek != 16)
         {
             nflWeek++;
         }

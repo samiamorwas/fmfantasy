@@ -19,10 +19,6 @@
 
     <ui:define name="body">
         
-        
-        <h:form>
-            <h:commandButton action="#{userReqBean.logout}" value="Log out" rendered="#{userReqBean.logged}" />
-        </h:form>
         <div id ="LeaguesOwned" class ="TableHeader" style="background-color: orangered">Leagues owned</div><br />
         <h:dataTable value="#{leagueReqBean.owned}" var="league">
 
@@ -42,8 +38,8 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">finished draft?</f:facet>
-                #{league.finishedDraft}
+                <f:facet name="header">League Status</f:facet>
+                #{league.leagueStatus}
             </h:column>
             <h:column>
                 <f:facet name="header">view league</f:facet>
@@ -74,8 +70,8 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">Finished Draft?</f:facet>
-                #{league.finishedDraft}
+                <f:facet name="header">League Status</f:facet>
+                #{league.leagueStatus}
             </h:column>
             <h:column>
                 <f:facet name="header">view league</f:facet>
@@ -86,22 +82,7 @@
 
         </h:dataTable>
         <br /><br />
-        <div class ="TableHeader" style="background-color: orangered">Teams owned</div><br />
-        <h:dataTable value="#{teamReqBean.owned}" var="team"	>
-
-            <h:column>
-                <f:facet name="header">League Name</f:facet>
-                #{team.league.leagueName}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Team Name</f:facet>
-                #{team.teamName}
-            </h:column>
-
-        </h:dataTable>
-        <br /><br />
-
+        
         <div class ="TableHeader" style="background-color: orangered">Invitations</div>
         <br />
         <h:dataTable value="#{inviteReqBean.invitesToYou}" var="inv"	> 

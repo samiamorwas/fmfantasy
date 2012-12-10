@@ -58,8 +58,14 @@ public class TeamReqBean {
         this.teamViewed = team;
         return "team_set";
     }
+    
     public FantasyTeam getTeam(){
         return teamViewed;
+    }
+    
+    public String setCurrentTeam() {
+        this.teamViewed = teamBean.findByOwnerAndLeague(uReq.getUser(), lReq.getLeague());
+        return "team_set";
     }
     
 }

@@ -2,23 +2,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html">
-
-    <h:link outcome="schedule" value="Schedule" />
-    <br />
-    <h:link outcome="roster" value="Roster" />
-    <br />
-    <h:link outcome="standings" value="Standings" />
-    <br />
-    <h:link outcome="leagues" value="My Leagues" />
-    <br />
     <h:form rendered="#{leagueReqBean.draftFinished}">
-        <h:link outcome="gamecenter" value="Game Center" />
+        <h:link outcome="schedule" value="Schedule" />
         <br />
-    </h:form>
-    <h:form rendered="#{leagueReqBean.draftFinished}">
+        <h:form>
+            <h:commandButton action="#{teamReqBean.setCurrentTeam()}" value="Roster" style="border: none; background: none"/>
+        </h:form>
+        <h:link outcome="standings" value="Standings" />
+        <br />
         <h:link outcome="freeagents" value="Free Agents" />
         <br />
     </h:form>
+    <h:link outcome="leagues" value="My Leagues" />
+    <br />
     <h:link outcome="draft" value="Draft" rendered="#{leagueReqBean.canDraft}" />
 
 </html>

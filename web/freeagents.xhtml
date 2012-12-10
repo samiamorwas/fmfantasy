@@ -61,8 +61,48 @@ and open the template in the editor.
                     <h:outputText value="#{player.name}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Season Points</f:facet>
-                    <h:outputText value="#{player.seasonPoints}"/>
+                    <f:facet name="header">Pass Yds</f:facet>
+                    #{player.passYards}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pass TD</f:facet>
+                    #{player.passTD}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pass Int</f:facet>
+                    #{player.passInt}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rush Yds</f:facet>
+                    #{player.rushYds}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rush TD</f:facet>
+                    #{player.rushTD}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rec Yds</f:facet>
+                    #{player.recYds}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rec TD</f:facet>
+                    #{player.recTD}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fumble TD</f:facet>
+                    #{player.fumTd}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">2pt</f:facet>
+                    #{player.twoPt}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fumble lost</f:facet>
+                    #{player.fumLost}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fantasy Pts</f:facet>
+                    #{player.seasonPoints}
                 </h:column>
             </h:dataTable>
         </h:form>
