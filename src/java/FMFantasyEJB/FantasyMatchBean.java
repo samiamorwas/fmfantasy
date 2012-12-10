@@ -63,9 +63,16 @@ public class FantasyMatchBean extends AbstractFacade<FantasyMatch> {
         
     }
     
-    public List<FantasyMatch> findByWeek(int w){
+    public List<FantasyMatch> findByLeagueAndWeek(FantasyLeague league, int week){
+        Query createNamedQuery = em.createNamedQuery("FantasyMatch.findByLeagueAndWeek");
+        createNamedQuery.setParameter("league", league);
+        createNamedQuery.setParameter("week", week);
+        
+        return createNamedQuery.getResultList();    
+    }
+    public List<FantasyMatch> findByWeek(int week){
         Query createNamedQuery = em.createNamedQuery("FantasyMatch.findByWeek");
-        createNamedQuery.setParameter("week", w);
+        createNamedQuery.setParameter("week", week);
         
         return createNamedQuery.getResultList();    
     }

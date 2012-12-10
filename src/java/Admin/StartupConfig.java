@@ -78,7 +78,7 @@ public class StartupConfig {
             if(worldDay == 1){
                 copyRostersToMatch(worldWeek);            
             }
-            if(worldDay == 2){
+            if(worldDay == 5){
                 doMatchesStats(worldWeek);
             }
         }

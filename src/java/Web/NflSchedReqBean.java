@@ -76,7 +76,7 @@ public class NflSchedReqBean {
     public void incrementNFLWeek()
     {
         // Can't go to next week if it's Week 14
-        if (nflWeek != 14)
+        if (nflWeek != 16)
         {
             nflWeek++;
         }

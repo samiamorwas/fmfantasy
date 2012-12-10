@@ -13,7 +13,9 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
     
     <ui:define name="body">
-        
+        <h:form rendered ="#{leagueReqBean.winnerDeclared()}">
+            <h3>Winner: #{leagueReqBean.winningTeam.teamName}</h3>
+        </h:form>
         <h1>#{leagueReqBean.league.leagueName} Standings</h1>
         <h:form id ="scheduleForm">
             <center>

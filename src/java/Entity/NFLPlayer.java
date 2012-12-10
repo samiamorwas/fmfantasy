@@ -35,7 +35,7 @@ public class NFLPlayer implements Serializable {
     private String name;
     private String team;
     
-    private int seasonPoints;
+    private int passYards, passTD, passInt, rushYds, rushTD, recYds, recTD, fumTd, twoPt, fumLost, seasonPoints;
     
     
     /*
@@ -67,6 +67,87 @@ public class NFLPlayer implements Serializable {
         }
     }
 
+    public int getPassYards() {
+        return passYards;
+    }
+
+    public void setPassYards(int passYards) {
+        this.passYards = passYards;
+    }
+
+    public int getPassTD() {
+        return passTD;
+    }
+
+    public void setPassTD(int passTD) {
+        this.passTD = passTD;
+    }
+
+    public int getPassInt() {
+        return passInt;
+    }
+
+    public void setPassInt(int passInt) {
+        this.passInt = passInt;
+    }
+
+    public int getRushYds() {
+        return rushYds;
+    }
+
+    public void setRushYds(int rushYds) {
+        this.rushYds = rushYds;
+    }
+
+    public int getRushTD() {
+        return rushTD;
+    }
+
+    public void setRushTD(int rushTD) {
+        this.rushTD = rushTD;
+    }
+
+    public int getRecYds() {
+        return recYds;
+    }
+
+    public void setRecYds(int recYds) {
+        this.recYds = recYds;
+    }
+
+    public int getRecTD() {
+        return recTD;
+    }
+
+    public void setRecTD(int recTD) {
+        this.recTD = recTD;
+    }
+
+    public int getFumTd() {
+        return fumTd;
+    }
+
+    public void setFumTd(int fumTd) {
+        this.fumTd = fumTd;
+    }
+
+    public int getTwoPt() {
+        return twoPt;
+    }
+
+    public void setTwoPt(int twoPt) {
+        this.twoPt = twoPt;
+    }
+
+    public int getFumLost() {
+        return fumLost;
+    }
+
+    public void setFumLost(int fumLost) {
+        this.fumLost = fumLost;
+    }
+
+    
     public int getSeasonPoints() {
         return seasonPoints;
     }

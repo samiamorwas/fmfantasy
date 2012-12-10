@@ -158,12 +158,35 @@ public class NFLData {
                     if(! pObj.getString("PositionCategory").equals("DEF") ){
                         String playerName = pObj.getString("Name");
                         String position = pObj.getString("Position");
-                        int fantasyPoints = pObj.getInt("FantasyPoints");
                         int NFLDataID = pObj.getInt("PlayerID");
+                        
+                        int passYds = pObj.getInt("PassingYards");
+                        int passTD = pObj.getInt("PassingTouchdowns");
+                        int passInt = pObj.getInt("PassingInterceptions");
+                        int rushYds = pObj.getInt("RushingYards");
+                        int rushTD = pObj.getInt("RushingTouchdowns");
+                        int recYds = pObj.getInt("ReceivingYards");
+                        int recTds = pObj.getInt("ReceivingTouchdowns");
+                        int fumTD = pObj.getInt("FumbleReturnTouchdowns");
+                        int twoPt = pObj.getInt("TwoPointConversionRuns")
+                                + pObj.getInt("TwoPointConversionPasses")
+                                + pObj.getInt("TwoPointConversionReceptions");
+                        int fumLost = pObj.getInt("FumblesLost");
+                        int fantasyPoints = pObj.getInt("FantasyPoints");
                         
                         NFLPlayer nflp = new NFLPlayer();
                         nflp.setTeam(teamAbrv);
                         nflp.setName(playerName);
+                        nflp.setPassYards(passYds);
+                        nflp.setPassTD(passTD);
+                        nflp.setPassInt(passInt);
+                        nflp.setRushYds(rushYds);
+                        nflp.setRushTD(rushTD);
+                        nflp.setRecTD(recTds);
+                        nflp.setRecYds(recYds);
+                        nflp.setFumTd(fumTD);
+                        nflp.setTwoPt(twoPt);
+                        nflp.setFumLost(fumLost);
                         nflp.setSeasonPoints(fantasyPoints);
                         nflp.setNFLDataID(NFLDataID);
                         if(position.equals("QB")){

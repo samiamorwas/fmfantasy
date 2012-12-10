@@ -19,8 +19,9 @@
 
     <ui:define name="body">
         
-        <h1>Leagues Owned</h1>
-        <h:dataTable value="#{leagueReqBean.owned}" var="league">
+
+    <h1>Leagues Owned</h1>
+    <h:dataTable value="#{leagueReqBean.owned}" var="league">
 
             <h:column>
                 <f:facet name="header">league ID</f:facet>
@@ -38,8 +39,8 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">finished draft?</f:facet>
-                #{league.finishedDraft}
+                <f:facet name="header">League Status</f:facet>
+                #{league.leagueStatus}
             </h:column>
             <h:column>
                 <f:facet name="header">view league</f:facet>
@@ -70,8 +71,8 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">Finished Draft?</f:facet>
-                #{league.finishedDraft}
+                <f:facet name="header">League Status</f:facet>
+                #{league.leagueStatus}
             </h:column>
             <h:column>
                 <f:facet name="header">view league</f:facet>
