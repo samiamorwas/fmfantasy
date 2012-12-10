@@ -36,6 +36,8 @@ import javax.inject.Named;
 @Singleton
 @Startup
 public class StartupConfig {
+    
+    
     @EJB
     private NFLData nfld;
     @EJB
@@ -77,55 +79,42 @@ public class StartupConfig {
             worldWeek++;
         }
         if (worldWeek == 15){
-            FantasyLeagueBean allLeagues = new FantasyLeagueBean();
-            FantasyTeamBean teamBean1 = new FantasyTeamBean();
-        for(FantasyLeague l: allLeagues.findAll() ){
-             List<FantasyTeam> teams = teamBean1.findByLeague(l);
-             List<FantasyTeam> sideA, sideB;
-             sideA = new ArrayList(teams.subList(0, 1));
-             sideB = new ArrayList(teams.subList(2,3));
-             sideB.add(0, sideB.get(1));
-             sideB.remove(sideB.size()-1);
-        
-        for (int j = 0; j < sideA.size(); j++)
-            {   
-                FantasyMatch matchToAdd = new FantasyMatch();
-                matchToAdd.setWeek(15);
-                matchToAdd.setLeague(l);
-                matchToAdd.setTeam1(sideA.get(j));
-                matchToAdd.setTeam2(sideB.get(j));
-                FantasyMatchBean newBean = new FantasyMatchBean();
-                newBean.create(matchToAdd);
+            for(FantasyLeague l: flBean.findAll() ){
+                 List<FantasyTeam> teams = ftBean.findByLeague(l);
+                 List<FantasyTeam> sideA, sideB;
+                 sideA = new ArrayList(teams.subList(0, 1));
+                 sideB = new ArrayList(teams.subList(2,3));
+                 sideB.add(0, sideB.get(1));
+                 sideB.remove(sideB.size()-1);
+
+                for (int j = 0; j < sideA.size(); j++)
+                {   
+                    FantasyMatch matchToAdd = new FantasyMatch();
+                    matchToAdd.setWeek(15);
+                    matchToAdd.setLeague(l);
+                    matchToAdd.setTeam1(sideA.get(j));
+                    matchToAdd.setTeam2(sideB.get(j));
+
+                    fmatchBean.create(matchToAdd);
+                }
+
             }
-        
         }
-        }
-        if (worldWeek == 15){
-            FantasyLeagueBean allLeagues = new FantasyLeagueBean();
-            FantasyTeamBean teamBean1 = new FantasyTeamBean();
-             for(FantasyLeague l: allLeagues.findAll() ){
-             List<FantasyTeam> teams = teamBean1.findByLeague(l);
-        List<FantasyTeam> sideA, sideB;
-        sideA = new ArrayList();
-        sideB = new ArrayList();
-        sideA.add(0, teams.get(0));
-        sideB.add(0, teams.get(1));
-        sideA.add(1, teams.get(2));
-        sideB.add(1, teams.get(3));
-        
-        
-        for (int j = 0; j < sideA.size(); j++)
-            {   
-                FantasyMatch matchToAdd = new FantasyMatch();
-                matchToAdd.setWeek(16);
-                matchToAdd.setLeague(l);
-                matchToAdd.setTeam1(sideA.get(j));
-                matchToAdd.setTeam2(sideB.get(j));
-                FantasyMatchBean newBean = new FantasyMatchBean();
-                newBean.create(matchToAdd);
+        if (worldWeek == 16){            
+             for(FantasyLeague l: flBean.findAll() ){
+                List<FantasyMatch> week15Matches = fmatchBean.findByLeagueAndWeek(l,15);
+                
+                FantasyTeam winner1 = week15Matches.get(0).getWinningTeam();
+                FantasyTeam winner2 = week15Matches.get(1).getWinningTeam();
+                
+                FantasyMatch finalMatch = new FantasyMatch();
+                finalMatch.setTeam1(winner1);
+                finalMatch.setTeam2(winner2);
+                finalMatch.setLeague(l);
+                finalMatch.setWeek(16);
+                
+                fmatchBean.create(finalMatch);        
             }
-        
-             }
         }
         // if week > 0
         // if day == 1 - copy roster to current weeks matches

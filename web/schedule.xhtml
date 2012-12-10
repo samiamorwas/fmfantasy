@@ -39,7 +39,7 @@ and open the template in the editor.
             </center>
             <h1>Week #{matchReqBean.matchWeek}: #{matchReqBean.team1Name} VS #{matchReqBean.team2Name}</h1>
                
-        <h:dataTable value="#{matchReqBean.team1PlayerStats}" var ="playerStats" style="float: left; margin-left: 125px;">
+        <h:dataTable value="#{matchReqBean.team1PlayerStats}" var ="playerStats" style="float: left;">
             <f:facet name="header">
                 #{matchReqBean.team1Name}
             </f:facet>
@@ -67,7 +67,7 @@ and open the template in the editor.
             </h:column>
         </h:dataTable>
         
-        <h:dataTable value="#{matchReqBean.team2PlayerStats}" var ="playerStats" style="float: right; margin-right: 125px;">
+        <h:dataTable value="#{matchReqBean.team2PlayerStats}" var ="playerStats" style="float: right;">
             <f:facet name="header">
                 #{matchReqBean.team2Name}
             </f:facet>
