@@ -48,6 +48,7 @@ public class LeagueReqBean {
         leagueName = "";
         teamName = "";
         error = "";
+        weekViewed = 1;
     }
 
     public FantasyLeague getLeague() {
