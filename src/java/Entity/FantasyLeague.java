@@ -44,7 +44,17 @@ public class FantasyLeague implements Serializable {
 
     @OneToMany(mappedBy = "league")
     private List<RosterPlayer> rosterPlayers;
-
+    
+    
+    public String getLeagueStatus(){
+        //perhaps add playoffs here.
+        if(finishedDraft)
+            return "Season Started!";
+        if(startedDraft)
+            return "Draft Started";
+        return "Awaiting draft";
+    }
+    
     public Long getLeagueID() {
         return leagueID;
     }
