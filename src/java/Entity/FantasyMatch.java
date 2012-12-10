@@ -18,7 +18,8 @@ import javax.persistence.OneToOne;
  * @author Greasy
  */
 @Entity
-@NamedQueries( {@NamedQuery(name = "FantasyMatch.findByWeek", query = "SELECT match FROM FantasyMatch match WHERE match.week = :week"),
+@NamedQueries( {@NamedQuery(name = "FantasyMatch.findByLeagueAndWeek", query = "SELECT match FROM FantasyMatch match WHERE match.league = :league AND match.week = :week"),
+                @NamedQuery(name = "FantasyMatch.findByWeek", query = "SELECT match FROM FantasyMatch match WHERE match.week = :week"),
                 @NamedQuery(name = "FantasyMatch.findCurrentForTeam", query = "SELECT match FROM FantasyMatch match WHERE match.week = :week AND (match.team1 = :team OR match.team2 = :team)")})
 public class FantasyMatch implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -41,7 +42,16 @@ public class FantasyMatch implements Serializable {
     private NFLPlayer team1QB, team1RB1, team1RB2, team1WR1, team1WR2, team1WRRB, team1TE, team1K, team1DEF;    
     private NFLPlayer team2QB, team2RB1, team2RB2, team2WR1, team2WR2, team2WRRB, team2TE, team2K, team2DEF;
     
-    
+    public FantasyTeam getWinningTeam(){
+        if(team1Points == 0 && team2Points == 0){
+            return null;
+        }
+        //who cares about ties
+        if(team1Points > team2Points)
+            return team1;
+        else
+            return team2;
+    }
 
     public NFLPlayer getTeam1DEF() {
         return team1DEF;

@@ -50,7 +50,27 @@ public class LeagueReqBean {
         error = "";
         weekViewed = 1;
     }
-
+    
+    public boolean winnerDeclared(){
+        List<FantasyMatch> finalMatches = matchBean.findByLeagueAndWeek(league, 16);
+        
+        if(finalMatches.size() < 1)
+            return false;
+        FantasyTeam winningTeam = finalMatches.get(0).getWinningTeam();
+        if(winningTeam != null)
+            return true;
+        else
+            return false;
+    }
+    public FantasyTeam getWinningTeam(){
+        List<FantasyMatch> finalMatches = matchBean.findByLeagueAndWeek(league, 16);
+        
+        if(finalMatches.size() < 1)
+            return null;
+        
+        return finalMatches.get(0).getWinningTeam();
+    }
+    
     public FantasyLeague getLeague() {
         return league;
     }
@@ -146,7 +166,7 @@ public class LeagueReqBean {
     }
     
     public List<FantasyMatch> getMatchesInWeek(){
-        List<FantasyMatch> results = matchBean.findByWeek(weekViewed);
+        List<FantasyMatch> results = matchBean.findByLeagueAndWeek(league, weekViewed);
         return results;
     }
     public void decrementWeek()
