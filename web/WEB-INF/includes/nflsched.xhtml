@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML>
+<html     xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:ui="http://java.sun.com/jsf/facelets"
+          xmlns:h="http://java.sun.com/jsf/html"
+          template="/template.xhtml"
+          xmlns:p="http://primefaces.org/ui">
+
+        <h:form id ="nflScheduleForm">            
+            <p:commandLink value=" prev " update="nflScheduleForm" actionListener="#{nflScheduleReqBean.decrementNFLWeek()}" />
+            <h:outputText value="Week #{nflScheduleReqBean.nflWeek}" />
+            <p:commandLink value=" next " update="nflScheduleForm" actionListener="#{nflScheduleReqBean.incrementNFLWeek()}"/>
+            <table>
+                <tr >
+                    <ui:repeat value="#{nflScheduleReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                        <h:form rendered="#{status.index lt 8}"><td>#{nflMatch.dayOfWeek}</td></h:form>
+                    </ui:repeat>
+                </tr>
+                <tr>
+                    <ui:repeat value="#{nflScheduleReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                        <h:form rendered="#{status.index lt 8}"><td>#{nflMatch.homeTeam}</td></h:form>
+                    </ui:repeat>
+                </tr>
+                <tr>
+                    <ui:repeat value="#{nflScheduleReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                        <h:form rendered="#{status.index lt 8}"><td>VS</td></h:form>
+                    </ui:repeat>
+                </tr>
+                <tr>
+                    <ui:repeat value="#{nflScheduleReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                        <h:form rendered="#{status.index lt 8}"><td>#{nflMatch.awayTeam}</td></h:form>
+                    </ui:repeat>
+                </tr>
+            </table>
+            <table>
+                <tr >
+                    <ui:repeat value="#{nflScheduleReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                        <h:form rendered="#{status.index gt 7}"><td>#{nflMatch.dayOfWeek}</td></h:form>
+                    </ui:repeat>
+                </tr>
+                <tr>
+                    <ui:repeat value="#{nflScheduleReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                        <h:form rendered="#{status.index gt 7}"><td>#{nflMatch.homeTeam}</td></h:form>
+                    </ui:repeat>
+                </tr>
+                <tr>
+                    <ui:repeat value="#{nflScheduleReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                        <h:form rendered="#{status.index gt 7}"><td>VS</td></h:form>
+                    </ui:repeat>
+                </tr>
+                <tr>
+                    <ui:repeat value="#{nflScheduleReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                        <h:form rendered="#{status.index gt 7}"><td>#{nflMatch.awayTeam}</td></h:form>
+                    </ui:repeat>
+                </tr>
+            </table>           
+        </h:form>
+
+</html>

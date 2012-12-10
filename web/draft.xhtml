@@ -21,7 +21,7 @@ and open the template in the editor.
                         <h:outputText value="Week #{nFLScheduleReqBean.nflWeek}" />
                         <p:commandLink value=" next " update="nflScheduleForm" actionListener="#{nFLScheduleReqBean.incrementNFLWeek()}"/>
                     </div>
-                    <p:dataTable value="#{nFLScheduleReqBean.nflMatchesForWeek}" var="nflMatch">
+                    <p:dataTable value="#{nFLScheduleReqBean.nflMatchesForWeek}}" var="nflMatch">
                         <p:column>
                             <p:row>
                                 <h:outputText value="#{nflMatch.dayOfWeek}" />
