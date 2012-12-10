@@ -15,13 +15,9 @@
 
     <ui:define name="body">
         
-        
-        <h:form><h:commandButton action="#{userReqBean.logout}" value="Log out" /></h:form>
-        <h:form><h:commandButton action="leagues.xhtml" value="back" /></h:form>
-        <br />
+        <h:form><h:commandButton action="leagues.xhtml" value="Back" /></h:form>
 
-        <div class ="TableHeader" style="background-color: orangered">Teams in #{leagueReqBean.league.leagueName}</div>
-        <br />
+        <h1>Teams in #{leagueReqBean.league.leagueName}</h1>
 
         <h:dataTable value="#{teamReqBean.inLeague}" var="team">
 
@@ -50,8 +46,7 @@
         </h:dataTable>
         <br /><br />
         <h:form rendered="#{leagueReqBean.canInvite}" >
-            <div class ="TableHeader" style="background-color: orangered">Invite Members</div>
-            <br />
+            <h1>Invite Members</h1>
             <div class="whiteText" style="font-size: 24px">
                 <h:outputLabel value="Username:" for="email" />
             </div>
@@ -59,7 +54,7 @@
             <h:commandButton action="#{inviteReqBean.sendInvite()}" value="Invite"/>
         </h:form>
         <h:outputLabel value="#{inviteReqBean.error}" style="color: red;" />
-        
+        <br />
         <h:dataTable value="#{inviteReqBean.invitesByLeague}" var="invite">
             
             <h:column>

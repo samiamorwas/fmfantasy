@@ -18,7 +18,7 @@
     <h:body>
         <div id="mainBox" class="mainBox">
             <div id="topBar" class="topBar">
-                
+
                 <h:form>
                     <h:commandButton action="#{startupConfig.advanceDay()}" value="--next day--"
                                      style="background: transparent; border: none;"/>
@@ -29,18 +29,20 @@
                     <h:link outcome="leagues" value="Home" rendered="#{userReqBean.logged}" />
                 </h:form>
             </div>
-            
+
             <div id="top" class="top">
 
             </div>
 
-            <div name="nflSchedule" class="scheduleTable">
+            <div id="scheduleTable" class="scheduleTable">
                 <ui:insert name="schedule">
                     <ui:include src="/WEB-INF/includes/nflsched.xhtml" />
                 </ui:insert>
             </div>
-           
-             <div id="navBar" class="navBar">
+
+            <br />
+
+            <div id="navBar" class="navBar">
                 <ui:insert name="navBar">
                     <ui:include src="/WEB-INF/includes/mainNav.xhtml" />
                 </ui:insert>
@@ -48,11 +50,11 @@
 
             <div id="content" class="content">
                 <ui:insert name="body">Default Body</ui:insert>
-                
+
                 <br/><br />
-                  <h:graphicImage url="./images/nfl5.png" style="width: 150px;"/>
+                <h:graphicImage url="./images/nfl5.png" style="width: 150px;"/>
             </div>
-           
+
         </div>
     </h:body>
 </html>
