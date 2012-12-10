@@ -109,6 +109,10 @@
             <from-outcome>draft_over</from-outcome>
             <to-view-id>/league.xhtml</to-view-id>
         </navigation-case>
+         <navigation-case>
+            <from-outcome>draft_complete</from-outcome>
+            <to-view-id>/standings.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
