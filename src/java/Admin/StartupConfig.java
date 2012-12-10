@@ -9,12 +9,14 @@ import Entity.FantasyMatch;
 import Entity.FantasyTeam;
 import Entity.NFLMatch;
 import Entity.NFLPlayer;
+import Entity.NFLPlayerStats;
 import Entity.RosterPlayer;
 import FMFantasyEJB.FantasyLeagueBean;
 import FMFantasyEJB.FantasyMatchBean;
 import FMFantasyEJB.FantasyTeamBean;
 import FMFantasyEJB.NFLMatchBean;
 import FMFantasyEJB.NFLPlayerBean;
+import FMFantasyEJB.NFLPlayerStatsBean;
 import FMFantasyEJB.RosterPlayerBean;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,6 +49,8 @@ public class StartupConfig {
     private FantasyTeamBean ftBean;
     @EJB
     private FantasyLeagueBean flBean;
+    @EJB
+    private NFLPlayerStatsBean nflpsBean;
     
     private int worldDay;
     private int worldWeek;
@@ -117,6 +121,7 @@ public class StartupConfig {
                                 RBnum++;
                                 break;
                         }
+                        break;
                     case 3:
                         switch(WRnum){
                             case 0:
@@ -132,6 +137,7 @@ public class StartupConfig {
                                 WRnum++;
                                 break;
                         }
+                        break;
                     case 4:
                         fm.setTeam1TE(nflp);
                         break;
@@ -169,6 +175,7 @@ public class StartupConfig {
                                 RBnum++;
                                 break;
                         }
+                        break;
                     case 3:
                         switch(WRnum){
                             case 0:
@@ -184,6 +191,7 @@ public class StartupConfig {
                                 WRnum++;
                                 break;
                         }
+                        break;
                     case 4:
                         fm.setTeam2TE(nflp);
                         break;
@@ -199,13 +207,24 @@ public class StartupConfig {
         }
         
     }
+    
+    public int retrievePoints(NFLPlayer nflp, int week){
+        NFLPlayerStats nflps = nflpsBean.getPlayerStatsByPlayerAndWeek(nflp, week);
+        if(nflps == null){
+            nflps = new NFLPlayerStats(nflp, week, nfld.getWeekPointsForPlayer(nflp, week));
+            nflpsBean.create(nflps);
+        }
+        return nflps.getFantasyPoints();
+        
+    }
     //for each match of the week
     //  for each nflplayer in match
     //      retreive stats of player for week
     //      assign points
     //      add points
-    //  compute winner or something
-    //  update points/rank/w/l/d of teams in match
+    //  compute winner and points and whatever
+    //for each league
+    //  update ranks of teams
     private void doMatchesStats(int week){
         
         
@@ -216,32 +235,32 @@ public class StartupConfig {
             FantasyTeam team2 = fm.getTeam2();
             int team1Points = 0, team2Points = 0;
             
-            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1QB(), week);
-            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2QB(), week);
+            team1Points += retrievePoints(fm.getTeam1QB(), week);
+            team2Points += retrievePoints(fm.getTeam2QB(), week);
             
-            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1RB1(), week);
-            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2RB1(), week);
-            
-            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1RB2(), week);
-            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2RB2(), week);
-            
-            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1WR1(), week);
-            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2WR1(), week);
-            
-            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1WR2(), week);
-            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2WR2(), week);
-            
-            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1WRRB(), week);
-            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2WRRB(), week);
-            
-            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1TE(), week);
-            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2TE(), week);
-            
-            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1K(), week);
-            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2K(), week);
-            
-            team1Points += nfld.getWeekPointsForPlayer(fm.getTeam1DEF(), week);
-            team2Points += nfld.getWeekPointsForPlayer(fm.getTeam2DEF(), week);
+            team1Points += retrievePoints(fm.getTeam1RB1(), week);
+            team2Points += retrievePoints(fm.getTeam2RB1(), week);
+
+            team1Points += retrievePoints(fm.getTeam1RB2(), week);
+            team2Points += retrievePoints(fm.getTeam2RB2(), week);
+
+            team1Points += retrievePoints(fm.getTeam1WR1(), week);
+            team2Points += retrievePoints(fm.getTeam2WR1(), week);
+
+            team1Points += retrievePoints(fm.getTeam1WR2(), week);
+            team2Points += retrievePoints(fm.getTeam2WR2(), week);
+
+            team1Points += retrievePoints(fm.getTeam1WRRB(), week);
+            team2Points += retrievePoints(fm.getTeam2WRRB(), week);
+
+            team1Points += retrievePoints(fm.getTeam1TE(), week);
+            team2Points += retrievePoints(fm.getTeam2TE(), week);
+
+            team1Points += retrievePoints(fm.getTeam1K(), week);
+            team2Points += retrievePoints(fm.getTeam2K(), week);
+
+            team1Points += retrievePoints(fm.getTeam1DEF(), week);
+            team2Points += retrievePoints(fm.getTeam2DEF(), week);
             
             fm.setTeam1Points(team1Points);
             fm.setTeam2Points(team2Points);

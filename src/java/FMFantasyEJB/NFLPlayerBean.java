@@ -5,8 +5,6 @@
 package FMFantasyEJB;
 
 import Entity.NFLPlayer;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
