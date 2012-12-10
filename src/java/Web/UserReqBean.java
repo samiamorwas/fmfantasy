@@ -106,6 +106,7 @@ public class UserReqBean implements Serializable{
         if( lookup != null){
             if(lookup.getPassword().equals(password)){
                 user = lookup;
+                error = "";
                 result = "login_success";
             } else{
                 result = "wrong_password";
@@ -117,7 +118,6 @@ public class UserReqBean implements Serializable{
         }
         
         clearInputs();
-        error = "";
         return result;
     }
     
