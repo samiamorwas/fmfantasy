@@ -75,6 +75,8 @@ public class NFLData {
     public int getWeekPointsForPlayer(NFLPlayer nflp, int week){
         int points;
         
+        if(nflp == null)
+            return 0;
         long nfldataID = nflp.getNFLDataID();
         //if not defense
         try {
