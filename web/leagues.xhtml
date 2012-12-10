@@ -86,22 +86,7 @@
 
         </h:dataTable>
         <br /><br />
-        <div class ="TableHeader" style="background-color: orangered">Teams owned</div><br />
-        <h:dataTable value="#{teamReqBean.owned}" var="team"	>
-
-            <h:column>
-                <f:facet name="header">League Name</f:facet>
-                #{team.league.leagueName}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Team Name</f:facet>
-                #{team.teamName}
-            </h:column>
-
-        </h:dataTable>
-        <br /><br />
-
+        
         <div class ="TableHeader" style="background-color: orangered">Invitations</div>
         <br />
         <h:dataTable value="#{inviteReqBean.invitesToYou}" var="inv"	> 
