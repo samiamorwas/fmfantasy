@@ -1,11 +1,39 @@
 body {
-    background-image: url('../../images/mongoose_fight.jpg');
-    background-repeat: repeat;
+    background-color: #397249;
 }
 
 #topBar {
-    position: relative;
     color: black;
+    position: relative;
+}
+
+#scheduleTable {
+    border: 2px groove black;
+    border-bottom: none;
+    background-color: #9CB770;
+    color: black;
+    padding: 5px;
+    font-family: Times, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    width: 810px;
+    float: right;
+}
+
+#scheduleTable table {
+    border-collapse: collapse;
+    background-color: lightblue;
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+}
+
+#scheduleTable table, #scheduleTable th {
+    text-align: center;
+    border: 2px groove black;
+    font-family: Times, sans-serif;
+    font-size: 12px;
+    padding: 1px;
 }
 
 a:link, a:visited {
@@ -44,13 +72,13 @@ a:link:hover, a:visited:hover {
     margin: auto;
     width: 1010px;
     height: auto;
+    padding: 5px;
 }
 
 #top {
     position: relative;
     background-image: url('../../images/top_bar.png');
     background-repeat: no-repeat;
-    opacity: 0.96;
     padding: 50px;
     border: 5px groove white;
 }
@@ -76,18 +104,19 @@ a:link:hover, a:visited:hover {
     font-size: 22px;
     text-align: center;
     width: 160px;
+    position: relative;
 }
 
 #content {
     border: 2px groove black;
-    background-color: #0A2540;
+    background-color: #9CB770;
     color: black;
-    opacity: 0.96;
     padding: 5px;
     font-family: Times, sans-serif;
     font-size: 17px;
     text-align: center;
     width: 810px;
+    height: auto;
     float: right;
 }
 
@@ -128,7 +157,7 @@ a:link:hover, a:visited:hover {
 h1 {
     font-family: Times, sans-serif;
     border: 5px groove black;
-    background-color: orangered;
+    background-color: #C7E1BA;
 }
 
 h2 {
