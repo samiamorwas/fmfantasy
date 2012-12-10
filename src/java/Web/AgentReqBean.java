@@ -207,7 +207,7 @@ public class AgentReqBean {
         
         List<RosterPlayer> draftedPlayers = rpBean.getByLeague(leag);
         for(int i = 0; i < draftedPlayers.size(); i++){
-            if(draftedPlayers.get(i).getNflPlayer().getNFLDataID() == rp.getNflPlayer().getNFLDataID()){
+            if(draftedPlayers.get(i).getNflPlayer().getNFLPlayerID() == rp.getNflPlayer().getNFLPlayerID()){
                 error = "Player already drafted!";
                 return "already_drafted";
             }            
