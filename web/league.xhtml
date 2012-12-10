@@ -5,7 +5,8 @@
                     xmlns:h="http://java.sun.com/jsf/html"
                     xmlns:f="http://java.sun.com/jsf/core"
                     template="/template.xhtml"
-                    xmlns:c="http://java.sun.com/jsp/jstl/core">
+                    xmlns:c="http://java.sun.com/jsp/jstl/core"
+                    xmlns:p="http://primefaces.org/ui">
 
 
     <ui:define name="title">
@@ -13,6 +14,34 @@
     </ui:define>
 
     <ui:define name="body">
+        <div name="nflSchedule">
+            <h:form id ="nflScheduleForm">
+                <center>
+                    <div id="nflSchedulNav">
+                        <p:commandLink value=" prev " update="nflScheduleForm" actionListener="#{nFLScheduleReqBean.decrementNFLWeek()}" />
+                        <h:outputText value="Week #{nFLScheduleReqBean.nflWeek}" />
+                        <p:commandLink value=" next " update="nflScheduleForm" actionListener="#{nFLScheduleReqBean.incrementNFLWeek()}"/>
+                    </div>
+                    <p:dataTable value="#{nFLScheduleReqBean.nflMatchesForWeek}" var="nflMatch">
+                        <p:column>
+                            <p:row>
+                                <h:outputText value="#{nflMatch.dayOfWeek}" />
+                            </p:row>
+                            <p:row>
+                                <h:outputText value="#{nflMatch.awayTeam}" />
+                            </p:row>
+                            <p:row>
+                                <h:outputText value="vs" />
+                            </p:row>
+                            <p:row>
+                                <h:outputText value="#{nflMatch.homeTeam}" />
+                            </p:row>
+                        </p:column>
+                    </p:dataTable>
+                </center>
+            </h:form>
+        </div>
+        
         <h:form><h:commandButton action="#{userReqBean.logout}" value="Log out" /></h:form>
         <h:form><h:commandButton action="leagues.xhtml" value="back" /></h:form>
         <br />

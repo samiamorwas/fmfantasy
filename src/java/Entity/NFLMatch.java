@@ -28,6 +28,7 @@ public class NFLMatch implements Serializable {
     private int week;
     private String homeTeam;
     private String awayTeam;
+    private String dayOfWeek;
 
     public int getWeek() {
         return week;
@@ -53,6 +54,14 @@ public class NFLMatch implements Serializable {
         this.awayTeam = awayTeam;
     }
 
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
     public Long getNFLMatchID() {
         return NFLMatchID;
     }
@@ -60,8 +69,6 @@ public class NFLMatch implements Serializable {
     public void setNFLMatchID(Long NFLMatchID) {
         this.NFLMatchID = NFLMatchID;
     }
-    
-    
     
     @Override
     public int hashCode() {

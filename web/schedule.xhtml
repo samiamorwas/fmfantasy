@@ -14,16 +14,43 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
     
     <ui:define name="body">
+        <div name="nflSchedule">
+            <h:form id ="nflScheduleForm">
+                <center>
+                    <div id="nflSchedulNav">
+                        <p:commandLink value=" prev " update="nflScheduleForm" actionListener="#{nFLScheduleReqBean.decrementNFLWeek()}" />
+                        <h:outputText value="Week #{nFLScheduleReqBean.nflWeek}" />
+                        <p:commandLink value=" next " update="nflScheduleForm" actionListener="#{nFLScheduleReqBean.incrementNFLWeek()}"/>
+                    </div>
+                    <p:dataTable value="#{nFLScheduleReqBean.nflMatchesForWeek}" var="nflMatch">
+                        <p:column>
+                            <p:row>
+                                <h:outputText value="#{nflMatch.dayOfWeek}" />
+                            </p:row>
+                            <p:row>
+                                <h:outputText value="#{nflMatch.awayTeam}" />
+                            </p:row>
+                            <p:row>
+                                <h:outputText value="vs" />
+                            </p:row>
+                            <p:row>
+                                 <h:outputText value="#{nflMatch.homeTeam}" />
+                            </p:row>
+                        </p:column>
+                    </p:dataTable>
+                </center>
+            </h:form>
+        </div>
+        
         <h1>#{leagueReqBean.league.leagueName}</h1>
         
         <h:form id ="scheduleForm">
-            <h2>
-                <p:commandLink value=" prev " update="scheduleForm" actionListener="#{leagueReqBean.decrementWeek()}"/>
-                <h:outputText value="Week #{leagueReqBean.weekViewed}" />
-                <p:commandLink value=" next " update="scheduleForm" actionListener="#{leagueReqBean.incrementWeek()}"/>
-            </h2>
-        
             <center>
+                <div id="scheduleNav">
+                    <p:commandLink value=" prev " update="scheduleForm" actionListener="#{leagueReqBean.decrementWeek()}"/>
+                    <h:outputText value="Week #{leagueReqBean.weekViewed}" />
+                    <p:commandLink value=" next " update="scheduleForm" actionListener="#{leagueReqBean.incrementWeek()}"/>
+                </div>
                 <h:dataTable value="#{leagueReqBean.matchesInWeek}" var="match">
                     <h:column>
                         <p:commandLink value="#{match.team1.teamName}" action="#{teamReqBean.viewTeam(match.team1)}"/>
@@ -36,8 +63,6 @@ and open the template in the editor.
                     </h:column>
                 </h:dataTable>
             </center>
-            
-            
         </h:form>
         
     </ui:define>
