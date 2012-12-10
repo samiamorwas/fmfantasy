@@ -82,10 +82,8 @@ public class StartupConfig {
             for(FantasyLeague l: flBean.findAll() ){
                  List<FantasyTeam> teams = ftBean.findByLeague(l);
                  List<FantasyTeam> sideA, sideB;
-                 sideA = new ArrayList(teams.subList(0, 1));
-                 sideB = new ArrayList(teams.subList(2,3));
-                 sideB.add(0, sideB.get(1));
-                 sideB.remove(sideB.size()-1);
+                 sideA = new ArrayList(teams.subList(0, 2));
+                 sideB = new ArrayList(teams.subList(2,4));
 
                 for (int j = 0; j < sideA.size(); j++)
                 {   

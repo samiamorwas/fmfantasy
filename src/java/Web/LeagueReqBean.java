@@ -179,7 +179,7 @@ public class LeagueReqBean {
     public void incrementWeek()
     {
         // Can't go to next week if it's Week 14
-        if (weekViewed != 14)
+        if (weekViewed != 16)
             weekViewed++;
     }
     public boolean getDraftFinished() {
