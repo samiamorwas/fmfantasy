@@ -37,19 +37,23 @@ public class MatchReqBean {
         return "gamecenter.xhtml";
     }
     public int getMatchWeek(){
-        if(match != null)
+        if(match != null) {
             return match.getWeek();
-        else
+        }
+        else {
             return -1;
+        }
     }
 
     public List<NFLPlayerStats> getTeam1PlayerStats(){
         List<NFLPlayerStats> result = new ArrayList<NFLPlayerStats>();
         
-        if(match==null)
+        if(match==null) {
             return result;
-        if(match.getTeam2QB() == null)
+        }
+        if(match.getTeam2QB() == null) {
             return result;
+        }
         
         int week = match.getWeek();
         
@@ -82,11 +86,13 @@ public class MatchReqBean {
     public List<NFLPlayerStats> getTeam2PlayerStats(){
         List<NFLPlayerStats> result = new ArrayList<NFLPlayerStats>();
         
-        if(match == null)
+        if(match == null) {
             return result;
+        }
         
-        if(match.getTeam2QB() == null)
+        if(match.getTeam2QB() == null) {
             return result;
+        }
         
         int week = match.getWeek();
         
@@ -119,35 +125,45 @@ public class MatchReqBean {
     
     public int getPointsForPlayer(NFLPlayer player) {
         int week = match.getWeek();
-        if(player != null)
+        if(player != null) {
             return nfldata.getWeekPointsForPlayer(player, week);
-        else
+        }
+        else {
             return 0;
+        }
     }
     
     public String getTeam1Name(){
-        if(match != null)
+        if(match != null) {
             return match.getTeam1().getTeamName();
-        else
+        }
+        else {
             return "";
+        }
     }
     public String getTeam2Name(){
-        if(match != null)
+        if(match != null) {
             return match.getTeam2().getTeamName();
-        else
+        }
+        else {
             return "";
+        }
     }
     public int getTeam1Total(){
-        if(match != null)
+        if(match != null) {
             return match.getTeam1Points();
-        else
+        }
+        else {
             return 0;
+        }
     }
     public int getTeam2Total(){
-        if(match != null)
+        if(match != null) {
             return match.getTeam2Points();
-        else
+        }
+        else {
             return 0;
+        }
     }
     
 }
