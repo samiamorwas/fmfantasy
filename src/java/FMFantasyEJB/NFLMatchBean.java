@@ -33,7 +33,15 @@ public class NFLMatchBean extends AbstractFacade<NFLMatch> {
         Query createNamedQuery = em.createNamedQuery("NFLMatch.findByWeek");
         createNamedQuery.setParameter("week", week);
         
-        List<NFLMatch> result = createNamedQuery.getResultList();    
+        List<NFLMatch> result = createNamedQuery.getResultList();
+        int i = 0;
+        while(i < result.size()){
+            if(result.get(i).getAwayTeam().equals("BYE")){
+                result.remove(i);
+                continue;
+            }                
+            i++;
+        }
         
         return result;
     }
