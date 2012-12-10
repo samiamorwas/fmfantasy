@@ -10,7 +10,7 @@
 
     <h:form>
         <h:panelGrid columns="1">
-            <h:outputLabel value="Email:" for="email" rendered="#{!userReqBean.logged}" />
+            <h:outputLabel value="Username:" for="email" rendered="#{!userReqBean.logged}" />
             <h:inputText id="email" value="#{userReqBean.email}" rendered="#{!userReqBean.logged}" />
 
             <h:outputLabel value="Password:" for="password" rendered="#{!userReqBean.logged}" />
