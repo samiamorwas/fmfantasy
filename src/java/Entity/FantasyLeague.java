@@ -110,12 +110,6 @@ public class FantasyLeague implements Serializable {
     public void setRosterPlayers(List<RosterPlayer> rosterPlayers) {
         this.rosterPlayers = rosterPlayers;
     }
-     
-    
-    
-    
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;
