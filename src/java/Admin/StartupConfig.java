@@ -203,7 +203,7 @@ public class StartupConfig {
                         break;
                 }
             }            
-            
+            fmatchBean.edit(fm);
         }
         
     }
@@ -282,7 +282,11 @@ public class StartupConfig {
             team1.setPointsAgainst(team1.getPointsAgainst() + team2Points);
             
             team2.setPointsFor(team2.getPointsFor() + team2Points);
-            team2.setPointsAgainst(team2.getPointsAgainst() + team1Points);            
+            team2.setPointsAgainst(team2.getPointsAgainst() + team1Points);
+            
+            fmatchBean.edit(fm);
+            ftBean.edit(team1);
+            ftBean.edit(team2);
         }
         
         List<FantasyLeague> leagues = flBean.findAll();
