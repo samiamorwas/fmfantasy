@@ -6,33 +6,31 @@
           template="/template.xhtml"
           xmlns:p="http://primefaces.org/ui">
 
-        <h:form id ="nflScheduleForm">            
-            <p:commandLink value=" prev " update="nflScheduleForm" actionListener="#{nflSchedReqBean.decrementNFLWeek()}" />
-            <h:outputText value="Week #{nflSchedReqBean.nflWeek}" />
-            <p:commandLink value=" next " update="nflScheduleForm" actionListener="#{nflSchedReqBean.incrementNFLWeek()}"/>
-            <table>
-                <tr >
-                    <ui:repeat value="#{nflSchedReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
-                        <h:form rendered="#{status.index lt 16}"><td>#{nflMatch.dayOfWeek}</td></h:form>
-                    </ui:repeat>
-                </tr>
-                <tr>
-                    <ui:repeat value="#{nflSchedReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
-                        <h:form rendered="#{status.index lt 16}"><td>#{nflMatch.homeTeam}</td></h:form>
-                    </ui:repeat>
-                </tr>
-                <tr>
-                    <ui:repeat value="#{nflSchedReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
-                        <h:form rendered="#{status.index lt 16}"><td>VS</td></h:form>
-                    </ui:repeat>
-                </tr>
-                <tr>
-                    <ui:repeat value="#{nflSchedReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
-                        <h:form rendered="#{status.index lt 16}"><td>#{nflMatch.awayTeam}</td></h:form>
-                    </ui:repeat>
-                </tr>
-            </table>
-                      
-        </h:form>
-
+    <h:form id ="nflScheduleForm">            
+        <p:commandLink value=" prev " update="nflScheduleForm" actionListener="#{nflSchedReqBean.decrementNFLWeek()}" />
+        <h:outputText value="Week #{nflSchedReqBean.nflWeek}" />
+        <p:commandLink value=" next " update="nflScheduleForm" actionListener="#{nflSchedReqBean.incrementNFLWeek()}"/>
+        <table>
+            <tr>
+                <ui:repeat value="#{nflSchedReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                    <td>#{nflMatch.dayOfWeek}</td>
+                </ui:repeat>
+            </tr>
+            <tr>
+                <ui:repeat value="#{nflSchedReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                    <td>#{nflMatch.homeTeam}</td>
+                </ui:repeat>
+            </tr>
+            <tr>
+                <ui:repeat value="#{nflSchedReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                    <td>VS</td>
+                </ui:repeat>
+            </tr>
+            <tr>
+                <ui:repeat value="#{nflSchedReqBean.nflMatchesForWeek}" var="nflMatch" varStatus="status">
+                    <td>#{nflMatch.awayTeam}</td>
+                </ui:repeat>
+            </tr>
+        </table>
+    </h:form>
 </html>
