@@ -86,6 +86,11 @@ public class StartupConfig {
     
     // delete all rosterPlayers, teams, leagues, users
     private void clearAll(){
+        List<FantasyMatch> allMatches = fmatchBean.findAll();
+        for(FantasyMatch fm : allMatches){
+            fmatchBean.remove(fm);
+        }
+        
         List<RosterPlayer> allRps= rpBean.findAll();
         for(RosterPlayer rp : allRps){
             rpBean.remove(rp);
