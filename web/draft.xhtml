@@ -18,9 +18,20 @@ and open the template in the editor.
         <h:form id ="input">
             <h:outputLabel value="#{agentReqBean.error}"/>
             
-            <p:autoComplete id="nameauto" value="#{agentReqBean.draftTextEntry}" 
+            <p:autoComplete value="#{agentReqBean.playerToDraft}"
+                            id="nameauto"                            
                             completeMethod="#{agentReqBean.draftAutoComplete}"
-                            maxResults ="8">
+                            var="nflp"
+                            converter="#{agentReqBean.nflpc}"
+                            forceSelection="true"
+                            itemLabel="#{nflp.name}"
+                            itemValue="#{nflp}"
+                            maxResults="8"
+                            >
+                <p:column>
+                    <h:outputText value="#{nflp.positionString} - #{nflp.name}" />
+                
+                </p:column>
                 
             </p:autoComplete>
             <br/>
@@ -43,15 +54,24 @@ and open the template in the editor.
             <p:selectBooleanCheckbox value="#{agentReqBean.DEF}" itemLabel="DEF">
                 <p:ajax update ="input"/>
             </p:selectBooleanCheckbox>
-        </h:form>
+        
         <br />
-        <h:form> 
-            <p:carousel id="teamCarousel" value="#{teamReqBean.inLeague}" var="team" itemStyle="width: 180px;" >  
-                <f:facet name="header">Assign To Team</f:facet>  
-                <h:panelGrid columns="1" style="width:100%" cellpadding="5">
-                    <h:commandLink style="font-size: 23px;" action="#{agentReqBean.draftPlayer(team)}">#{team.teamName}</h:commandLink>      
-                </h:panelGrid>  
-            </p:carousel>
+        
+            <p:dataGrid rows ="#{teamReqBean.inLeague.size()}" value="#{teamReqBean.inLeague}" var="team" columns="4" >
+                <p:column style="width: border-box">
+                    <p:panelGrid columns="1" style="width: 180px">
+                        <f:facet name="header" >
+                            <p:commandLink update=":input" style="font-size: 16px;" actionListener="#{agentReqBean.draftPlayer(team)}" value="#{team.teamName}"/>
+                        </f:facet>
+                        <h:dataTable value="#{rosterReqBean.getByTeam(team)}" var="rp">
+                            <h:column >
+                                <p:commandLink update=":input" actionListener="#{rosterReqBean.drop(rp)}" value="X " style="font-size: 12px"/>
+                                <h:outputText value="#{rp.nflPlayer.positionString}: #{rp.nflPlayer.name}" style="font-size: 12px"/>
+                            </h:column>
+                        </h:dataTable>
+                    </p:panelGrid>    
+                </p:column>
+            </p:dataGrid>
         </h:form>
         <br />        
         <h:form>

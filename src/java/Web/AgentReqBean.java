@@ -4,6 +4,7 @@
  */
 package Web;
 
+import Converters.NFLPlayerConverter;
 import Entity.FantasyLeague;
 import Entity.FantasyTeam;
 import Entity.FantasyUser;
@@ -19,6 +20,7 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -44,7 +46,12 @@ public class AgentReqBean {
     
     private String agentTextEntry;
     private String draftTextEntry;
+    private NFLPlayer playerToDraft;
+    private long playerToDraftID;
     private boolean QB,RB,WR,TE,KCK,DEF;
+    
+    @Inject
+    private NFLPlayerConverter nflpc;
     
     /**
      * Creates a new instance of FantasyLeagueController
@@ -56,6 +63,7 @@ public class AgentReqBean {
     private void clearInputs(){
         agentTextEntry="";
         draftTextEntry="";
+        playerToDraft = null;
     }
     public String getError() {
         return error;
@@ -99,15 +107,18 @@ public class AgentReqBean {
         
         clearInputs();
     }
-    public List<String> draftAutoComplete(String name){
-        List<String> result = new ArrayList<String>();
+    public List<NFLPlayer> draftAutoComplete(String query){
+        //List<String> result = new ArrayList<String>();
   
-        List<NFLPlayer> nflpResult = getFreeAgentsLike(name);
-        for(int i = 0; i < nflpResult.size(); i++){
-            result.add(nflpResult.get(i).getName());            
-        }
+        List<NFLPlayer> nflpResult = getFreeAgentsLike(query);
+        //for(int i = 0; i < nflpResult.size(); i++){
+        //    result.add(nflpResult.get(i).getName());            
+        //}
         
-        return result;
+        return nflpResult;
+    }
+    public void selectEvent(SelectEvent evt){
+        
     }
 
     public class NFLPlayerComparable implements Comparator<NFLPlayer>{
@@ -198,12 +209,12 @@ public class AgentReqBean {
         rp.setRosterSlot(0); //start benched
         
         //nfl stuff
-        List<NFLPlayer> nflpList = getFreeAgentsLike(draftTextEntry);
-        if(nflpList.isEmpty()){
-            error = "No Such Player!";
+        if(playerToDraft == null){
+            clearInputs();
+            error = "select a player";
             return "no_such_player";
         }
-        rp.setNflPlayer(nflpList.get(0));
+        rp.setNflPlayer(playerToDraft);
         
         List<RosterPlayer> draftedPlayers = rpBean.getByLeague(leag);
         for(int i = 0; i < draftedPlayers.size(); i++){
@@ -277,6 +288,24 @@ public class AgentReqBean {
         this.DEF = DEF;
     }
 
+    public NFLPlayer getPlayerToDraft() {
+        return playerToDraft;
+    }
+
+    public void setPlayerToDraft(NFLPlayer playerToDraft) {
+        this.playerToDraft = playerToDraft;
+    }
+
+    public NFLPlayerConverter getNflpc() {
+        return nflpc;
+    }
+
+    public void setNflpc(NFLPlayerConverter nflpc) {
+        this.nflpc = nflpc;
+    }
+    
+    
+
     public String getDraftTextEntry() {
         return draftTextEntry;
     }
@@ -284,5 +313,14 @@ public class AgentReqBean {
     public void setDraftTextEntry(String draftTextEntry) {
         this.draftTextEntry = draftTextEntry;
     }
+
+    public long getPlayerToDraftID() {
+        return playerToDraftID;
+    }
+
+    public void setPlayerToDraftID(long playerToDraftID) {
+        this.playerToDraftID = playerToDraftID;
+    }
+    
     
 }

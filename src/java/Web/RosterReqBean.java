@@ -46,6 +46,10 @@ public class RosterReqBean {
         return rosterBean.getBenchByTeam(ft);
     }
     
+    public List<RosterPlayer> getByTeam(FantasyTeam ft){
+        return rosterBean.getByTeam(ft);
+    }
+    
     public void drop(RosterPlayer rp){
         rosterBean.remove(rp);        
     }
