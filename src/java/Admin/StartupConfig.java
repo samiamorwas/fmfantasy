@@ -7,6 +7,7 @@ package Admin;
 import Entity.FantasyLeague;
 import Entity.FantasyMatch;
 import Entity.FantasyTeam;
+import Entity.FantasyUser;
 import Entity.NFLMatch;
 import Entity.NFLPlayer;
 import Entity.NFLPlayerStats;
@@ -14,6 +15,7 @@ import Entity.RosterPlayer;
 import FMFantasyEJB.FantasyLeagueBean;
 import FMFantasyEJB.FantasyMatchBean;
 import FMFantasyEJB.FantasyTeamBean;
+import FMFantasyEJB.FantasyUserBean;
 import FMFantasyEJB.NFLMatchBean;
 import FMFantasyEJB.NFLPlayerBean;
 import FMFantasyEJB.NFLPlayerStatsBean;
@@ -21,6 +23,8 @@ import FMFantasyEJB.RosterPlayerBean;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -37,7 +41,8 @@ import javax.inject.Named;
 @Startup
 public class StartupConfig {
     
-    
+    @EJB
+    private FantasyUserBean fUserBean;
     @EJB
     private NFLData nfld;
     @EJB
@@ -68,6 +73,126 @@ public class StartupConfig {
     public int getWorldDay(){
         return worldDay;
     }
+    
+    public void createPreDraft(){
+        clearAll();
+        createLeague();        
+    }
+    public void createPostDraftAndPromote(){
+        clearAll();
+        createLeague();
+        doDraft();
+    }
+    
+    // delete all rosterPlayers, teams, leagues, users
+    private void clearAll(){
+        List<RosterPlayer> allRps= rpBean.findAll();
+        for(RosterPlayer rp : allRps){
+            rpBean.remove(rp);
+        }
+        
+        List<FantasyTeam> allTeams = ftBean.findAll();
+        for(FantasyTeam ft : allTeams){
+            ftBean.remove(ft);
+        }
+        
+        List<FantasyLeague> allLeagues = flBean.findAll();
+        for(FantasyLeague fl : allLeagues){
+            flBean.remove(fl);
+        }
+        
+        List<FantasyUser> allUsers = fUserBean.findAll();
+        for(FantasyUser fu : allUsers){
+            fUserBean.remove(fu);
+        }
+    }
+    // create users, create league, give users team in league.
+    private void createLeague(){    
+        FantasyUser maxUser = new FantasyUser();
+        maxUser.setEmail("max@gmail.com");
+        maxUser.setPassword("password");
+        fUserBean.create(maxUser);
+        
+        FantasyUser adrianUser = new FantasyUser();
+        adrianUser.setEmail("adrian@gmail.com");
+        adrianUser.setPassword("password");
+        fUserBean.create(adrianUser);
+        
+        FantasyUser ashayUser = new FantasyUser();
+        ashayUser.setEmail("ashay@gmail.com");
+        ashayUser.setPassword("password");
+        fUserBean.create(ashayUser);
+        
+        FantasyUser jessUser = new FantasyUser();
+        jessUser.setEmail("jess@gmail.com");
+        jessUser.setPassword("password");
+        fUserBean.create(jessUser);
+        
+        //create league
+        FantasyLeague league = new FantasyLeague();
+        league.setDraftStarted(false);
+        league.setFinishedDraft(false);
+        league.setLeagueName("Mongeese Only");
+        league.setLeagueOwner(maxUser);
+        flBean.create(league);
+        
+        //create teams
+        FantasyTeam maxTeam = new FantasyTeam();
+        maxTeam.setTeamName("Max's Team");
+        maxTeam.setTeamOwner(maxUser);
+        maxTeam.setLeague(league);
+        ftBean.create(maxTeam);
+        
+        FantasyTeam ashayTeam = new FantasyTeam();
+        ashayTeam.setTeamName("Ashay's Team");
+        ashayTeam.setTeamOwner(ashayUser);
+        ashayTeam.setLeague(league);
+        ftBean.create(ashayTeam);
+        
+        FantasyTeam jessTeam = new FantasyTeam();
+        jessTeam.setTeamName("Jess's team");
+        jessTeam.setTeamOwner(jessUser);
+        jessTeam.setLeague(league);
+        ftBean.create(jessTeam);
+        
+        FantasyTeam adrianTeam = new FantasyTeam();
+        adrianTeam.setTeamName("Team Greasy Pizza");
+        adrianTeam.setTeamOwner(adrianUser);
+        adrianTeam.setLeague(league);        
+        ftBean.create(adrianTeam);
+    }
+    private void doDraft(){
+        Iterator<NFLPlayer> QB = nflpb.getPlayerLikeNameAndPos("", 1).iterator();
+        Iterator<NFLPlayer> RB = nflpb.getPlayerLikeNameAndPos("", 2).iterator();
+        Iterator<NFLPlayer> WR = nflpb.getPlayerLikeNameAndPos("", 3).iterator();
+        Iterator<NFLPlayer> TE = nflpb.getPlayerLikeNameAndPos("", 4).iterator();
+        Iterator<NFLPlayer> K = nflpb.getPlayerLikeNameAndPos("", 5).iterator();
+        Iterator<NFLPlayer> DEF = nflpb.getPlayerLikeNameAndPos("", 6).iterator();
+        
+        List<FantasyTeam> allTeams = ftBean.findAll();
+        for(FantasyTeam ft : allTeams){
+            rpBean.create( new RosterPlayer(ft,ft.getLeague(),QB.next()) );
+            
+            rpBean.create( new RosterPlayer(ft,ft.getLeague(),RB.next()) );
+            rpBean.create( new RosterPlayer(ft,ft.getLeague(),RB.next()) );
+            rpBean.create( new RosterPlayer(ft,ft.getLeague(),RB.next()) );
+            
+            rpBean.create( new RosterPlayer(ft,ft.getLeague(),WR.next()) );
+            rpBean.create( new RosterPlayer(ft,ft.getLeague(),WR.next()) );
+            
+            rpBean.create( new RosterPlayer(ft,ft.getLeague(),TE.next()) );
+            rpBean.create( new RosterPlayer(ft,ft.getLeague(),K.next()) );
+            rpBean.create( new RosterPlayer(ft,ft.getLeague(),DEF.next()) );
+        }
+        
+        //promote them all
+        List<RosterPlayer> allRosterMembers = rpBean.findAll();
+        for( RosterPlayer rp : allRosterMembers){
+            rp.setRosterSlot(rp.getNflPlayer().getPosition());
+            rpBean.edit(rp);
+        }
+    }
+    
     public void advanceWeek(){
         for(int i = 0; i < 7; i++){
             advanceDay();
@@ -78,7 +203,7 @@ public class StartupConfig {
             worldDay = 1;
             worldWeek++;
         }
-        if (worldWeek == 15){
+        if (worldDay == 1 && worldWeek == 15){
             for(FantasyLeague l: flBean.findAll() ){
                  List<FantasyTeam> teams = ftBean.findByLeague(l);
                  List<FantasyTeam> sideA, sideB;
@@ -98,7 +223,7 @@ public class StartupConfig {
 
             }
         }
-        if (worldWeek == 16){            
+        if (worldDay == 1 && worldWeek == 16){            
              for(FantasyLeague l: flBean.findAll() ){
                 List<FantasyMatch> week15Matches = fmatchBean.findByLeagueAndWeek(l,15);
                 

@@ -64,6 +64,13 @@ public class RosterPlayer implements Serializable {
     @Column(name = "ROSTERSLOT")
     private int rosterSlot; //0 benched, 1-10 active positions? this could work
     
+    public RosterPlayer(){}
+    public RosterPlayer(FantasyTeam ft, FantasyLeague fl, NFLPlayer nflp){
+        this.team = ft;
+        this.league = fl;
+        this.nflPlayer = nflp;
+    }
+    
     public String getPositionString(){
         return nflPlayer.getPositionString();        
     }

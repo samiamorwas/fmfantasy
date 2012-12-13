@@ -49,7 +49,7 @@ public class NFLPlayerBean extends AbstractFacade<NFLPlayer> {
         createNamedQuery.setParameter("name", name);
         createNamedQuery.setParameter("pos", pos);
         
-        createNamedQuery.setMaxResults(10);
+        createNamedQuery.setMaxResults(16);
         
         List<NFLPlayer> result = createNamedQuery.getResultList();
         
