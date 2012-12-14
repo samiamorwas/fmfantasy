@@ -21,13 +21,21 @@ and open the template in the editor.
 
         <div id="rightBox">
             <ui:define name="body">
-                <div id="vikings">
-                    <h1>Vikings do it again!</h1>
-                    <img src="./images/vikings.jpg" />
-
+                <h1>Welcome to Fighting Mongooses Fantasy Football</h1>
+                <div class="whiteText">
+                    If you like to play your game hard, you are on the right website. Our website is designed 
+                    for the ease of use of our players. Our website includes
+                    <ul>
+                        <li>Intuitive</li>
+                        <li>Features which allow for easy drafting of players</li>
+                        <li>Minimalistic views</li>
+                        <li>Easy to navigate</li>
+                        <li>Manage rosters without breaking a sweat</li>
+                        <li>and many more exciting features!</li>
+                    </ul>
                 </div>
-                <div id="text" style="color:white;">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <div class="doNotKnow">
+                    Do not know how to play Fantasy football? Click<a href="http://www.nfl.com/fantasyfootball/fantasy101">Fantasy Football 101</a> to learn.
                 </div>
                 <div>
                     <p:commandLink value="create users" actionListener="#{startupConfig.createPreDraft()}"/>
