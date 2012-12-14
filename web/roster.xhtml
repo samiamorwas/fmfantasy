@@ -5,32 +5,33 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <ui:composition
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      template="./template.xhtml">
-    
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    template="./template.xhtml">
+
     <ui:define name="body">
-        
-        
+
+
         <h:form id="teamNameTitle">
             <h1>#{teamReqBean.team.teamName}</h1>
         </h:form>
         <h:form id="teamSelectForm">
-            <h:dataTable style="float:right;" value="#{teamReqBean.inLeague}" var="team">
-                <h:column>
-                    <f:facet name="header">Teams</f:facet>
-                    <p:commandLink update=":rosterTables,:teamNameTitle"  actionListener="#{teamReqBean.viewTeam(team)}">
-                        <h:outputText value="#{team.teamName}"/>
-                    </p:commandLink>
-                </h:column>
-            </h:dataTable>
+            <table>
+                <tr>
+                    <ui:repeat value="#{teamReqBean.inLeague}" var="team">
+                        <td>
+                            <p:commandLink update=":rosterTables,:teamNameTitle"  actionListener="#{teamReqBean.viewTeam(team)}" value="#{team.teamName}"/>
+                        </td>
+                    </ui:repeat>
+                </tr>
+            </table>
         </h:form>
-        
+
         <h:form id ="rosterTables">
-            <h:dataTable value="#{rosterReqBean.active}" var="player" style="float: top;">
+            <h:dataTable value="#{rosterReqBean.active}" var="player" style="float: top; margin-bottom: 20px; margin-top: 20px;">
                 <h:column rendered="#{userReqBean.user.userID == teamReqBean.team.teamOwner.userID}">
                     <f:facet name="header">X</f:facet>
                     <p:commandLink update =":rosterTables" 
@@ -54,7 +55,7 @@ and open the template in the editor.
                     <f:facet name="header">Player</f:facet>
                     #{player.nflPlayer.name}
                 </h:column>
-                
+
                 <h:column>
                     <f:facet name="header">Pass Yds</f:facet>
                     #{player.nflPlayer.passYards}
@@ -100,7 +101,7 @@ and open the template in the editor.
                     #{player.nflPlayer.seasonPoints}
                 </h:column>
             </h:dataTable>
-            <br />
+
             <h:dataTable value="#{rosterReqBean.bench}" var="player" style="float: bottom;">
                 <h:column rendered="#{userReqBean.user.userID == teamReqBean.team.teamOwner.userID}">
                     <f:facet name="header">X</f:facet>
@@ -126,7 +127,7 @@ and open the template in the editor.
                     <f:facet name="header">Player</f:facet>
                     #{player.nflPlayer.name}
                 </h:column>
-                
+
                 <h:column>
                     <f:facet name="header">Pass Yds</f:facet>
                     #{player.nflPlayer.passYards}
@@ -172,8 +173,8 @@ and open the template in the editor.
                     #{player.nflPlayer.seasonPoints}
                 </h:column>
             </h:dataTable>
-            
+
         </h:form>
     </ui:define>
-    
+
 </ui:composition>
