@@ -196,6 +196,14 @@ public class StartupConfig {
             rp.setRosterSlot(rp.getNflPlayer().getPosition());
             rpBean.edit(rp);
         }
+        
+        List<FantasyLeague> allLeagues = flBean.findAll();
+        for( FantasyLeague fl : allLeagues){
+            fl.setDraftStarted(true);
+            fl.setFinishedDraft(true);
+            fmatchBean.createSchedule(fl);
+            flBean.edit(fl);
+        }
     }
     
     public void advanceWeek(){
